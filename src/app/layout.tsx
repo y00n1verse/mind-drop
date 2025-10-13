@@ -19,7 +19,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <header className="h-20">헤더</header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
