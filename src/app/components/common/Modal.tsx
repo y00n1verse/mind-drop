@@ -29,9 +29,16 @@ export default function Modal({
 
   return createPortal(
     <div className="fixed inset-0 flex flex-col items-center justify-center">
-      <div className="absolute inset-0 bg-black opacity-50" />
-      <div className="relative flex flex-col items-center overflow-y-hidden rounded-xl bg-white">
-        <button type="button" className="absolute top-4 right-4">
+      <div onClick={onClose} className="absolute inset-0 bg-black opacity-50" />
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative flex flex-col items-center overflow-y-hidden rounded-xl bg-white"
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-4 right-4"
+        >
           X
         </button>
         {children}
