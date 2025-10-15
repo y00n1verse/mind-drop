@@ -27,6 +27,14 @@ body {
   color: var(--text-primary);
 }
 
+@theme {
+  --color-best: oklch(88.5% 0.062 18.334);
+  --color-good: oklch(76.5% 0.177 163.223);
+  --color-normal: oklch(85.2% 0.199 91.936);
+  --color-bad: oklch(80.9% 0.105 251.813);
+  --color-worst: oklch(75% 0.183 60.934);
+}
+
 .text-4xl {
   font-size: 2.5rem;
   line-height: 3rem;
