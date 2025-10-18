@@ -33,6 +33,30 @@ body {
   --color-normal: oklch(85.2% 0.199 91.936);
   --color-bad: oklch(80.9% 0.105 251.813);
   --color-worst: oklch(75% 0.183 60.934);
+
+  --color-brand-primary: oklch(0.7335 0.0825 145.2);
+  --color-brand-primary-hover: color-mix(
+    in oklch,
+    var(--color-brand-primary),
+    black 10%
+  );
+
+  --color-complete-border: oklch(0.5984 0.0763 144.55);
+  --color-complete-bg: var(--color-brand-primary);
+  --color-complete-hover: var(--color-brand-primary-hover);
+
+  --color-cancel-border: oklch(0.8141 0.0137 251.58);
+  --color-cancel-bg: oklch(1 0 0);
+  --color-cancel-hover: color-mix(
+    in oklch,
+    oklch(1 0 0),
+    oklch(0.8141 0.0137 251.58) 10%
+  );
+  --color-cancel-text: oklch(0.4938 0.0219 145.23);
+
+  --color-warn-border: oklch(0.65 0.15 28);
+  --color-warn-bg: oklch(0.63 0.17 28);
+  --color-warn-hover: color-mix(in oklch, var(--color-warn-bg), black 10%);
 }
 
 .text-4xl {
