@@ -26,7 +26,7 @@ export default function SignupForm() {
       const res = await instance.post('/signup', data);
 
       console.log('회원가입이 완료되었습니다!', res.data);
-      router.push('/login');
+      router.push('/signin');
     } catch (error) {
       console.error('회원가입을 실패하였습니다.');
     }
