@@ -1,3 +1,5 @@
+import prisma from '@/lib/prisma';
+import bcrypt from 'bcryptjs';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -12,15 +14,35 @@ const handler = NextAuth({
           type: 'password',
         },
       },
-      async authorize(credentials, req) {
-        const { email, password } = credentials ?? {};
+      async authorize(credentials) {
+        const email = credentials?.email;
+        const password = credentials?.password;
 
-        // 테스트용 로그인
-        if (email === 'test@example.com' && password === '1234') {
-          return { id: '1', name: '홍지윤', email };
+        if (!email || !password) {
+          console.error('이메일 또는 비밀번호가 입력되지 않았습니다.');
+          return null;
         }
 
-        return null;
+        const user = await prisma.user.findUnique({
+          where: { email },
+        });
+
+        if (!user) {
+          console.error('존재하지 않는 유저입니다.');
+          return null;
+        }
+
+        const isValid = await bcrypt.compare(password, user.password);
+
+        if (!isValid) {
+          console.error('비밀번호가 유효하지 않습니다.');
+          return null;
+        }
+
+        return {
+          id: user.id.toString(),
+          email: user.email,
+        };
       },
     }),
   ],
