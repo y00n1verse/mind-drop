@@ -1,6 +1,6 @@
 'use client';
 
-import instance from '../lib/instance';
+import instance from '../../lib/instance';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Button from '../components/common/Button';
