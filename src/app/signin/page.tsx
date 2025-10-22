@@ -2,6 +2,9 @@
 
 import { signIn } from 'next-auth/react';
 import Button from '../components/common/Button';
+import NaverIcon from '@/assets/icons/NaverIcon.svg';
+import GoogleIcon from '@/assets/icons/GoogleIcon.svg';
+import KakaoIcon from '@/assets/icons/KakaoIcon.svg';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
@@ -37,9 +40,9 @@ export default function LoginPage() {
     <div className="flex flex-col items-center justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-72 flex-col gap-4"
+        className="flex w-100 flex-col gap-8"
       >
-        <h1 className="mb-2 text-center text-2xl">로그인</h1>
+        <h1 className="mt-28 mb-2 text-center text-2xl">로그인</h1>
 
         <div className="flex w-full flex-col">
           <input
@@ -85,15 +88,44 @@ export default function LoginPage() {
         >
           로그인
         </Button>
-        <p className="text-center text-sm">
+
+        <p className="text-md mt-3 text-center">
           아직 계정이 없으신가요?{' '}
           <a
             href="/signup"
-            className="text-sm text-blue-700 underline hover:text-blue-500"
+            className="text-md text-blue-700 underline hover:text-blue-500"
           >
             회원가입
           </a>
         </p>
+
+        <div className="mt-3 flex items-center space-x-6">
+          <div className="h-px grow bg-gray-300"></div>
+          <p className="text-gray-600">또는</p>
+          <div className="h-px grow bg-gray-300"></div>
+        </div>
+        <div className="flex justify-center gap-4">
+          <button
+            className="cursor-pointer"
+            onClick={() => signIn('naver', { callbackUrl: '/' })}
+          >
+            <NaverIcon />
+          </button>
+
+          <button
+            className="cursor-pointer"
+            onClick={() => signIn('google', { callbackUrl: '/' })}
+          >
+            <GoogleIcon />
+          </button>
+
+          <button
+            className="cursor-pointer"
+            onClick={() => signIn('kakao', { callbackUrl: '/' })}
+          >
+            <KakaoIcon />
+          </button>
+        </div>
       </form>
     </div>
   );

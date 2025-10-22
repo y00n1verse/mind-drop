@@ -1,6 +1,9 @@
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import NextAuth from 'next-auth';
+import NaverProvider from 'next-auth/providers/naver';
+import KakaoProvider from 'next-auth/providers/kakao';
+import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const handler = NextAuth({
@@ -32,6 +35,11 @@ const handler = NextAuth({
           return null;
         }
 
+        if (!user.password) {
+          console.error('비밀번호가 지정되어 있지 않은 계정입니다.');
+          return null;
+        }
+
         const isValid = await bcrypt.compare(password, user.password);
 
         if (!isValid) {
@@ -45,10 +53,62 @@ const handler = NextAuth({
         };
       },
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+    }),
+
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID!,
+      clientSecret: process.env.NAVER_CLIENT_SECRET!,
+    }),
   ],
 
   session: {
     strategy: 'jwt',
+  },
+
+  callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider && user?.email) {
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email },
+        });
+
+        if (!existingUser) {
+          await prisma.user.create({
+            data: {
+              email: user.email,
+              name: user.name ?? '',
+              image: user.image ?? '',
+              provider: account.provider,
+            },
+          });
+        }
+      }
+      return true;
+    },
+
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url;
+      return baseUrl;
+    },
+
+    async jwt({ token, user }) {
+      if (user) token.id = user.id;
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (token) session.user.id = token.id;
+      return session;
+    },
   },
 
   pages: { signIn: '/signin' },
