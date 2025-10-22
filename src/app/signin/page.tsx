@@ -106,6 +106,7 @@ export default function LoginPage() {
         </div>
         <div className="flex justify-center gap-4">
           <button
+            type="button"
             className="cursor-pointer"
             onClick={() => signIn('naver', { callbackUrl: '/' })}
           >
@@ -113,6 +114,7 @@ export default function LoginPage() {
           </button>
 
           <button
+            type="button"
             className="cursor-pointer"
             onClick={() => signIn('google', { callbackUrl: '/' })}
           >
@@ -120,6 +122,7 @@ export default function LoginPage() {
           </button>
 
           <button
+            type="button"
             className="cursor-pointer"
             onClick={() => signIn('kakao', { callbackUrl: '/' })}
           >
