@@ -17,7 +17,7 @@ export default function Calendar() {
   }, [setSelectedDate]);
 
   return (
-    <div className="p-4 md:p-5 lg:p-8">
+    <div className="flex justify-center p-4 lg:items-center lg:justify-start lg:p-8">
       <DayPicker
         locale={ko}
         mode="single"
