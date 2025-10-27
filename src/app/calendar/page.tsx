@@ -1,3 +1,9 @@
+import Calendar from './Calendar';
+
 export default function CalendarPage() {
-  return <div>캘린더 페이지</div>;
+  return (
+    <div className="mx-auto flex max-w-480 justify-center lg:justify-start">
+      <Calendar />
+    </div>
+  );
 }
