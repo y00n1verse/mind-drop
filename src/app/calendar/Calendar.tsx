@@ -17,9 +17,10 @@ export default function Calendar() {
   }, [setSelectedDate]);
 
   return (
-    <div className="flex justify-center p-4 lg:items-center lg:justify-start lg:p-8">
+    <div className="flex justify-center rounded-md bg-[oklch(0.937_0_0)] pt-6 pb-2 md:px-3 lg:items-center lg:justify-start lg:p-8">
       <DayPicker
         locale={ko}
+        animate
         mode="single"
         navLayout="around"
         selected={selectedDate ? new Date(selectedDate) : undefined}
@@ -32,7 +33,7 @@ export default function Calendar() {
         disabled={{ after: today }}
         classNames={{
           day_button:
-            'flex flex-col cursor-pointer justify-start items-center p-1 gap-1 text-xs  w-17 h-15 rounded-md hover:bg-gray-100 transition-colors lg:p-1.5 lg:gap-1 md:w-21 md:h-19 lg:w-24 lg:h-22',
+          'flex flex-col cursor-pointer justify-start items-center p-1 gap-1 text-xs w-17 h-17 rounded-md hover:bg-gray-100 transition-colors lg:p-1.5 lg:gap-1 md:w-20 md:h-18 lg:w-24 lg:h-22',
           selected: 'rounded-lg bg-gray-100',
         }}
         components={{
