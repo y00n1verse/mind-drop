@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import UserIcon from '@/assets/icons/UserIcon.svg';
 import HomeIcon from '@/assets/icons/HomeIcon.svg';
@@ -8,7 +9,10 @@ import StatsIcon from '@/assets/icons/StatsIcon.svg';
 import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
 
 export default function NavBar() {
+  const { data: session } = useSession();
   const pathname = usePathname();
+
+  if (!session?.user) return null;
 
   const navMenu = [
     { href: '/', label: '메인', Icon: HomeIcon },
