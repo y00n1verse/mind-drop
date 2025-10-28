@@ -24,7 +24,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 z-50 hidden w-full bg-white md:block">
+      <nav className="fixed top-0 left-0 z-50 hidden w-full md:block">
         <div className="mx-auto max-w-480 px-4 sm:px-6 lg:px-8">
           <div className="flex h-18 items-center justify-between">
             <Link
@@ -68,7 +68,7 @@ export default function NavBar() {
         </div>
       </nav>
 
-      <nav className="fixed bottom-0 left-0 z-50 flex h-16 w-full items-center justify-around bg-white md:hidden">
+      <nav className="fixed bottom-0 left-0 z-50 flex h-16 w-full items-center justify-around md:hidden">
         {[...navMenu, navUser].map(({ href, label, Icon }) => (
           <Link
             key={href}
