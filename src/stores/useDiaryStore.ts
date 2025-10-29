@@ -1,3 +1,4 @@
+import instance from '@/lib/instance';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -16,11 +17,11 @@ interface DiaryStore {
   selectedDate: string | null;
 
   setSelectedDate: (date: string | null) => void;
-  getUserDiaries: (userId: string) => Diary[];
-  getDiaryByDate: (userId: string, date: string) => Diary | undefined;
-  addDiary: (diary: Diary) => void;
-  updateDiary: (userId: string, date: string, updated: Partial<Diary>) => void;
-  deleteDiary: (userId: string, date: string) => void;
+  getUserDiaries: () => Promise<void>;
+  getDiaryByDate: (date: string) => Diary | undefined;
+  addDiary: (diary: Omit<Diary, 'userId'>) => Promise<void>;
+  updateDiary: (date: string, updated: Partial<Diary>) => Promise<void>;
+  deleteDiary: (date: string) => Promise<void>;
 }
 
 export const useDiaryStore = create<DiaryStore>()(
@@ -31,32 +32,52 @@ export const useDiaryStore = create<DiaryStore>()(
 
       setSelectedDate: (date) => set({ selectedDate: date }),
 
-      getUserDiaries: (userId) =>
-        get().diaries.filter((d) => d.userId === userId),
+      getUserDiaries: async () => {
+        try {
+          const res = await instance.get('/diaries');
+          set({ diaries: res.data });
+        } catch (e) {
+          console.error('일기 리스트를 가져오는데 실패했어요: ', e);
+        }
+      },
 
-      getDiaryByDate: (userId, date) =>
-        get().diaries.find((d) => d.userId === userId && d.date === date),
+      getDiaryByDate: (date) => get().diaries.find((d) => d.date === date),
 
-      addDiary: (d) =>
-        set((state) => ({
-          diaries: [...state.diaries, d],
-        })),
+      addDiary: async (d) => {
+        try {
+          const res = await instance.post('/diaries', d);
+          set((state) => ({ diaries: [...state.diaries, res.data] }));
+        } catch (e) {
+          console.error('일기를 추가하는데 실패했어요: ', e);
+        }
+      },
 
-      updateDiary: (userId, date, updated) =>
-        set((state) => ({
-          diaries: state.diaries.map((diary) =>
-            diary.userId === userId && diary.date === date
-              ? { ...diary, ...updated }
-              : diary,
-          ),
-        })),
+      updateDiary: async (date, updated) => {
+        try {
+          const res = await instance.put('/diaries', {
+            date,
+            ...updated,
+          });
+          set((state) => ({
+            diaries: state.diaries.map((diary) =>
+              diary.date === date ? res.data : diary,
+            ),
+          }));
+        } catch (e) {
+          console.error('일기를 수정하는데 실패했어요: ', e);
+        }
+      },
 
-      deleteDiary: (userId, date) =>
-        set((state) => ({
-          diaries: state.diaries.filter(
-            (d) => !(d.userId === userId && d.date === date),
-          ),
-        })),
+      deleteDiary: async (date) => {
+        try {
+          await instance.delete('/diaries', { params: { date } });
+          set((state) => ({
+            diaries: state.diaries.filter((d) => d.date !== date),
+          }));
+        } catch (e) {
+          console.error('일기를 삭제하는데 실패했어요: ', e);
+        }
+      },
     }),
     { name: 'diary-storage' },
   ),
