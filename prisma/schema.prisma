@@ -1,22 +1,43 @@
-// DB 뼈대 만드는 파일
-
-// 클라이언트에서 Prisma DB를 연결하기 위해서 prisma-client 필요
 generator client {
   provider = "prisma-client-js"
 }
 
-// 어떤 종류의 DB를 사용할 것인지
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 // 테이블
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   email     String   @unique
   name      String?
   image     String?
   password  String?
   provider  String?
+  diaries   Diary[]
+}
+
+enum Emotion {
+  best
+  good
+  normal
+  bad
+  worst
+}
+
+model Diary {
+  id        String   @id @default(cuid())
+  userId    String
+  date      String
+  title     String
+  content   String
+  emotion   Emotion
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+  @@index([userId, date])
 }
