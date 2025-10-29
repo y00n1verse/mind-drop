@@ -1,56 +1,31 @@
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
         email: { label: '이메일', type: 'text', placeholder: '이메일 입력' },
-        password: {
-          label: '비밀번호',
-          type: 'password',
-        },
+        password: { label: '비밀번호', type: 'password' },
       },
       async authorize(credentials) {
         const email = credentials?.email;
         const password = credentials?.password;
+        if (!email || !password) return null;
 
-        if (!email || !password) {
-          console.error('이메일 또는 비밀번호가 입력되지 않았습니다.');
-          return null;
-        }
-
-        const user = await prisma.user.findUnique({
-          where: { email },
-        });
-
-        if (!user) {
-          console.error('존재하지 않는 유저입니다.');
-          return null;
-        }
-
-        if (!user.password) {
-          console.error('비밀번호가 지정되어 있지 않은 계정입니다.');
-          return null;
-        }
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user || !user.password) return null;
 
         const isValid = await bcrypt.compare(password, user.password);
+        if (!isValid) return null;
 
-        if (!isValid) {
-          console.error('비밀번호가 유효하지 않습니다.');
-          return null;
-        }
-
-        return {
-          id: user.id.toString(),
-          email: user.email,
-        };
+        return { id: user.id.toString(), email: user.email };
       },
     }),
 
@@ -70,9 +45,7 @@ const handler = NextAuth({
     }),
   ],
 
-  session: {
-    strategy: 'jwt',
-  },
+  session: { strategy: 'jwt' },
 
   callbacks: {
     async signIn({ user, account }) {
@@ -95,11 +68,6 @@ const handler = NextAuth({
       return true;
     },
 
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) return url;
-      return baseUrl;
-    },
-
     async jwt({ token, user }) {
       if (user) {
         const dbUser = await prisma.user.findUnique({
@@ -119,6 +87,8 @@ const handler = NextAuth({
   },
 
   pages: { signIn: '/signin' },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
