@@ -31,7 +31,13 @@ export async function GET(req: Request) {
 
     const diaries = await prisma.diary.findMany({
       where: { userId },
-      select: { date: true, title: true, emotion: true, createdAt: true },
+      select: {
+        date: true,
+        title: true,
+        content: true,
+        emotion: true,
+        createdAt: true,
+      },
     });
 
     return res(diaries);
