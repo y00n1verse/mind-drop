@@ -1,0 +1,125 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Button from '../common/Button';
+import FormInput from '../common/FormInput';
+import EmotionSelector from './EmotionSelector';
+import FormTextarea from './FormTextarea';
+
+interface DiaryFormProps {
+  mode: 'create' | 'edit';
+  diary?: { title: string; content: string; emotion?: string };
+  onSuccess: () => void;
+  onFormStateChange?: (isValid: boolean) => void;
+}
+
+interface DiaryFormData {
+  title: string;
+  content: string;
+  emotion: string;
+}
+
+export default function DiaryForm({
+  mode,
+  diary,
+  onSuccess,
+  onFormStateChange,
+}: DiaryFormProps) {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    clearErrors,
+    watch,
+    formState: { errors },
+  } = useForm<DiaryFormData>({
+    defaultValues: {
+      title: diary?.title || '',
+      content: diary?.content || '',
+      emotion: diary?.emotion || '',
+    },
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const selectedEmotion = watch('emotion');
+
+  const title = watch('title');
+  const content = watch('content');
+  const isFormValid =
+    title.trim() !== '' && content.trim() !== '' && selectedEmotion !== '';
+
+  useEffect(() => {
+    onFormStateChange?.(isFormValid);
+  }, [isFormValid, onFormStateChange]);
+
+  const handleEmotionSelect = (variant: string) => {
+    setValue('emotion', variant);
+    clearErrors('emotion');
+  };
+
+  const onSubmit = async (data: DiaryFormData) => {
+    if (!data.emotion) {
+      setError('emotion', { message: '감정을 선택해주세요.' });
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      onSuccess();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex w-full max-w-2xl flex-col gap-8 text-lg"
+    >
+      <FormInput
+        type="text"
+        placeholder="제목"
+        register={register('title', { required: '제목은 필수에요.' })}
+        error={errors.title}
+        className="text-xl md:text-2xl"
+      />
+
+      <FormTextarea
+        placeholder="오늘 하루는 어땠는지 자유롭게 적어보세요."
+        register={register('content', { required: '일기 내용은 필수에요.' })}
+        error={errors.content}
+        className="text-lg md:text-xl"
+      />
+
+      <EmotionSelector
+        selectedEmotion={selectedEmotion}
+        onSelect={handleEmotionSelect}
+        error={errors.emotion?.message}
+      />
+
+      <input
+        type="hidden"
+        {...register('emotion', { required: '감정을 선택해주세요.' })}
+      />
+
+      <div className="mt-10 hidden justify-end gap-3 md:flex">
+        <Button type="button" size="large" variant="cancel">
+          취소
+        </Button>
+        <Button
+          type="submit"
+          size="large"
+          variant="complete"
+          disabled={!isFormValid || isSubmitting}
+        >
+          {isSubmitting
+            ? '저장 중...'
+            : mode === 'create'
+              ? '저장하기'
+              : '수정하기'}
+        </Button>
+      </div>
+    </form>
+  );
+}
