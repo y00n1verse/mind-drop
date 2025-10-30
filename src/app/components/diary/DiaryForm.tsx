@@ -6,10 +6,13 @@ import Button from '../common/Button';
 import FormInput from '../common/FormInput';
 import EmotionSelector from './EmotionSelector';
 import FormTextarea from './FormTextarea';
+import { useDiaryStore } from '@/stores/useDiaryStore';
+import { EmotionType } from '@/constants/emotions';
+import { useRouter } from 'next/navigation';
 
 interface DiaryFormProps {
   mode: 'create' | 'edit';
-  diary?: { title: string; content: string; emotion?: string };
+  diary?: { title: string; content: string; emotion?: EmotionType };
   onSuccess: () => void;
   onFormStateChange?: (isValid: boolean) => void;
 }
@@ -17,7 +20,7 @@ interface DiaryFormProps {
 interface DiaryFormData {
   title: string;
   content: string;
-  emotion: string;
+  emotion: EmotionType;
 }
 
 export interface DiaryFormHandle {
@@ -26,6 +29,10 @@ export interface DiaryFormHandle {
 
 const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
   ({ mode, diary, onSuccess, onFormStateChange }, ref) => {
+    const router = useRouter();
+    const addDiary = useDiaryStore((state) => state.addDiary);
+    const selectedDate = useDiaryStore((state) => state.selectedDate);
+
     const {
       register,
       handleSubmit,
@@ -38,7 +45,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       defaultValues: {
         title: diary?.title || '',
         content: diary?.content || '',
-        emotion: diary?.emotion || '',
+        emotion: diary?.emotion as EmotionType,
       },
     });
 
@@ -48,13 +55,13 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
     const title = watch('title');
     const content = watch('content');
     const isFormValid =
-      title.trim() !== '' && content.trim() !== '' && selectedEmotion !== '';
+      title.trim() !== '' && content.trim() !== '' && !!selectedEmotion;
 
     useEffect(() => {
       onFormStateChange?.(isFormValid);
     }, [isFormValid, onFormStateChange]);
 
-    const handleEmotionSelect = (variant: string) => {
+    const handleEmotionSelect = (variant: EmotionType) => {
       setValue('emotion', variant);
       clearErrors('emotion');
     };
@@ -64,9 +71,23 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
         setError('emotion', { message: '감정을 선택해주세요.' });
         return;
       }
+
+      if (!selectedDate) {
+        console.error('선택된 날짜가 없습니다.');
+        return;
+      }
+
       setIsSubmitting(true);
       try {
+        await addDiary({
+          date: selectedDate,
+          title: data.title,
+          content: data.content,
+          emotion: data.emotion,
+        });
         onSuccess();
+      } catch (e) {
+        console.error('일기 저장 실패:', e);
       } finally {
         setIsSubmitting(false);
       }
@@ -108,7 +129,12 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
         />
 
         <div className="mt-10 hidden justify-end gap-3 md:flex">
-          <Button type="button" size="large" variant="cancel">
+          <Button
+            type="button"
+            size="large"
+            variant="cancel"
+            onClick={() => router.push('/calendar')}
+          >
             취소
           </Button>
           <Button

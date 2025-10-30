@@ -1,9 +1,9 @@
-import { emotions } from '@/constants/emotions';
+import { emotions, EmotionType } from '@/constants/emotions';
 import Label from '../common/Label';
 
 interface EmotionSelectorProps {
-  selectedEmotion: string;
-  onSelect: (variant: string) => void;
+  selectedEmotion: EmotionType;
+  onSelect: (variant: EmotionType) => void;
   error?: string;
 }
 
