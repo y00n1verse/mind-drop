@@ -3,9 +3,11 @@
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { emotions } from '@/constants/emotions';
 import Button from '../components/common/Button';
+import { useRouter } from 'next/navigation';
 
 export default function DiaryPanel() {
   const { selectedDate, getDiaryByDate } = useDiaryStore();
+  const router = useRouter();
 
   const diary = selectedDate ? getDiaryByDate(selectedDate) : null;
 
@@ -17,7 +19,14 @@ export default function DiaryPanel() {
           <p>일기를 작성하러 갈까요?</p>
         </div>
 
-        <Button variant="complete" className="h-10 w-35 lg:w-45">
+        <Button
+          variant="complete"
+          className="h-10 w-35 lg:w-45"
+          onClick={() => {
+            if (!selectedDate) return;
+            router.push(`/diary/form?date=${selectedDate}`);
+          }}
+        >
           일기쓰러 가기
         </Button>
       </div>
@@ -52,7 +61,7 @@ export default function DiaryPanel() {
         </div>
 
         <div className="flex items-end justify-between md:flex-col md:items-start">
-          <p className="w-32 truncate text-sm md:w-full md:text-base">
+          <p className="w-56 truncate text-sm md:w-full md:text-base">
             {diary.content}
           </p>
           <p className="text-right text-sm text-gray-400 md:hidden">
