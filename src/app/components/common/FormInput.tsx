@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface FormInputProps {
@@ -5,6 +6,7 @@ interface FormInputProps {
   placeholder: string;
   register: UseFormRegisterReturn;
   error?: FieldError;
+  className?: string;
 }
 
 export default function FormInput({
@@ -12,6 +14,7 @@ export default function FormInput({
   placeholder,
   register,
   error,
+  className,
 }: FormInputProps) {
   return (
     <div className="flex w-full flex-col">
@@ -19,14 +22,16 @@ export default function FormInput({
         {...register}
         type={type}
         placeholder={placeholder}
-        className={`w-full border-b px-3 py-2 focus:outline-none ${
+        className={clsx(
+          'w-full border-b px-3 py-2 placeholder:text-gray-400 focus:outline-none',
           error
             ? 'border-[var(--color-warn-bg)] focus:border-[var(--color-warn-bg)]'
-            : 'border-gray-500 focus:border-[var(--color-brand-primary-hover)]'
-        }`}
+            : 'border-gray-500 focus:border-[var(--color-brand-primary-hover)]',
+          className,
+        )}
       />
       {error && (
-        <p className="mt-2 ml-2 text-left text-sm text-[var(--color-warn-bg)]">
+        <p className="mt-2 ml-2 text-left text-base text-[var(--color-warn-bg)]">
           {error.message}
         </p>
       )}

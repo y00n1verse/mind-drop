@@ -14,14 +14,14 @@ export default function EmotionSelector({
 }: EmotionSelectorProps) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-lg">
+      <p className="text-lg md:text-xl">
         오늘의 기분{' '}
         {error ? (
-          <span className="md:text-md text-xs font-medium text-[var(--color-warn-bg)]">
+          <span className="text-sm text-[var(--color-warn-bg)] md:text-base">
             {error}
           </span>
         ) : (
-          <span className="md:text-md text-xs text-gray-500">
+          <span className="text-base text-gray-500 md:text-lg">
             (감정 캐릭터들을 눌러보세요)
           </span>
         )}
