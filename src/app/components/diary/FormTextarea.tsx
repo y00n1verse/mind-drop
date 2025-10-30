@@ -1,29 +1,26 @@
-import clsx from 'clsx';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import clsx from 'clsx';
 
-interface FormInputProps {
-  type: string;
+interface FormTextareaProps {
   placeholder: string;
   register: UseFormRegisterReturn;
   error?: FieldError;
   className?: string;
 }
 
-export default function FormInput({
-  type,
+export default function FormTextarea({
   placeholder,
   register,
   error,
   className,
-}: FormInputProps) {
+}: FormTextareaProps) {
   return (
-    <div className="flex w-full flex-col">
-      <input
+    <div className="flex flex-col">
+      <textarea
         {...register}
-        type={type}
         placeholder={placeholder}
         className={clsx(
-          'w-full border-b px-3 py-2 placeholder:text-gray-400 focus:outline-none',
+          'h-60 w-full resize-none border-b px-3 py-2 placeholder:text-gray-400 focus:outline-none',
           error
             ? 'border-[var(--color-warn-bg)] focus:border-[var(--color-warn-bg)]'
             : 'border-gray-500 focus:border-[var(--color-brand-primary-hover)]',

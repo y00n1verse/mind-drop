@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   children?: ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -17,30 +18,36 @@ export default function Button({
   children,
   className,
   onClick,
+  disabled = false,
 }: ButtonProps) {
-  const baseStyles = 'flex items-center justify-center cursor-pointer';
+  const baseStyles = clsx(
+    'flex items-center justify-center rounded-xl border transition-colors duration-150',
+    disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+  );
+
+  const disabledStyle =
+    'bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed';
 
   const variantStyles = {
     complete: clsx(
-      'border',
-      'text-white',
-      'bg-[var(--color-complete-bg)]',
-      'border-[var(--color-complete-border)]',
-      'hover:bg-[var(--color-complete-hover)]',
+      'border text-white',
+      disabled
+        ? disabledStyle
+        : 'bg-[var(--color-complete-bg)] border-[var(--color-complete-border)] hover:bg-[var(--color-complete-hover)]',
     ),
 
     cancel: clsx(
       'border',
-      'text-[var(--color-cancel-text)]',
-      'bg-[var(--color-cancel-bg)]',
-      'border-[var(--color-cancel-border)]',
-      'hover:bg-[var(--color-cancel-hover)]',
+      disabled
+        ? disabledStyle
+        : 'text-[var(--color-cancel-text)] bg-[var(--color-cancel-bg)] border-[var(--color-cancel-border)] hover:bg-[var(--color-cancel-hover)]',
     ),
+
     warn: clsx(
       'border text-white',
-      'bg-[var(--color-warn-bg)]',
-      'border-[var(--color-warn-border)]',
-      'hover:bg-[var(--color-warn-hover)]',
+      disabled
+        ? disabledStyle
+        : 'bg-[var(--color-warn-bg)] border-[var(--color-warn-border)] hover:bg-[var(--color-warn-hover)]',
     ),
   };
 
