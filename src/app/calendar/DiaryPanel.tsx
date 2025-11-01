@@ -69,7 +69,7 @@ export default function DiaryPanel() {
         </div>
 
         <div className="flex items-end justify-between md:flex-col md:items-start">
-          <p className="w-56 truncate text-sm md:w-full md:text-base">
+          <p className="md:truncate-none w-56 truncate text-sm md:w-full md:text-base md:whitespace-pre-line">
             {diary.content}
           </p>
           <p className="text-right text-sm text-gray-400 md:hidden">
