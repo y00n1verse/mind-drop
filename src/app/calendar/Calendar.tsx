@@ -3,7 +3,7 @@
 import { emotions } from '@/constants/emotions';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { ko } from 'date-fns/locale';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 
@@ -11,15 +11,25 @@ export default function Calendar() {
   const today = new Date();
   const { diaries, selectedDate, setSelectedDate, getUserDiaries } =
     useDiaryStore();
+  const [month, setMonth] = useState<Date>(today);
 
   useEffect(() => {
-    const formatted = today.toLocaleDateString('sv-SE');
-    setSelectedDate(formatted);
-  }, [setSelectedDate]);
+    if (!selectedDate) {
+      const formatted = today.toLocaleDateString('sv-SE');
+      setSelectedDate(formatted);
+    }
+  }, [selectedDate, setSelectedDate]);
 
   useEffect(() => {
     getUserDiaries();
   }, [getUserDiaries]);
+
+  useEffect(() => {
+    if (selectedDate) {
+      const dateObj = new Date(selectedDate);
+      setMonth(dateObj);
+    }
+  }, [selectedDate]);
 
   return (
     <div className="flex justify-center rounded-md bg-[oklch(0.937_0_0)] pt-6 pb-2 md:px-3 lg:items-center lg:justify-start lg:p-8">
@@ -29,6 +39,8 @@ export default function Calendar() {
         mode="single"
         navLayout="around"
         selected={selectedDate ? new Date(selectedDate) : undefined}
+        month={month}
+        onMonthChange={setMonth}
         onSelect={(date) => {
           if (date) {
             const formatted = date.toLocaleDateString('sv-SE');
