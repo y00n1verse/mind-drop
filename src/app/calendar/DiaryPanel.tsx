@@ -35,8 +35,16 @@ export default function DiaryPanel() {
 
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
+  const handleClick = () => {
+    if (!selectedDate) return;
+    router.push(`/diary/detail?date=${selectedDate}`);
+  };
+
   return (
-    <div className="m-5 flex items-center gap-4 rounded-md bg-[oklch(0.937_0_0)] p-5 md:m-0 md:w-full md:flex-col md:items-start md:gap-5 md:p-5 lg:gap-5 lg:p-10">
+    <div
+      onClick={handleClick}
+      className="m-5 flex cursor-pointer items-center gap-4 rounded-md bg-[oklch(0.937_0_0)] p-5 transition-all hover:scale-[1.01] hover:shadow-md md:m-0 md:w-full md:flex-col md:items-start md:gap-5 md:p-5 lg:gap-5 lg:p-10"
+    >
       {emotionData && (
         <div className="md:self-center">
           <emotionData.Icon
