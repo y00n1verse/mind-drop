@@ -13,8 +13,9 @@ import { useRouter } from 'next/navigation';
 interface DiaryFormProps {
   mode: 'create' | 'edit';
   diary?: { title: string; content: string; emotion?: EmotionType };
-  onSuccess: () => void;
+  onSuccess: (data: DiaryFormData) => void;
   onFormStateChange?: (isValid: boolean) => void;
+  onCancel?: () => void;
 }
 
 interface DiaryFormData {
@@ -28,10 +29,9 @@ export interface DiaryFormHandle {
 }
 
 const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
-  ({ mode, diary, onSuccess, onFormStateChange }, ref) => {
+  ({ mode, diary, onSuccess, onFormStateChange, onCancel }, ref) => {
     const router = useRouter();
-    const addDiary = useDiaryStore((state) => state.addDiary);
-    const selectedDate = useDiaryStore((state) => state.selectedDate);
+    const { addDiary, updateDiary, selectedDate } = useDiaryStore();
 
     const {
       register,
@@ -45,7 +45,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       defaultValues: {
         title: diary?.title || '',
         content: diary?.content || '',
-        emotion: diary?.emotion as EmotionType,
+        emotion: diary?.emotion ?? undefined,
       },
     });
 
@@ -79,13 +79,18 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
 
       setIsSubmitting(true);
       try {
-        await addDiary({
-          date: selectedDate,
-          title: data.title,
-          content: data.content,
-          emotion: data.emotion,
-        });
-        onSuccess();
+        if (mode === 'create') {
+          await addDiary({
+            date: selectedDate,
+            title: data.title,
+            content: data.content,
+            emotion: data.emotion,
+          });
+        } else if (mode === 'edit') {
+          await updateDiary(selectedDate, data);
+        }
+
+        onSuccess(data);
       } catch (e) {
         console.error('일기 저장 실패:', e);
       } finally {
@@ -133,7 +138,13 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
             type="button"
             size="large"
             variant="cancel"
-            onClick={() => router.push('/calendar')}
+            onClick={() => {
+              if (mode === 'edit' && onCancel) {
+                onCancel();
+              } else {
+                router.push('/calendar');
+              }
+            }}
           >
             취소
           </Button>
