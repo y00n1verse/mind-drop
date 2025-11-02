@@ -11,11 +11,10 @@ import {
   LabelList,
   ResponsiveContainer,
 } from 'recharts';
-
-const mockData = emotions.map((emotion) => ({
-  ...emotion,
-  uv: Math.floor(Math.random() * 30) + 1,
-}));
+import { useDiaryStore } from '@/stores/useDiaryStore';
+import { useMemo, useState } from 'react';
+import { getEmotionStatsByMonth } from '@/utils/getEmotionStatsByMonth';
+import { addMonths, format, subMonths } from 'date-fns';
 
 function EmotionTick({ x, y, payload }: any) {
   const emotion = emotions.find((e) => e.label === payload.value);
@@ -37,6 +36,19 @@ function EmotionTick({ x, y, payload }: any) {
 }
 
 export default function EmotionMonthlyChart() {
+  const { diaries } = useDiaryStore();
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const currentMonth = format(currentDate, 'yyyy-MM');
+
+  const chartData = useMemo(
+    () => getEmotionStatsByMonth(diaries, currentMonth),
+    [diaries, currentMonth],
+  );
+
+  const handlePrevMonth = () => setCurrentDate((d) => subMonths(d, 1));
+  const handleNextMonth = () => setCurrentDate((d) => addMonths(d, 1));
+
   return (
     <div className="flex w-full flex-col items-start gap-4">
       <div className="flex flex-col items-start gap-1">
@@ -48,11 +60,17 @@ export default function EmotionMonthlyChart() {
 
       <div className="w-full rounded-md bg-white p-5 shadow-sm">
         <div className="flex items-center justify-between pb-3">
-          <button className="cursor-pointer rounded-md hover:bg-gray-100">
+          <button
+            onClick={handlePrevMonth}
+            className="cursor-pointer rounded-md hover:bg-gray-100"
+          >
             <ChevronLeft />
           </button>
-          <p>2025-10-01 ~ 2025-10-31</p>
-          <button className="cursor-pointer rounded-md hover:bg-gray-100">
+          <p>{format(currentDate, 'yyyy년 MM월')}</p>
+          <button
+            onClick={handleNextMonth}
+            className="cursor-pointer rounded-md hover:bg-gray-100"
+          >
             <ChevronRight />
           </button>
         </div>
@@ -60,7 +78,7 @@ export default function EmotionMonthlyChart() {
         <div className="relative h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={mockData}
+              data={chartData}
               margin={{ top: 40, right: 10, bottom: 80, left: 10 }}
             >
               <XAxis
@@ -76,7 +94,7 @@ export default function EmotionMonthlyChart() {
                   fill="#959595"
                   fontSize={14}
                 />
-                {mockData.map((entry, index) => (
+                {chartData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={`var(--color-${entry.variant})`}
