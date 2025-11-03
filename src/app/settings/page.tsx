@@ -1,10 +1,14 @@
 'use client';
 
+import useModal from '../hooks/useModal';
 import { signOut } from 'next-auth/react';
-import Button from '../components/common/Button';
 import AuthGuard from '../components/AuthGuard';
+import Button from '../components/common/Button';
+import ChangePasswordModal from './components/ChangePasswordModal';
 
 export default function SettingsPage() {
+  const { isOpen, openModal, closeModal } = useModal();
+
   const handleDeleteAccount = async () => {
     if (!confirm('정말 탈퇴하시겠습니까? 작성했던 모든 일기가 삭제됩니다.'))
       return;
@@ -27,6 +31,9 @@ export default function SettingsPage() {
   return (
     <AuthGuard>
       <div className="flex flex-col gap-4">
+        <Button variant="warn" onClick={openModal} className="cursor-pointer">
+          비밀번호 변경
+        </Button>
         <Button
           variant="warn"
           onClick={() => signOut({ callbackUrl: '/signin' })}
@@ -42,6 +49,7 @@ export default function SettingsPage() {
           회원 탈퇴
         </Button>
       </div>
+      <ChangePasswordModal isOpen={isOpen} onClose={closeModal} />
     </AuthGuard>
   );
 }
