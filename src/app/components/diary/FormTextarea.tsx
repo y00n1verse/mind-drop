@@ -28,7 +28,7 @@ export default function FormTextarea({
         )}
       />
       {error && (
-        <p className="mt-2 ml-2 text-left text-base text-[var(--color-warn-bg)]">
+        <p className="mt-2 ml-2 text-left text-sm text-[var(--color-warn-bg)]">
           {error.message}
         </p>
       )}
