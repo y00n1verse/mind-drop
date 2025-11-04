@@ -17,9 +17,7 @@ export default function EmotionSelector({
       <p className="text-lg md:text-xl">
         오늘의 기분{' '}
         {error ? (
-          <span className="text-sm text-[var(--color-warn-bg)] md:text-base">
-            {error}
-          </span>
+          <span className="text-sm text-[var(--color-warn-bg)]">{error}</span>
         ) : (
           <span className="text-base text-gray-500 md:text-lg">
             (감정 캐릭터들을 눌러보세요)

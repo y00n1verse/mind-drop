@@ -22,6 +22,15 @@ export default function FormInput({
         {...register}
         type={type}
         placeholder={placeholder}
+        onCopy={(e) => {
+          if (type === 'password') e.preventDefault();
+        }}
+        onPaste={(e) => {
+          if (type === 'password') e.preventDefault();
+        }}
+        onCut={(e) => {
+          if (type === 'password') e.preventDefault();
+        }}
         className={clsx(
           'w-full border-b px-3 py-2 placeholder:text-gray-400 focus:outline-none',
           error
@@ -31,7 +40,7 @@ export default function FormInput({
         )}
       />
       {error && (
-        <p className="mt-2 ml-2 text-left text-base text-[var(--color-warn-bg)]">
+        <p className="mt-2 ml-2 text-left text-sm text-[var(--color-warn-bg)]">
           {error.message}
         </p>
       )}

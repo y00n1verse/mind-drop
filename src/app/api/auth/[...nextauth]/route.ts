@@ -73,7 +73,12 @@ export const authOptions: AuthOptions = {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
         });
-        token.id = dbUser ? dbUser.id.toString() : (user as any).id;
+
+        if (dbUser) {
+          token.id = dbUser.id.toString();
+          token.hasPassword = !!dbUser.password;
+          token.provider = dbUser.provider ? dbUser.provider : 'credentials';
+        }
       }
       return token;
     },
@@ -81,6 +86,8 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       if (session?.user && token?.id) {
         session.user.id = token.id;
+        session.user.hasPassword = token.hasPassword;
+        session.user.provider = token.provider;
       }
       return session;
     },
