@@ -16,6 +16,7 @@ export interface SignupFormData {
 export default function SignupForm() {
   const router = useRouter();
   const {
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -23,6 +24,8 @@ export default function SignupForm() {
   } = useForm<SignupFormData>();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).+$/;
 
   const onSubmit = async (data: SignupFormData) => {
     try {
@@ -84,6 +87,11 @@ export default function SignupForm() {
         placeholder="비밀번호"
         register={register('password', {
           required: '비밀번호를 입력해주세요.',
+          minLength: { value: 8, message: '8자 이상 입력해주세요.' },
+          pattern: {
+            value: passwordRegex,
+            message: '영문 대/소문자, 숫자 및 특수문자를 모두 포함해야 해요.',
+          },
         })}
         error={errors.password}
       />
@@ -92,6 +100,8 @@ export default function SignupForm() {
         placeholder="비밀번호 확인"
         register={register('confirmPassword', {
           required: '비밀번호를 다시 한 번 입력해주세요.',
+          validate: (value) =>
+            value === watch('password') || '비밀번호가 일치하지 않아요.',
         })}
         error={errors.confirmPassword}
       />
