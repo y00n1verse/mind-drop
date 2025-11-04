@@ -1,8 +1,8 @@
 'use client';
 
-import useModal from '../hooks/useModal';
-import AuthGuard from '../components/AuthGuard';
-import Button from '../components/common/Button';
+import useModal from '../../hooks/useModal';
+import AuthGuard from '../../components/AuthGuard';
+import Button from '../../components/common/Button';
 import { signOut, useSession } from 'next-auth/react';
 import ChangePasswordModal from './components/ChangePasswordModal';
 
