@@ -1,10 +1,10 @@
 'use client';
 
-import instance from '../../lib/instance';
+import instance from '@/lib/instance';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import Button from '../components/common/Button';
-import FormInput from '../components/common/FormInput';
+import Button from '@/app/components/common/Button';
+import FormInput from '@/app/components/common/FormInput';
 
 export interface SignupFormData {
   email: string;

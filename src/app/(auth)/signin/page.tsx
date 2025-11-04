@@ -3,11 +3,11 @@
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import Button from '../components/common/Button';
+import Button from '../../components/common/Button';
 import NaverIcon from '@/assets/icons/NaverIcon.svg';
 import KakaoIcon from '@/assets/icons/KakaoIcon.svg';
 import GoogleIcon from '@/assets/icons/GoogleIcon.svg';
-import FormInput from '../components/common/FormInput';
+import FormInput from '../../components/common/FormInput';
 
 interface LoginFormData {
   email: string;

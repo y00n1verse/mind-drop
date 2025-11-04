@@ -1,6 +1,6 @@
-import AuthGuard from '../components/AuthGuard';
 import Calendar from './Calendar';
 import DiaryPanel from './DiaryPanel';
+import AuthGuard from '@/app/components/AuthGuard';
 
 export default function CalendarPage() {
   return (
