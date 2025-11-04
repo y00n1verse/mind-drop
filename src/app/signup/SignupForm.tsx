@@ -35,9 +35,9 @@ export default function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-72 flex-col gap-4"
+      className="mt-28 flex w-100 flex-col gap-8 md:mt-0"
     >
-      <h1 className="mb-2 text-center text-2xl">회원가입</h1>
+      <h1 className="mb-2 text-center text-2xl md:mt-20">회원가입</h1>
 
       <FormInput
         type="email"
