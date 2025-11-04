@@ -17,16 +17,23 @@ interface FormValues {
   confirmPassword: string;
 }
 
+const passwordRegex =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).+$/;
+
 export default function ChangePasswordModal({
   isOpen,
   onClose,
 }: ChangePasswordModalProps) {
   const {
+    watch,
     reset,
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    mode: 'onBlur',
+  });
 
   const onSubmit = async (data: FormValues) => {
     try {
@@ -35,9 +42,8 @@ export default function ChangePasswordModal({
       reset();
       onClose();
     } catch (e: any) {
-      console.error(e);
       if (e.response?.data?.message) {
-        alert(e.response.data.message);
+        setError('currentPassword', { message: e.response.data.message });
       } else {
         alert('비밀번호를 변경하는 중 오류가 발생했어요.');
       }
@@ -63,6 +69,8 @@ export default function ChangePasswordModal({
             placeholder="현재 비밀번호"
             register={register('currentPassword', {
               required: '현재 비밀번호를 입력해주세요.',
+              validate: (value) =>
+                value.trim().length > 0 || '공백만 입력할 수 없어요.',
             })}
             error={errors.currentPassword}
             className="rounded-lg border"
@@ -72,6 +80,12 @@ export default function ChangePasswordModal({
             placeholder="새 비밀번호"
             register={register('newPassword', {
               required: '새 비밀번호를 입력해주세요.',
+              minLength: { value: 8, message: '8자 이상 입력해주세요.' },
+              pattern: {
+                value: passwordRegex,
+                message:
+                  '영문 대/소문자, 숫자 및 특수문자를 모두 포함해야 해요.',
+              },
             })}
             error={errors.newPassword}
             className="rounded-lg border"
@@ -81,6 +95,9 @@ export default function ChangePasswordModal({
             placeholder="새 비밀번호 확인"
             register={register('confirmPassword', {
               required: '비밀번호를 한 번 더 입력해주세요.',
+              validate: (value) =>
+                value === watch('newPassword') ||
+                '새 비밀번호가 일치하지 않아요.',
             })}
             error={errors.confirmPassword}
             className="rounded-lg border"

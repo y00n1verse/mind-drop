@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   const isValid = await bcrypt.compare(currentPassword, user.password);
   if (!isValid) {
     return NextResponse.json(
-      { message: '비밀번호가 올바르지 않습니다.' },
+      { message: '현재 비밀번호가 올바르지 않아요.' },
       { status: 400 },
     );
   }
