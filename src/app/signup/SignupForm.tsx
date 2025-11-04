@@ -19,16 +19,42 @@ export default function SignupForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<SignupFormData>();
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const onSubmit = async (data: SignupFormData) => {
     try {
-      const res = await instance.post('/signup', data);
+      if (data.email.length < 5) {
+        setError('email', { message: '아이디는 5자 이상 입력해주세요.' });
+        return;
+      }
 
-      console.log('회원가입이 완료되었습니다!', res.data);
+      const isEmailFormat = data.email.includes('@');
+      if (isEmailFormat && !emailRegex.test(data.email)) {
+        setError('email', { message: '이메일 형식이 올바르지 않아요.' });
+        return;
+      }
+
+      const { data: duplicateCheck } = await instance.post(
+        '/auth/check-duplicate',
+        {
+          email: data.email,
+        },
+      );
+
+      if (duplicateCheck.exists) {
+        setError('email', { message: '이미 사용 중인 아이디예요.' });
+        return;
+      }
+
+      await instance.post('/signup', data);
       router.push('/signin');
-    } catch (error) {
-      console.error('회원가입을 실패하였습니다.');
+    } catch {
+      setError('email', {
+        message: '문제가 발생했어요. 잠시 후 다시 시도해주세요.',
+      });
     }
   };
 
@@ -40,9 +66,11 @@ export default function SignupForm() {
       <h1 className="mb-2 text-center text-2xl md:mt-20">회원가입</h1>
 
       <FormInput
-        type="email"
-        placeholder="이메일"
-        register={register('email', { required: '이메일을 입력해주세요.' })}
+        type="text"
+        placeholder="아이디 또는 이메일"
+        register={register('email', {
+          required: '아이디 또는 이메일을 입력해주세요.',
+        })}
         error={errors.email}
       />
       <FormInput
