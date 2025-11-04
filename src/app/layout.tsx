@@ -1,8 +1,7 @@
 import './globals.css';
-import { Metadata } from 'next';
 import { Noto_Sans } from 'next/font/google';
 import SessionWrapper from './session-wrapper';
-import NavBar from './components/layout/NavBar';
+import { Metadata } from 'next';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -24,11 +23,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={`${notoSans.className}`}>
-        <SessionWrapper>
-          <NavBar />
-          <main className="md:mt-20">{children}</main>
-        </SessionWrapper>
+      <body className={notoSans.className}>
+        <SessionWrapper>{children}</SessionWrapper>
       </body>
     </html>
   );
