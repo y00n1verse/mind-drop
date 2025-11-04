@@ -5,6 +5,7 @@ CREATE TYPE "Emotion" AS ENUM ('best', 'good', 'normal', 'bad', 'worst');
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "nickname" TEXT NOT NULL,
     "name" TEXT,
     "image" TEXT,
     "password" TEXT,
