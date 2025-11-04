@@ -13,6 +13,10 @@ export interface SignupFormData {
   confirmPassword: string;
 }
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const passwordRegex =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).+$/;
+
 export default function SignupForm() {
   const router = useRouter();
   const {
@@ -21,25 +25,12 @@ export default function SignupForm() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<SignupFormData>();
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).+$/;
+  } = useForm<SignupFormData>({
+    mode: 'onBlur',
+  });
 
   const onSubmit = async (data: SignupFormData) => {
     try {
-      if (data.email.length < 5) {
-        setError('email', { message: '아이디는 5자 이상 입력해주세요.' });
-        return;
-      }
-
-      const isEmailFormat = data.email.includes('@');
-      if (isEmailFormat && !emailRegex.test(data.email)) {
-        setError('email', { message: '이메일 형식이 올바르지 않아요.' });
-        return;
-      }
-
       const { data: duplicateCheck } = await instance.post(
         '/auth/check-duplicate',
         {
@@ -64,7 +55,7 @@ export default function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-28 flex w-100 flex-col gap-8 md:mt-0"
+      className="mt-28 flex w-100 flex-col gap-8 md:mt-0 md:w-lg"
     >
       <h1 className="mb-2 text-center text-2xl md:mt-20">회원가입</h1>
 
@@ -73,13 +64,29 @@ export default function SignupForm() {
         placeholder="아이디 또는 이메일"
         register={register('email', {
           required: '아이디 또는 이메일을 입력해주세요.',
+          minLength: { value: 5, message: '아이디는 5자 이상 입력해주세요.' },
+          validate: {
+            notBlank: (value) =>
+              value.trim().length > 0 || '공백만 입력할 수 없어요.',
+            emailFormat: (value) => {
+              const isEmailFormat = value.includes('@');
+              if (isEmailFormat && !emailRegex.test(value)) {
+                return '이메일 형식이 올바르지 않아요.';
+              }
+              return true;
+            },
+          },
         })}
         error={errors.email}
       />
       <FormInput
         type="text"
         placeholder="닉네임"
-        register={register('nickname', { required: '닉네임을 입력해주세요.' })}
+        register={register('nickname', {
+          required: '닉네임을 입력해주세요.',
+          validate: (value) =>
+            value.trim().length > 0 || '닉네임은 공백일 수 없어요.',
+        })}
         error={errors.nickname}
       />
       <FormInput
