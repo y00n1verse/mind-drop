@@ -55,7 +55,7 @@ export default function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-28 flex w-100 flex-col gap-8 md:mt-0 md:w-lg"
+      className="mt-28 mb-14 flex w-100 flex-col gap-8 md:mt-0 md:w-lg"
     >
       <h1 className="mb-2 text-center text-2xl md:mt-20">회원가입</h1>
 
