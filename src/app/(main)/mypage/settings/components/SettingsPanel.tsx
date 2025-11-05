@@ -4,7 +4,7 @@ import { ChevronLeft } from 'lucide-react';
 import useModal from '@/app/hooks/useModal';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import DeleteAccountButton from './DeleteAccount';
+import DeleteAccountButton from './DeleteAccountButton';
 import ChangeNicknameModal from './ChangeNicknameModal';
 import ChangePasswordModal from './ChangePasswordModal';
 import ChangePasswordButton from './ChangePasswordButton';
@@ -46,13 +46,13 @@ export default function SettingsPanel() {
         <h1 className="text-lg font-medium">내 계정</h1>
       </header>
 
-      <div className="flex w-full flex-col items-start gap-1">
+      <div className="flex w-full flex-col items-start gap-1 md:mt-38 md:flex-row md:items-center md:justify-center md:gap-12 md:p-6 lg:mt-60 lg:gap-20 lg:p-8">
         <ChangeNicknameButton onClick={openNicknameModal} />
 
         {!isSocialLogin ? (
           <ChangePasswordButton onClick={openPasswordModal} />
         ) : (
-          <div className="w-full rounded-sm px-5 py-3 text-left text-base font-medium text-gray-600">
+          <div className="w-full rounded-sm px-5 py-3 text-left text-base font-medium text-gray-600 md:w-auto md:text-center">
             {provider === 'google' &&
               'Google 로그인은 비밀번호를 변경할 수 없어요'}
             {provider === 'kakao' &&
