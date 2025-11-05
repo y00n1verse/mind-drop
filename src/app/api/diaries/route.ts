@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/authOptions';
+import { authOptions } from '../auth/authOptions';
 
 async function requireUser() {
   const session = await getServerSession(authOptions);
