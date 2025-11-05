@@ -21,7 +21,7 @@ export default function NavBar() {
   ];
 
   const navUser = {
-    href: '/settings',
+    href: '/mypage',
     label: '마이페이지',
     Icon: UserIcon,
   };

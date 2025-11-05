@@ -28,7 +28,7 @@ export default function Modal({
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 flex flex-col items-center justify-center">
+    <div className="fixed inset-0 z-99 flex flex-col items-center justify-center">
       <div onClick={onClose} className="absolute inset-0 bg-black opacity-50" />
       <div
         onClick={(e) => e.stopPropagation()}
