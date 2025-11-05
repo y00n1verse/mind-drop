@@ -2,13 +2,13 @@
 
 import 'react-day-picker/style.css';
 import { ko } from 'date-fns/locale';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { emotions } from '@/constants/emotions';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 
 export default function Calendar() {
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
   const { diaries, selectedDate, setSelectedDate, getUserDiaries } =
     useDiaryStore();
   const [month, setMonth] = useState<Date>(today);
