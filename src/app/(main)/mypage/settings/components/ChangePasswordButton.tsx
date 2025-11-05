@@ -1,15 +1,16 @@
 'use client';
 
-import Button from '@/app/components/common/Button';
-
 export default function ChangePasswordButton({
   onClick,
 }: {
   onClick: () => void;
 }) {
   return (
-    <Button variant="warn" onClick={onClick} className="cursor-pointer">
+    <button
+      onClick={onClick}
+      className="w-full cursor-pointer rounded-sm px-5 py-3 text-left text-base font-medium transition hover:bg-gray-100"
+    >
       비밀번호 변경
-    </Button>
+    </button>
   );
 }

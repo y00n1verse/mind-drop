@@ -1,7 +1,6 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
-import Button from '@/app/components/common/Button';
 
 export default function DeleteAccountButton() {
   const handleDeleteAccount = async () => {
@@ -23,12 +22,11 @@ export default function DeleteAccountButton() {
   };
 
   return (
-    <Button
-      variant="warn"
+    <button
       onClick={handleDeleteAccount}
-      className="cursor-pointer"
+      className="w-full cursor-pointer rounded-sm px-5 py-3 text-left text-base font-medium text-[var(--color-warn-bg)] transition hover:bg-gray-100"
     >
       회원 탈퇴
-    </Button>
+    </button>
   );
 }
