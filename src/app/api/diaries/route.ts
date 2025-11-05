@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '../auth/authOptions';
 
 async function requireUser() {
   const session = await getServerSession(authOptions);
@@ -14,7 +14,7 @@ async function requireUser() {
 
 const res = <T>(data: T, status = 200) => NextResponse.json(data, { status });
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
     const userId = await requireUser();
     const { searchParams } = new URL(req.url);
@@ -48,7 +48,7 @@ export async function GET(req: Request) {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const userId = await requireUser();
     const body = await req.json();
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
     const userId = await requireUser();
     const { date, title, content, emotion } = await req.json();
@@ -80,7 +80,7 @@ export async function PUT(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
   try {
     const userId = await requireUser();
     const { searchParams } = new URL(req.url);

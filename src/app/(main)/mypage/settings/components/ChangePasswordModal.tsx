@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import Modal from '@/app/components/common/Modal';
 import Button from '@/app/components/common/Button';
 import FormInput from '@/app/components/common/FormInput';
+import { AxiosError } from 'axios';
 
 interface ChangePasswordModalProps {
   isOpen: boolean;
@@ -41,9 +42,12 @@ export default function ChangePasswordModal({
       alert('비밀번호를 변경했어요.');
       reset();
       onClose();
-    } catch (e: any) {
-      if (e.response?.data?.message) {
-        setError('currentPassword', { message: e.response.data.message });
+    } catch (e) {
+      const error = e as AxiosError<{ message?: string }>;
+      const message = error.response?.data?.message;
+
+      if (message) {
+        setError('currentPassword', { message });
       } else {
         alert('비밀번호를 변경하는 중 오류가 발생했어요.');
       }

@@ -166,4 +166,5 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
   },
 );
 
+DiaryForm.displayName = 'DiaryForm';
 export default DiaryForm;
