@@ -6,6 +6,7 @@ declare module 'next-auth' {
       id: string;
       email: string;
       name?: string | null;
+      nickname?: string | null;
       image?: string | null;
       hasPassword?: boolean;
       provider?: string;
@@ -18,5 +19,6 @@ declare module 'next-auth/jwt' {
     id?: string;
     hasPassword?: boolean;
     provider?: string;
+    nickname?: string | null;
   }
 }

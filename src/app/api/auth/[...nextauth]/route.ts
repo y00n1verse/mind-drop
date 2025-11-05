@@ -78,6 +78,7 @@ export const authOptions: AuthOptions = {
           token.id = dbUser.id.toString();
           token.hasPassword = !!dbUser.password;
           token.provider = dbUser.provider ? dbUser.provider : 'credentials';
+          token.nickname = dbUser.nickname ?? '';
         }
       }
       return token;
@@ -86,6 +87,7 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       if (session?.user && token?.id) {
         session.user.id = token.id;
+        session.user.nickname = token.nickname ?? '';
         session.user.hasPassword = token.hasPassword;
         session.user.provider = token.provider;
       }
