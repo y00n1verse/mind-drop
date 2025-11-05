@@ -63,34 +63,32 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
         reset();
         onClose();
       }}
+      title="닉네임 변경"
     >
-      <div className="flex w-[380px] flex-col items-center px-7 py-8">
-        <h2 className="mb-8 text-xl text-gray-800">닉네임 변경</h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex w-full flex-col items-center gap-4"
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex w-full flex-col items-center gap-4"
+      >
+        <FormInput
+          type="text"
+          placeholder="닉네임"
+          register={register('nickname', {
+            required: '닉네임을 입력해주세요.',
+            validate: (v) =>
+              v.trim().length > 0 || '닉네임은 공백일 수 없어요.',
+          })}
+          error={errors.nickname}
+          className="rounded-lg border"
+        />
+        <Button
+          type="submit"
+          variant="complete"
+          className="mt-2 h-10 w-full"
+          disabled={isSubmitting}
         >
-          <FormInput
-            type="text"
-            placeholder="닉네임"
-            register={register('nickname', {
-              required: '닉네임을 입력해주세요.',
-              validate: (v) =>
-                v.trim().length > 0 || '닉네임은 공백일 수 없어요.',
-            })}
-            error={errors.nickname}
-            className="rounded-lg border"
-          />
-          <Button
-            type="submit"
-            variant="complete"
-            className="mt-2 h-10 w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? '변경 중' : '닉네임 변경'}
-          </Button>
-        </form>
-      </div>
+          {isSubmitting ? '변경 중' : '닉네임 변경'}
+        </Button>
+      </form>
     </Modal>
   );
 }
