@@ -54,7 +54,7 @@ export default function Calendar() {
           selected: 'rounded-lg bg-gray-100',
         }}
         components={{
-          DayButton: ({ day, modifiers, ...buttonProps }) => {
+          DayButton: ({ day, ...buttonProps }) => {
             const formatted = day.date.toLocaleDateString('sv-SE');
             const diary = diaries.find((d) => d.date === formatted);
             const emotionData = emotions.find(
