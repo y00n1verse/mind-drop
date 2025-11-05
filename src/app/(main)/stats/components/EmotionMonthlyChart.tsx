@@ -15,8 +15,15 @@ import { useDiaryStore } from '@/stores/useDiaryStore';
 import { useMemo, useState } from 'react';
 import { getEmotionStatsByMonth } from '@/utils/getEmotionStatsByMonth';
 import { addMonths, format, subMonths } from 'date-fns';
+import { TickItem } from 'recharts/types/util/types';
 
-function EmotionTick({ x, y, payload }: any) {
+interface EmotionTickProps {
+  x?: number;
+  y?: number;
+  payload: TickItem & { value: string };
+}
+
+function EmotionTick({ x = 0, y = 0, payload }: EmotionTickProps) {
   const emotion = emotions.find((e) => e.label === payload.value);
   if (!emotion) return null;
   const { Icon, label, color, variant } = emotion;
@@ -84,7 +91,7 @@ export default function EmotionMonthlyChart() {
               <XAxis
                 axisLine={{ stroke: '#DCDCDC', strokeWidth: 0.5 }}
                 dataKey="label"
-                tick={<EmotionTick />}
+                tick={(props) => <EmotionTick {...props} />}
                 tickLine={false}
               />
               <Bar dataKey="uv" barSize={40} radius={3}>
