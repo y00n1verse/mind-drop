@@ -12,6 +12,7 @@ import ChangeNicknameButton from './ChangeNicknameButton';
 import SocialLoginAlertModal from './SocialLoginAlertModal';
 import LogoutButton from './LogoutButton';
 import SendBugButton from './SendBugButton';
+import ChangeLanguageButton from './ChangeLanguageButton';
 
 export default function SettingsPanel() {
   const { data: session } = useSession();
@@ -60,9 +61,10 @@ export default function SettingsPanel() {
         <h1 className="text-lg font-medium">내 계정</h1>
       </header>
 
-      <div className="flex w-full flex-col items-start gap-1 md:mt-38 md:flex-row md:items-center md:justify-center md:gap-12 md:p-6 lg:mt-60 lg:gap-20 lg:p-8">
+      <div className="flex w-full flex-col gap-1 md:grid md:grid-cols-2 md:gap-8 md:p-4 lg:grid-cols-3 lg:gap-10 lg:p-8">
         <ChangeNicknameButton onClick={openNicknameModal} />
         <ChangePasswordButton onClick={handlePasswordClick} />
+        <ChangeLanguageButton />
         <SendBugButton />
         <LogoutButton />
         <DeleteAccountButton />
