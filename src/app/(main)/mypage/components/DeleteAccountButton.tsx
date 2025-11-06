@@ -31,11 +31,11 @@ export default function DeleteAccountButton() {
     <>
       <button
         onClick={openConfirmModal}
-        className="w-full cursor-pointer rounded-sm p-3 px-5 text-left text-base font-medium text-[var(--color-warn-bg)] transition hover:bg-gray-100 md:w-auto md:rounded-xl md:border md:border-gray-100 md:p-12 md:text-center md:text-gray-600 md:shadow-md md:hover:bg-gray-100 lg:p-18"
+        className="w-full cursor-pointer rounded-sm px-5 py-3 text-left text-base font-medium text-[var(--color-warn-bg)] transition hover:bg-gray-100 md:w-auto md:rounded-xl md:border md:border-gray-100 md:p-12 md:text-center md:shadow-md md:hover:bg-gray-100 lg:p-18"
       >
         <div className="flex items-center justify-start gap-2 md:flex-col md:justify-center">
-          <UserX className="hidden text-gray-700 md:block md:h-28 md:w-28 lg:h-32 lg:w-32" />
-          <span className="block md:mt-2 md:text-lg md:font-semibold md:text-gray-600">
+          <UserX className="hidden text-[var(--color-warn-bg)] md:block md:h-28 md:w-28 lg:h-32 lg:w-32" />
+          <span className="block md:mt-2 md:text-lg md:font-semibold md:text-[var(--color-warn-bg)]">
             회원 탈퇴
           </span>
         </div>
