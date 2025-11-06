@@ -117,9 +117,9 @@ export default function Modal({
               </h2>
             )}
             {description && (
-              <p className="mb-2 text-base text-[var(--text-secondary)]">
+              <div className="mb-2 text-base text-[var(--text-secondary)]">
                 {description}
-              </p>
+              </div>
             )}
 
             {children}

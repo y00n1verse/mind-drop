@@ -9,6 +9,7 @@ import ChangeNicknameModal from './ChangeNicknameModal';
 import ChangePasswordModal from './ChangePasswordModal';
 import ChangePasswordButton from './ChangePasswordButton';
 import ChangeNicknameButton from './ChangeNicknameButton';
+import SocialLoginAlertModal from './SocialLoginAlertModal';
 
 export default function SettingsPanel() {
   const { data: session } = useSession();
@@ -26,12 +27,23 @@ export default function SettingsPanel() {
     closeModal: closeNicknameModal,
   } = useModal();
 
+  const {
+    isOpen: isAlertOpen,
+    openModal: openAlertModal,
+    closeModal: closeAlertModal,
+  } = useModal();
+
   const handleCancel = () => {
     router.push('/mypage');
   };
 
   const provider = session?.user?.provider;
   const isSocialLogin = provider && provider !== 'credentials';
+
+  const handlePasswordClick = () => {
+    if (isSocialLogin) openAlertModal();
+    else openPasswordModal();
+  };
 
   return (
     <>
@@ -48,20 +60,9 @@ export default function SettingsPanel() {
 
       <div className="flex w-full flex-col items-start gap-1 md:mt-38 md:flex-row md:items-center md:justify-center md:gap-12 md:p-6 lg:mt-60 lg:gap-20 lg:p-8">
         <ChangeNicknameButton onClick={openNicknameModal} />
-
-        {!isSocialLogin ? (
-          <ChangePasswordButton onClick={openPasswordModal} />
-        ) : (
-          <div className="w-full rounded-sm px-5 py-3 text-left text-base font-medium text-gray-600 md:w-auto md:text-center">
-            {provider === 'google' &&
-              'Google 로그인은 비밀번호를 변경할 수 없어요'}
-            {provider === 'kakao' &&
-              'Kakao 로그인은 비밀번호를 변경할 수 없어요'}
-            {provider === 'naver' &&
-              'Naver 로그인은 비밀번호를 변경할 수 없어요'}
-          </div>
-        )}
+        <ChangePasswordButton onClick={handlePasswordClick} />
         <DeleteAccountButton />
+
         <ChangePasswordModal
           isOpen={isPasswordOpen}
           onClose={closePasswordModal}
@@ -69,6 +70,11 @@ export default function SettingsPanel() {
         <ChangeNicknameModal
           isOpen={isNicknameOpen}
           onClose={closeNicknameModal}
+        />
+        <SocialLoginAlertModal
+          isOpen={isAlertOpen}
+          onClose={closeAlertModal}
+          provider={provider}
         />
       </div>
     </>
