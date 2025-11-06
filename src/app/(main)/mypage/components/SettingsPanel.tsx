@@ -10,6 +10,7 @@ import ChangePasswordModal from './ChangePasswordModal';
 import ChangePasswordButton from './ChangePasswordButton';
 import ChangeNicknameButton from './ChangeNicknameButton';
 import SocialLoginAlertModal from './SocialLoginAlertModal';
+import LogoutButton from './LogoutButton';
 
 export default function SettingsPanel() {
   const { data: session } = useSession();
@@ -61,6 +62,7 @@ export default function SettingsPanel() {
       <div className="flex w-full flex-col items-start gap-1 md:mt-38 md:flex-row md:items-center md:justify-center md:gap-12 md:p-6 lg:mt-60 lg:gap-20 lg:p-8">
         <ChangeNicknameButton onClick={openNicknameModal} />
         <ChangePasswordButton onClick={handlePasswordClick} />
+        <LogoutButton />
         <DeleteAccountButton />
 
         <ChangePasswordModal
