@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import UserIcon from '@/assets/icons/UserIcon.svg';
 import HomeIcon from '@/assets/icons/HomeIcon.svg';
 import StatsIcon from '@/assets/icons/StatsIcon.svg';
+import MindDropLogo from '@/assets/icons/MindDropLogo.svg';
 import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
 
 export default function NavBar() {
@@ -32,11 +33,8 @@ export default function NavBar() {
         <nav className="fixed top-0 left-0 z-50 hidden w-full bg-[color:var(--background-tertiary)] md:block">
           <div className="mx-auto max-w-480 px-4 sm:px-6 lg:px-8">
             <div className="flex h-18 items-center justify-between">
-              <Link
-                href="/"
-                className="text-2xl font-bold text-[color:var(--text-secondary)] transition-colors hover:text-[color:var(--color-brand-primary)]"
-              >
-                <span>Mind</span> <br /> <span className="ml-5">Drop</span>
+              <Link href="/" className="w-30">
+                <MindDropLogo />
               </Link>
 
               <div className="flex justify-center space-x-20">
@@ -100,7 +98,7 @@ export default function NavBar() {
               href="/"
               className="text-2xl font-bold text-[color:var(--text-secondary)] transition-colors hover:text-[color:var(--color-brand-primary)]"
             >
-              <span>Mind</span> <br /> <span className="ml-5">Drop</span>
+              <MindDropLogo />
             </Link>
 
             <Link
