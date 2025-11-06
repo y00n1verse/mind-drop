@@ -11,6 +11,7 @@ import ChangePasswordButton from './ChangePasswordButton';
 import ChangeNicknameButton from './ChangeNicknameButton';
 import SocialLoginAlertModal from './SocialLoginAlertModal';
 import LogoutButton from './LogoutButton';
+import SendBugButton from './SendBugButton';
 
 export default function SettingsPanel() {
   const { data: session } = useSession();
@@ -63,6 +64,7 @@ export default function SettingsPanel() {
         <ChangeNicknameButton onClick={openNicknameModal} />
         <ChangePasswordButton onClick={handlePasswordClick} />
         <LogoutButton />
+        <SendBugButton />
         <DeleteAccountButton />
 
         <ChangePasswordModal
