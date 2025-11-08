@@ -1,0 +1,9 @@
+{
+  "nav": {
+    "main": "主页",
+    "calendar": "日历",
+    "stats": "报告",
+    "mypage": "我的页面",
+    "signin": "登录"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "nav": {
+    "main": "Home",
+    "calendar": "Calendar",
+    "stats": "Reports",
+    "mypage": "My Page",
+    "signin": "Sign In"
+  }
+}
