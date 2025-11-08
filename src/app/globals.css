@@ -58,3 +58,52 @@ body {
   --color-warn-bg: oklch(0.63 0.17 28);
   --color-warn-hover: color-mix(in oklch, var(--color-warn-bg), black 10%);
 }
+
+#fp-nav {
+  top: 40% !important;
+}
+
+#fp-nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#fp-nav ul li {
+  margin: 5px !important;
+}
+
+#fp-nav ul li a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 15px !important;
+  height: 15px !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  transform: none !important;
+}
+
+#fp-nav ul li a span {
+  display: block !important;
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50%;
+  background: #dddddd;
+  transition: background-color 0.25s ease;
+  opacity: 1 !important;
+  margin: 0 !important;
+}
+
+#fp-nav ul li a:hover span,
+#fp-nav ul li a.active span {
+  background: var(--color-brand-primary) !important;
+}
+
+#fp-nav ul li a:not(.active):not(:hover) span {
+  background: #dddddd !important;
+}
