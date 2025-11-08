@@ -1,4 +1,5 @@
 import './globals.css';
+import I18nProvider from './i18n-wrapper';
 import { Noto_Sans } from 'next/font/google';
 import SessionWrapper from './session-wrapper';
 import { Metadata } from 'next';
@@ -24,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSans.className}>
-        <SessionWrapper>{children}</SessionWrapper>
+        <I18nProvider>
+          <SessionWrapper>{children}</SessionWrapper>
+        </I18nProvider>
       </body>
     </html>
   );
