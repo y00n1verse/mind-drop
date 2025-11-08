@@ -8,22 +8,28 @@ import HomeIcon from '@/assets/icons/HomeIcon.svg';
 import StatsIcon from '@/assets/icons/StatsIcon.svg';
 import MindDropLogo from '@/assets/icons/MindDropLogo.svg';
 import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
+import { useTranslation } from 'react-i18next';
+import useI18nReady from '@/app/hooks/useI18nReady';
 
 export default function NavBar() {
+  const { t } = useTranslation();
+  const ready = useI18nReady();
   const { data: session } = useSession();
   const pathname = usePathname();
+
+  if (!ready) return null;
 
   const isLoggedIn = !!session?.user;
 
   const navMenu = [
-    { href: '/', label: '메인', Icon: HomeIcon },
-    { href: '/calendar', label: '캘린더', Icon: CalendarIcon },
-    { href: '/stats', label: '리포트', Icon: StatsIcon },
+    { href: '/', label: t('nav.main'), Icon: HomeIcon },
+    { href: '/calendar', label: t('nav.calendar'), Icon: CalendarIcon },
+    { href: '/stats', label: t('nav.stats'), Icon: StatsIcon },
   ];
 
   const navUser = {
     href: '/mypage',
-    label: '마이페이지',
+    label: t('nav.mypage'),
     Icon: UserIcon,
   };
 
@@ -105,7 +111,7 @@ export default function NavBar() {
               href="/signin"
               className="text-lg text-[#CBCBCB] hover:text-[color:var(--color-brand-primary)]"
             >
-              로그인
+              {t('nav.signin')}
             </Link>
           </div>
         </div>
