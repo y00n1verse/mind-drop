@@ -107,3 +107,58 @@ body {
 #fp-nav ul li a:not(.active):not(:hover) span {
   background: #dddddd !important;
 }
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+.animate-wave {
+  animation: wave 1.5s ease-in-out infinite;
+}
+
+.fp-overflow {
+  overflow: visible !important;
+}
+
+@keyframes typing {
+  0% {
+    width: 0ch;
+  }
+  50% {
+    width: 5ch;
+  }
+  55% {
+    width: 5ch;
+  }
+  100% {
+    width: 9.5ch;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--text-secondary);
+  }
+}
+
+.typing-title {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--text-secondary);
+  width: 0ch;
+  animation:
+    typing 2.2s steps(9, end) forwards,
+    blink 0.6s step-end infinite;
+  animation-fill-mode: forwards;
+}
