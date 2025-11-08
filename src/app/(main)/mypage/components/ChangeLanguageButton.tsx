@@ -19,13 +19,13 @@ export default function ChangeLanguageButton() {
   const getLabel = (code: string) => {
     switch (code) {
       case 'ko':
-        return `언어: 한국어`;
+        return '언어: 한국어';
       case 'en':
-        return `Language: English`;
+        return 'Language: English';
       case 'zh':
-        return `语言: 中文`;
+        return '语言: 中文';
       default:
-        return `언어`;
+        return '언어';
     }
   };
 
