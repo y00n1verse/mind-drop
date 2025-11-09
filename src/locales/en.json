@@ -211,5 +211,12 @@
     "toast": {
       "success": "Diary saved successfully!"
     }
+  },
+  "emotions": {
+    "best": "Best",
+    "good": "Good",
+    "normal": "Normal",
+    "bad": "Bad",
+    "worst": "Worst"
   }
 }

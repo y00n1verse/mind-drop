@@ -211,5 +211,12 @@
     "toast": {
       "success": "日记保存成功！"
     }
+  },
+  "emotions": {
+    "best": "非常好",
+    "good": "好",
+    "normal": "一般",
+    "bad": "不好",
+    "worst": "糟糕"
   }
 }

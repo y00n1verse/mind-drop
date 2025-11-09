@@ -1,3 +1,4 @@
+import i18n from '@/lib/i18n';
 import BestIcon from '@/assets/icons/BestIcon.svg';
 import GoodIcon from '@/assets/icons/GoodIcon.svg';
 import NormalIcon from '@/assets/icons/NormalIcon.svg';
@@ -6,31 +7,41 @@ import WorstIcon from '@/assets/icons/WorstIcon.svg';
 
 export const emotions = [
   {
-    label: '최고',
+    get label() {
+      return i18n.t('emotions.best');
+    },
     variant: 'best',
     Icon: BestIcon,
     color: 'text-[var(--color-best)]',
   },
   {
-    label: '좋음',
+    get label() {
+      return i18n.t('emotions.good');
+    },
     variant: 'good',
     Icon: GoodIcon,
     color: 'text-[var(--color-good)]',
   },
   {
-    label: '보통',
+    get label() {
+      return i18n.t('emotions.normal');
+    },
     variant: 'normal',
     Icon: NormalIcon,
     color: 'text-[var(--color-normal)]',
   },
   {
-    label: '별로',
+    get label() {
+      return i18n.t('emotions.bad');
+    },
     variant: 'bad',
     Icon: BadIcon,
     color: 'text-[var(--color-bad)]',
   },
   {
-    label: '최악',
+    get label() {
+      return i18n.t('emotions.worst');
+    },
     variant: 'worst',
     Icon: WorstIcon,
     color: 'text-[var(--color-worst)]',

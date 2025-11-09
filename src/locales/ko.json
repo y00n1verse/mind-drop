@@ -211,5 +211,12 @@
     "toast": {
       "success": "일기 저장 완료!"
     }
+  },
+  "emotions": {
+    "best": "최고",
+    "good": "좋음",
+    "normal": "보통",
+    "bad": "별로",
+    "worst": "최악"
   }
 }
