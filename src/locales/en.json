@@ -129,5 +129,34 @@
     },
     "haveAccount": "Already have an account?",
     "signIn": "Sign In"
+  },
+  "landing": {
+    "section1": {
+      "subtitle": "Start your journey of reflection\nand journaling",
+      "button": {
+        "write": "Go to Write Diary",
+        "start": "Get Started"
+      }
+    },
+    "section2": {
+      "title": "Emotion Diary",
+      "description": "Select your mood\nand organize your day"
+    },
+    "section3": {
+      "title": "Emotion Calendar",
+      "description": "See your emotions at a glance\nby month"
+    },
+    "section4": {
+      "title": "Emotion Stats",
+      "description": "Visualize emotional changes\nbased on your diary data"
+    },
+    "section5": {
+      "title": "Time to Know Yourself",
+      "description": "Record your emotions today\nand understand yourself better",
+      "button": {
+        "write": "Go to Write Diary",
+        "login": "Go to Login"
+      }
+    }
   }
 }

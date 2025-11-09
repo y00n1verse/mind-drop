@@ -3,8 +3,11 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { NotebookPen } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function Section2() {
+  const { t } = useTranslation();
+
   return (
     <div className="section flex h-screen items-center justify-center bg-[var(--background-secondary)] px-2 md:pb-20">
       <div className="flex w-full max-w-5xl flex-col gap-8 md:flex-row md:justify-between">
@@ -36,11 +39,10 @@ export default function Section2() {
                 />
               </div>
               <h2 className="mb-2 text-lg font-semibold md:text-2xl lg:text-3xl">
-                감정 일기
+                {t('landing.section2.title')}
               </h2>
-              <p className="text-base leading-relaxed text-[var(--text-secondary)] md:text-lg lg:text-xl">
-                기분을 선택하고 <br />
-                하루를 정리해요.
+              <p className="text-base leading-relaxed whitespace-pre-line text-[var(--text-secondary)] md:text-lg lg:text-xl">
+                {t('landing.section2.description')}
               </p>
             </div>
           </div>

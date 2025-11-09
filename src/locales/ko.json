@@ -129,5 +129,34 @@
     },
     "haveAccount": "이미 계정이 있으신가요?",
     "signIn": "로그인"
+  },
+  "landing": {
+    "section1": {
+      "subtitle": "하루를 기록하고 돌아보는 여정의 시작",
+      "button": {
+        "write": "일기 쓰러가기",
+        "start": "지금 시작하기"
+      }
+    },
+    "section2": {
+      "title": "감정 일기",
+      "description": "기분을 선택하고\n하루를 정리해요"
+    },
+    "section3": {
+      "title": "감정 캘린더",
+      "description": "월별 감정을\n한눈에 볼 수 있어요"
+    },
+    "section4": {
+      "title": "감정 통계",
+      "description": "일기 데이터를 바탕으로\n감정 변화를 시각적으로 볼 수 있어요"
+    },
+    "section5": {
+      "title": "나를 알아가는 시간",
+      "description": "오늘의 감정을 기록하며\n나를 조금 더 이해해볼까요?",
+      "button": {
+        "write": "일기 쓰러가기",
+        "login": "로그인 하러가기"
+      }
+    }
   }
 }

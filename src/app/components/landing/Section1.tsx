@@ -1,10 +1,12 @@
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { emotions } from '@/constants/emotions';
+import { useTranslation } from 'react-i18next';
 
 export default function Section1() {
   const router = useRouter();
   const { data: session } = useSession();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     if (session) {
@@ -39,14 +41,16 @@ export default function Section1() {
             Mind Drop
           </h1>
           <p className="text-lg text-[color:var(--text-secondary)] md:text-xl">
-            하루를 기록하고 돌아보는 여정의 시작
+            {t('landing.section1.subtitle')}
           </p>
         </div>
         <button
           onClick={handleClick}
           className="cursor-pointer rounded-full bg-[var(--color-brand-primary)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--color-brand-primary-hover)] md:px-8 md:py-3 lg:px-10"
         >
-          {session ? '일기 쓰러가기' : '지금 시작하기'}
+          {session
+            ? t('landing.section1.button.write')
+            : t('landing.section1.button.start')}
         </button>
       </div>
     </div>

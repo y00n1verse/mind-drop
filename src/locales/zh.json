@@ -129,5 +129,34 @@
     },
     "haveAccount": "已经有账号了吗？",
     "signIn": "登录"
+  },
+  "landing": {
+    "section1": {
+      "subtitle": "开启记录与回顾每日旅程",
+      "button": {
+        "write": "去写日记",
+        "start": "立即开始"
+      }
+    },
+    "section2": {
+      "title": "情感日记",
+      "description": "选择心情，整理一天。"
+    },
+    "section3": {
+      "title": "情感日历",
+      "description": "一目了然地查看每月的情绪。"
+    },
+    "section4": {
+      "title": "情感统计",
+      "description": "根据日记数据可视化情绪变化。"
+    },
+    "section5": {
+      "title": "认识自己的时间",
+      "description": "记录今天的情绪，更好地了解自己。",
+      "button": {
+        "write": "去写日记",
+        "login": "去登录"
+      }
+    }
   }
 }
