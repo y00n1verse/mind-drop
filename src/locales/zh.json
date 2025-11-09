@@ -49,5 +49,15 @@
       "submit": "更改密码",
       "submitting": "正在更改"
     }
+  },
+  "deleteAccount": {
+    "modalTitle": "删除账户",
+    "description": "确定要删除您的账户吗？\n您撰写的所有日记都将被永久删除。",
+    "confirmLabel": "删除",
+    "cancelLabel": "取消",
+    "success": "账户删除成功",
+    "successDescription": "下次再见！",
+    "fail": "账户删除失败 ⚠️",
+    "serverError": "服务器错误 ⚠️"
   }
 }

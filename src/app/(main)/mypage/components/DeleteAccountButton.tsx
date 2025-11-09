@@ -20,17 +20,17 @@ export default function DeleteAccountButton() {
     try {
       const res = await fetch('/api/auth/delete-account', { method: 'DELETE' });
       if (res.ok) {
-        toast.success('회원 탈퇴 완료', {
-          description: '다음에 또 만나요!',
+        toast.success(t('deleteAccount.success'), {
+          description: t('deleteAccount.successDescription'),
         });
         setTimeout(() => {
           signOut({ callbackUrl: '/signin' });
         }, 2000);
       } else {
-        toast.error('회원 탈퇴 실패 ⚠️');
+        toast.error(t('deleteAccount.fail'));
       }
     } catch {
-      toast.error('서버 오류 ⚠️');
+      toast.error(t('deleteAccount.serverError'));
     } finally {
       closeConfirmModal();
     }
@@ -54,16 +54,14 @@ export default function DeleteAccountButton() {
         isOpen={isConfirmOpen}
         onClose={closeConfirmModal}
         onConfirm={handleDeleteAccount}
-        title="회원 탈퇴"
+        title={t('deleteAccount.modalTitle')}
         description={
-          <p>
-            정말 탈퇴하시겠어요?
-            <br />
-            작성했던 모든 일기가 삭제돼요.
+          <p className="whitespace-pre-line">
+            {t('deleteAccount.description')}
           </p>
         }
-        confirmLabel="탈퇴"
-        cancelLabel="취소"
+        confirmLabel={t('deleteAccount.confirmLabel')}
+        cancelLabel={t('deleteAccount.cancelLabel')}
         confirmVariant="warn"
       />
     </>

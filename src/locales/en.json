@@ -49,5 +49,15 @@
       "submit": "Change Password",
       "submitting": "Changing"
     }
+  },
+  "deleteAccount": {
+    "modalTitle": "Delete Account",
+    "description": "Are you sure you want to delete your account?\nAll your diaries will be permanently removed.",
+    "confirmLabel": "Delete",
+    "cancelLabel": "Cancel",
+    "success": "Account deleted successfully",
+    "successDescription": "See you next time!",
+    "fail": "Failed to delete account ⚠️",
+    "serverError": "Server error ⚠️"
   }
 }
