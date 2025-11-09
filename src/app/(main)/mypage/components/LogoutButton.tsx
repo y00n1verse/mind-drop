@@ -2,8 +2,11 @@
 
 import { signOut } from 'next-auth/react';
 import { LogOutIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function LogoutButton() {
+  const { t } = useTranslation();
+
   return (
     <button
       onClick={() => signOut({ callbackUrl: '/signin' })}
@@ -12,7 +15,7 @@ export default function LogoutButton() {
       <div className="flex items-center justify-start gap-2 md:flex-col md:justify-center">
         <LogOutIcon className="hidden text-gray-700 md:block md:h-28 md:w-28 lg:h-32 lg:w-32" />
         <span className="block md:mt-2 md:text-lg md:font-semibold md:text-gray-600">
-          로그아웃
+          {t('mypage.logOut')}
         </span>
       </div>
     </button>

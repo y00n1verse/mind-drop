@@ -1,9 +1,20 @@
 {
+  "language": {
+    "label": "Language: English"
+  },
   "nav": {
     "main": "Home",
     "calendar": "Calendar",
     "stats": "Reports",
     "mypage": "My Page",
     "signin": "Sign In"
+  },
+  "mypage": {
+    "myAccount": "My Account",
+    "changeNickname": "Change Nickname",
+    "changePassword": "Change Password",
+    "reportBug": "Report Bug",
+    "logOut": "Log Out",
+    "deleteAccount": "Delete Account"
   }
 }

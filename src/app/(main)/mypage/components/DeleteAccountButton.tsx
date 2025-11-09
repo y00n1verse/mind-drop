@@ -3,9 +3,12 @@
 import { UserX } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import useModal from '@/app/hooks/useModal';
+import { useTranslation } from 'react-i18next';
 import ConfirmModal from '@/app/components/common/ConfirmModal';
 
 export default function DeleteAccountButton() {
+  const { t } = useTranslation();
+
   const {
     isOpen: isConfirmOpen,
     openModal: openConfirmModal,
@@ -36,7 +39,7 @@ export default function DeleteAccountButton() {
         <div className="flex items-center justify-start gap-2 md:flex-col md:justify-center">
           <UserX className="hidden text-[var(--color-warn-bg)] md:block md:h-28 md:w-28 lg:h-32 lg:w-32" />
           <span className="block md:mt-2 md:text-lg md:font-semibold md:text-[var(--color-warn-bg)]">
-            회원 탈퇴
+            {t('mypage.deleteAccount')}
           </span>
         </div>
       </button>

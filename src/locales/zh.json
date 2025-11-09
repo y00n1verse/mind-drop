@@ -1,9 +1,20 @@
 {
+  "language": {
+    "label": "语言: 中文"
+  },
   "nav": {
     "main": "主页",
     "calendar": "日历",
     "stats": "报告",
     "mypage": "我的页面",
     "signin": "登录"
+  },
+  "mypage": {
+    "myAccount": "我的账户",
+    "changeNickname": "修改昵称",
+    "changePassword": "修改密码",
+    "reportBug": "错误报告",
+    "logOut": "退出登录",
+    "deleteAccount": "注销账号"
   }
 }
