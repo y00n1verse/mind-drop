@@ -67,5 +67,12 @@
     "cancelLabel": "Cancel",
     "successDescription": "See you next time!",
     "fail": "Failed to log out ⚠️"
+  },
+  "socialAlert": {
+    "title": "Password Change Not Available",
+    "message": "Password change is <span>not available</span> for social login accounts.",
+    "connected": "Connected SNS",
+    "localLogin": "Credential Login",
+    "confirm": "OK"
   }
 }

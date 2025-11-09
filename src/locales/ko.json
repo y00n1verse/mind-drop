@@ -67,5 +67,12 @@
     "cancelLabel": "취소",
     "successDescription": "다음에 또 만나요!",
     "fail": "로그아웃 실패 ⚠️"
+  },
+  "socialAlert": {
+    "title": "비밀번호 변경 불가",
+    "message": "소셜 로그인 계정은 <span>비밀번호 변경이 불가능</span>해요.",
+    "connected": "연결된 SNS",
+    "localLogin": "자격 증명 로그인",
+    "confirm": "확인"
   }
 }

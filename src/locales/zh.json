@@ -67,5 +67,12 @@
     "cancelLabel": "取消",
     "successDescription": "下次再见！",
     "fail": "退出失败 ⚠️"
+  },
+  "socialAlert": {
+    "title": "无法更改密码",
+    "message": "社交账号 <span>无法更改密码</span>。",
+    "connected": "已连接的社交平台",
+    "localLogin": "凭证登录",
+    "confirm": "确认"
   }
 }
