@@ -8,6 +8,7 @@ import NaverIcon from '@/assets/icons/NaverIcon.svg';
 import KakaoIcon from '@/assets/icons/KakaoIcon.svg';
 import GoogleIcon from '@/assets/icons/GoogleIcon.svg';
 import FormInput from '../../components/common/FormInput';
+import { useTranslation } from 'react-i18next';
 
 interface LoginFormData {
   email: string;
@@ -16,6 +17,8 @@ interface LoginFormData {
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -36,14 +39,14 @@ export default function LoginPage() {
 
       if (res?.error) {
         setError('email', {
-          message: '이메일 또는 비밀번호가 올바르지 않아요.',
+          message: t('login.error.invalidCredentials'),
         });
       } else {
         router.push('/');
       }
     } catch {
       setError('email', {
-        message: '로그인 중 문제가 발생했어요. 잠시 후 다시 시도해주세요.',
+        message: t('login.error.server'),
       });
     }
   };
@@ -54,26 +57,29 @@ export default function LoginPage() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-28 mb-14 flex w-100 flex-col gap-8 md:mt-0 md:w-lg"
       >
-        <h1 className="mb-2 text-center text-2xl md:mt-20">로그인</h1>
+        <h1 className="mb-2 text-center text-2xl md:mt-20">
+          {' '}
+          {t('login.title')}
+        </h1>
 
         <FormInput
           type="email"
-          placeholder="이메일 입력"
+          placeholder={t('login.emailPlaceholder')}
           register={register('email', {
-            required: '이메일을 입력해주세요.',
+            required: t('login.error.requiredEmail'),
             validate: (value) =>
-              value.trim().length > 0 || '공백만 입력할 수 없어요.',
+              value.trim().length > 0 || t('login.error.empty'),
           })}
           error={errors.email}
         />
 
         <FormInput
           type="password"
-          placeholder="비밀번호 입력"
+          placeholder={t('login.passwordPlaceholder')}
           register={register('password', {
-            required: '비밀번호를 입력해주세요.',
+            required: t('login.error.requiredPassword'),
             validate: (value) =>
-              value.trim().length > 0 || '공백만 입력할 수 없어요.',
+              value.trim().length > 0 || t('login.error.empty'),
           })}
           error={errors.password}
         />
@@ -84,22 +90,22 @@ export default function LoginPage() {
           variant="complete"
           className="mt-4 w-full"
         >
-          로그인
+          {t('login.submit')}
         </Button>
 
         <p className="text-md mt-3 text-center">
-          아직 계정이 없으신가요?{' '}
+          {t('login.noAccount')}{' '}
           <a
             href="/signup"
             className="text-md text-blue-700 underline hover:text-blue-500"
           >
-            회원가입
+            {t('login.signUp')}
           </a>
         </p>
 
         <div className="mt-3 flex items-center space-x-6">
           <div className="h-px grow bg-gray-300"></div>
-          <p className="text-gray-600">또는</p>
+          <p className="text-gray-600">{t('login.or')}</p>
           <div className="h-px grow bg-gray-300"></div>
         </div>
         <div className="flex justify-center gap-4">

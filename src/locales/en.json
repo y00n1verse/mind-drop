@@ -74,5 +74,21 @@
     "connected": "Connected SNS",
     "localLogin": "Credential Login",
     "confirm": "OK"
+  },
+  "login": {
+    "title": "Sign In",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "or": "or",
+    "error": {
+      "requiredEmail": "Please enter your email.",
+      "requiredPassword": "Please enter your password.",
+      "empty": "Cannot be blank.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "server": "An error occurred during login. Please try again later."
+    }
   }
 }
