@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import Modal from '@/app/components/common/Modal';
 import Button from '@/app/components/common/Button';
 import FormInput from '@/app/components/common/FormInput';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   isOpen: boolean;
@@ -25,6 +26,7 @@ interface ApiErrorResponse {
 
 export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
   const { data: session, update } = useSession();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -47,15 +49,13 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
       await update({
         user: { ...session?.user, nickname: data.nickname },
       });
-      toast.success('닉네임 변경 성공!');
+      toast.success(t('nickname.success'));
       onClose();
     } catch (error) {
       const err = error as AxiosError<ApiErrorResponse>;
-      const msg =
-        err.response?.data?.message ||
-        '닉네임을 변경하는 중 오류가 발생했어요.';
+      const msg = err.response?.data?.message || t('nickname.defaultError');
       setError('nickname', { message: msg });
-      toast.error('닉네임 변경 실패');
+      toast.error(t('nickname.errorToast'));
     }
   };
 
@@ -66,7 +66,7 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
         reset();
         onClose();
       }}
-      title="닉네임 변경"
+      title={t('nickname.modalTitle')}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -74,11 +74,10 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
       >
         <FormInput
           type="text"
-          placeholder="닉네임"
+          placeholder={t('nickname.placeholder')}
           register={register('nickname', {
-            required: '닉네임을 입력해주세요.',
-            validate: (v) =>
-              v.trim().length > 0 || '닉네임은 공백일 수 없어요.',
+            required: t('nickname.required'),
+            validate: (v) => v.trim().length > 0 || t('nickname.empty'),
           })}
           error={errors.nickname}
           className="rounded-lg border"
@@ -89,7 +88,9 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
           className="mt-2 h-10 w-full"
           disabled={isSubmitting}
         >
-          {isSubmitting ? '변경 중' : '닉네임 변경'}
+          {isSubmitting
+            ? t('nickname.button.submitting')
+            : t('nickname.button.submit')}
         </Button>
       </form>
     </Modal>

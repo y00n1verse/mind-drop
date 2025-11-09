@@ -16,5 +16,18 @@
     "reportBug": "버그 제보",
     "logOut": "로그아웃",
     "deleteAccount": "회원 탈퇴"
+  },
+  "nickname": {
+    "modalTitle": "닉네임 변경",
+    "placeholder": "닉네임",
+    "success": "닉네임 변경 성공!",
+    "errorToast": "닉네임 변경 실패",
+    "defaultError": "닉네임을 변경하는 중 오류가 발생했어요.",
+    "required": "닉네임을 입력해주세요.",
+    "empty": "닉네임은 공백일 수 없어요.",
+    "button": {
+      "submit": "변경",
+      "submitting": "변경 중"
+    }
   }
 }

@@ -16,5 +16,18 @@
     "reportBug": "Report Bug",
     "logOut": "Log Out",
     "deleteAccount": "Delete Account"
+  },
+  "nickname": {
+    "modalTitle": "Change Nickname",
+    "placeholder": "Nickname",
+    "success": "Nickname changed successfully!",
+    "errorToast": "Failed to change nickname",
+    "defaultError": "An error occurred while changing your nickname.",
+    "required": "Please enter your nickname.",
+    "empty": "Nickname cannot be blank.",
+    "button": {
+      "submit": "Change",
+      "submitting": "Changing"
+    }
   }
 }

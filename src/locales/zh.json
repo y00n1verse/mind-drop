@@ -16,5 +16,18 @@
     "reportBug": "错误报告",
     "logOut": "退出登录",
     "deleteAccount": "注销账号"
+  },
+  "nickname": {
+    "modalTitle": "更改昵称",
+    "placeholder": "昵称",
+    "success": "昵称修改成功！",
+    "errorToast": "昵称修改失败",
+    "defaultError": "更改昵称时发生错误。",
+    "required": "请输入昵称。",
+    "empty": "昵称不能为空。",
+    "button": {
+      "submit": "更改",
+      "submitting": "正在更改"
+    }
   }
 }
