@@ -1,17 +1,28 @@
 'use client';
 
 import 'react-day-picker/style.css';
-import { ko } from 'date-fns/locale';
+import { enUS, ko, zhCN } from 'date-fns/locale';
 import { useEffect, useMemo, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { emotions } from '@/constants/emotions';
 import { useDiaryStore } from '@/stores/useDiaryStore';
+import { useTranslation } from 'react-i18next';
 
 export default function Calendar() {
   const today = useMemo(() => new Date(), []);
   const { diaries, selectedDate, setSelectedDate, getUserDiaries } =
     useDiaryStore();
   const [month, setMonth] = useState<Date>(today);
+  const { i18n } = useTranslation();
+
+  const localeMap = {
+    ko: ko,
+    en: enUS,
+    zh: zhCN,
+  };
+
+  const currentLocale =
+    localeMap[i18n.language as keyof typeof localeMap] || ko;
 
   useEffect(() => {
     if (!selectedDate) {
@@ -34,7 +45,7 @@ export default function Calendar() {
   return (
     <div className="flex justify-center rounded-md bg-[oklch(0.937_0_0)] pt-6 pb-2 md:px-3 lg:items-center lg:justify-start lg:p-8">
       <DayPicker
-        locale={ko}
+        locale={currentLocale}
         animate
         mode="single"
         navLayout="around"
