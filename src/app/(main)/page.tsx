@@ -9,8 +9,6 @@ import Section2 from '../components/landing/Section2';
 import Section3 from '../components/landing/Section3';
 import Section4 from '../components/landing/Section4';
 import Section5 from '../components/landing/Section5';
-import { useSearchParams } from 'next/navigation';
-import { toast } from 'sonner';
 
 type FullpageApi = {
   moveTo: (section: number, slide?: number) => void;
@@ -19,21 +17,11 @@ type FullpageApi = {
 export default function LandingPage() {
   const [isClient, setIsClient] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const params = useSearchParams();
   const fullpageRef = useRef<FullpageApi | null>(null);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  useEffect(() => {
-    if (params.get('login') === 'success') {
-      if (sessionStorage.getItem('loginToastShown')) return;
-      toast.success('로그인 성공!');
-      window.history.replaceState({}, '', '/');
-      sessionStorage.setItem('loginToastShown', 'true');
-    }
-  }, [params]);
 
   if (!isClient) return null;
 
