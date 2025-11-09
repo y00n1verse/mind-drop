@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import { useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -41,7 +42,10 @@ export default function DiaryFormPage() {
       <DiaryForm
         ref={formRef}
         mode="create"
-        onSuccess={() => router.push('/calendar')}
+        onSuccess={() => {
+          toast.success('일기 저장 완료!');
+          router.push('/calendar');
+        }}
         onFormStateChange={setIsFormValid}
       />
     </div>
