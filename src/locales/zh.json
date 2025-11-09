@@ -162,5 +162,10 @@
   "notFound": {
     "description": "无法找到页面。\n页面不存在或暂时不可用。\n请再次确认您输入的地址是否正确。",
     "button": "返回主页"
+  },
+  "diaryPanel": {
+    "emptyMessage": "还没有写日记。\n要去写一篇吗?",
+    "writeButton": "去写日记",
+    "title": "{{month}}月 {{day}}日 日记"
   }
 }

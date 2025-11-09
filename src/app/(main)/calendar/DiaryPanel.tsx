@@ -1,11 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { emotions } from '@/constants/emotions';
 import Button from '@/app/components/common/Button';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 
 export default function DiaryPanel() {
+  const { t } = useTranslation();
   const { selectedDate, getDiaryByDate } = useDiaryStore();
   const router = useRouter();
 
@@ -14,9 +16,8 @@ export default function DiaryPanel() {
   if (!diary) {
     return (
       <div className="m-5 flex h-40 flex-col items-center justify-center gap-6 rounded-md bg-[oklch(0.937_0_0)] p-4 md:m-0 md:h-150 md:w-full md:gap-8 md:p-5 lg:p-8">
-        <div className="text-center">
-          <p>아직 작성된 일기가 없어요</p>
-          <p>일기를 작성하러 갈까요?</p>
+        <div className="text-center whitespace-pre-line">
+          <p>{t('diaryPanel.emptyMessage')}</p>
         </div>
 
         <Button
@@ -27,7 +28,7 @@ export default function DiaryPanel() {
             router.push(`/diary/form?date=${selectedDate}`);
           }}
         >
-          일기쓰러 가기
+          {t('diaryPanel.writeButton')}
         </Button>
       </div>
     );
@@ -54,8 +55,10 @@ export default function DiaryPanel() {
       )}
 
       <p className="hidden w-full text-center text-base text-gray-600 md:block md:text-lg">
-        {new Date(diary.date).getMonth() + 1}월 {new Date(diary.date).getDate()}
-        일 일기
+        {t('diaryPanel.title', {
+          month: new Date(diary.date).getMonth() + 1,
+          day: new Date(diary.date).getDate(),
+        })}
       </p>
 
       <div className="flex w-full flex-col gap-2 md:gap-5">

@@ -162,5 +162,10 @@
   "notFound": {
     "description": "The page could not be found.\nIt may not exist or is temporarily unavailable.\nPlease check that the address you entered is correct.",
     "button": "Back to Home"
+  },
+  "diaryPanel": {
+    "emptyMessage": "No diary entry yet.\nWould you like to write one?",
+    "writeButton": "Write a diary",
+    "title": "{{month}}/{{day}} Diary"
   }
 }
