@@ -158,5 +158,9 @@
         "login": "Go to Login"
       }
     }
+  },
+  "notFound": {
+    "description": "The page could not be found.\nIt may not exist or is temporarily unavailable.\nPlease check that the address you entered is correct.",
+    "button": "Back to Home"
   }
 }
