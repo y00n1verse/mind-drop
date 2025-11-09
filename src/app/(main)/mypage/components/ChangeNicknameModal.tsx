@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import { useEffect } from 'react';
 import { AxiosError } from 'axios';
 import instance from '@/lib/instance';
@@ -46,6 +47,7 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
       await update({
         user: { ...session?.user, nickname: data.nickname },
       });
+      toast.success('닉네임 변경 성공!');
       onClose();
     } catch (error) {
       const err = error as AxiosError<ApiErrorResponse>;
@@ -53,6 +55,7 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
         err.response?.data?.message ||
         '닉네임을 변경하는 중 오류가 발생했어요.';
       setError('nickname', { message: msg });
+      toast.error('닉네임 변경 실패');
     }
   };
 
