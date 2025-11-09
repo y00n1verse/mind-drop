@@ -9,6 +9,7 @@ import FormTextarea from './FormTextarea';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { EmotionType } from '@/constants/emotions';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 interface DiaryFormProps {
   mode: 'create' | 'edit';
@@ -86,13 +87,14 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
             content: data.content,
             emotion: data.emotion,
           });
+          toast.success('일기 저장 완료!');
         } else if (mode === 'edit') {
           await updateDiary(selectedDate, data);
+          toast.success('일기 수정 완료!');
         }
-
         onSuccess(data);
-      } catch (e) {
-        console.error('일기 저장 실패:', e);
+      } catch {
+        toast.error('일기 저장 실패');
       } finally {
         setIsSubmitting(false);
       }

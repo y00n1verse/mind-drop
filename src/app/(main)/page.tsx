@@ -17,7 +17,6 @@ type FullpageApi = {
 export default function LandingPage() {
   const [isClient, setIsClient] = useState(false);
   const [showButton, setShowButton] = useState(false);
-
   const fullpageRef = useRef<FullpageApi | null>(null);
 
   useEffect(() => {

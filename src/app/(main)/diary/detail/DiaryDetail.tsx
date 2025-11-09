@@ -8,6 +8,7 @@ import Button from '@/app/components/common/Button';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { useSearchParams, useRouter } from 'next/navigation';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
+import { toast } from 'sonner';
 
 export default function DiaryDetailPage() {
   const router = useRouter();
@@ -38,6 +39,7 @@ export default function DiaryDetailPage() {
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
   const handleSave = () => {
+    toast.success('일기 수정 완료!');
     setIsEditMode(false);
   };
 
