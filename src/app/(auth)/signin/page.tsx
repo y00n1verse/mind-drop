@@ -39,7 +39,7 @@ export default function LoginPage() {
           message: '이메일 또는 비밀번호가 올바르지 않아요.',
         });
       } else {
-        router.push('/');
+        router.push('/?login=success');
       }
     } catch {
       setError('email', {
