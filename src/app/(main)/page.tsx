@@ -10,10 +10,15 @@ import Section3 from '../components/landing/Section3';
 import Section4 from '../components/landing/Section4';
 import Section5 from '../components/landing/Section5';
 
+type FullpageApi = {
+  moveTo: (section: number, slide?: number) => void;
+};
+
 export default function LandingPage() {
   const [isClient, setIsClient] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const fullpageRef = useRef<any>(null);
+
+  const fullpageRef = useRef<FullpageApi | null>(null);
 
   useEffect(() => {
     setIsClient(true);
