@@ -59,5 +59,13 @@
     "successDescription": "See you next time!",
     "fail": "Failed to delete account ⚠️",
     "serverError": "Server error ⚠️"
+  },
+  "logout": {
+    "modalTitle": "Log Out",
+    "description": "Are you sure you want to log out?",
+    "confirmLabel": "Log Out",
+    "cancelLabel": "Cancel",
+    "successDescription": "See you next time!",
+    "fail": "Failed to log out ⚠️"
   }
 }

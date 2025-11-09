@@ -59,5 +59,13 @@
     "successDescription": "다음에 또 만나요!",
     "fail": "회원 탈퇴 실패 ⚠️",
     "serverError": "서버 오류 ⚠️"
+  },
+  "logout": {
+    "modalTitle": "로그아웃",
+    "description": "정말 로그아웃하시겠어요?",
+    "confirmLabel": "로그아웃",
+    "cancelLabel": "취소",
+    "successDescription": "다음에 또 만나요!",
+    "fail": "로그아웃 실패 ⚠️"
   }
 }

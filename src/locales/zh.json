@@ -59,5 +59,13 @@
     "successDescription": "下次再见！",
     "fail": "账户删除失败 ⚠️",
     "serverError": "服务器错误 ⚠️"
+  },
+  "logout": {
+    "modalTitle": "退出登录",
+    "description": "确定要退出登录吗？",
+    "confirmLabel": "退出",
+    "cancelLabel": "取消",
+    "successDescription": "下次再见！",
+    "fail": "退出失败 ⚠️"
   }
 }
