@@ -3,6 +3,7 @@ import I18nProvider from './i18n-wrapper';
 import { Noto_Sans } from 'next/font/google';
 import SessionWrapper from './session-wrapper';
 import { Metadata } from 'next';
+import { Toaster } from 'sonner';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={notoSans.className}>
         <I18nProvider>
           <SessionWrapper>{children}</SessionWrapper>
+          <Toaster richColors position="top-center" />
         </I18nProvider>
       </body>
     </html>
