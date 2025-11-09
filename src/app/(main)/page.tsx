@@ -28,7 +28,7 @@ export default function LandingPage() {
 
   return (
     <>
-      {/* @ts-expect-error */}
+      {/* @ts-expect-error: ReactFullpage is not typed for Next.js SSR */}
       <ReactFullpage
         scrollingSpeed={700}
         easing="easeInOutCubic"
