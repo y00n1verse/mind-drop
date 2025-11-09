@@ -90,5 +90,44 @@
       "invalidCredentials": "邮箱或密码错误。",
       "server": "登录时发生错误，请稍后再试。"
     }
+  },
+  "signup": {
+    "title": "注册",
+    "emailPlaceholder": "邮箱或用户名",
+    "nicknamePlaceholder": "昵称",
+    "passwordPlaceholder": "密码",
+    "confirmPasswordPlaceholder": "确认密码",
+    "submit": "注册",
+    "success": "注册成功！",
+    "error": {
+      "duplicate": "该邮箱已被使用。",
+      "failed": "注册失败",
+      "server": "发生错误，请稍后再试。"
+    },
+    "validation": {
+      "common": {
+        "notBlank": "不能只输入空格。"
+      },
+      "email": {
+        "required": "请输入邮箱或用户名。",
+        "minLength": "用户名长度至少为 5 个字符。",
+        "invalid": "邮箱格式不正确。"
+      },
+      "nickname": {
+        "required": "请输入昵称。",
+        "notBlank": "昵称不能为空。"
+      },
+      "password": {
+        "required": "请输入密码。",
+        "minLength": "密码长度至少为 8 个字符。",
+        "pattern": "密码必须包含字母、数字和特殊字符。"
+      },
+      "confirmPassword": {
+        "required": "请再次输入密码。",
+        "mismatch": "两次输入的密码不一致。"
+      }
+    },
+    "haveAccount": "已经有账号了吗？",
+    "signIn": "登录"
   }
 }

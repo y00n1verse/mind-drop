@@ -90,5 +90,44 @@
       "invalidCredentials": "Email or password is incorrect.",
       "server": "An error occurred during login. Please try again later."
     }
+  },
+  "signup": {
+    "title": "Sign Up",
+    "emailPlaceholder": "Email or Username",
+    "nicknamePlaceholder": "Nickname",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "submit": "Sign Up",
+    "success": "Sign-up complete!",
+    "error": {
+      "duplicate": "This email is already in use.",
+      "failed": "Sign-up failed",
+      "server": "Something went wrong. Please try again later."
+    },
+    "validation": {
+      "common": {
+        "notBlank": "You cannot enter only spaces."
+      },
+      "email": {
+        "required": "Please enter your email or username.",
+        "minLength": "Username must be at least 5 characters long.",
+        "invalid": "Invalid email format."
+      },
+      "nickname": {
+        "required": "Please enter your nickname.",
+        "notBlank": "Nickname cannot be blank."
+      },
+      "password": {
+        "required": "Please enter your password.",
+        "minLength": "Password must be at least 8 characters.",
+        "pattern": "Password must include letters, numbers, and special characters."
+      },
+      "confirmPassword": {
+        "required": "Please re-enter your password.",
+        "mismatch": "Passwords do not match."
+      }
+    },
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In"
   }
 }
