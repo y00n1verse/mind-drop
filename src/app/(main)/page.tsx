@@ -1,35 +1,66 @@
 'use client';
 
+import { ArrowUp } from 'lucide-react';
 import 'fullpage.js/dist/fullpage.css';
+import { useEffect, useRef, useState } from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
+import Section1 from '../components/landing/Section1';
+import Section2 from '../components/landing/Section2';
+import Section3 from '../components/landing/Section3';
+import Section4 from '../components/landing/Section4';
+import Section5 from '../components/landing/Section5';
 
 export default function LandingPage() {
+  const [isClient, setIsClient] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+  const fullpageRef = useRef<any>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
   return (
-    // @ts-expect-error
-    <ReactFullpage
-      scrollingSpeed={700}
-      easing="easeInOutCubic"
-      navigation
-      fitToSection={true}
-      autoScrolling={true}
-      scrollBar={false}
-      licenseKey="OPEN-SOURCE-GPLV3-LICENSE"
-      render={() => (
-        <ReactFullpage.Wrapper>
-          <div className="section flex h-screen items-center justify-center bg-[var(--background-tertiary)] text-xl">
-            1 페이지
-          </div>
-          <div className="section flex h-screen items-center justify-center bg-[var(--background-tertiary)] text-xl">
-            2 페이지
-          </div>
-          <div className="section flex h-screen items-center justify-center bg-[var(--background-tertiary)] text-xl">
-            3 페이지
-          </div>
-          <div className="section flex h-screen items-center justify-center bg-[var(--background-tertiary)] text-xl">
-            4 페이지
-          </div>
-        </ReactFullpage.Wrapper>
+    <>
+      {/* @ts-expect-error */}
+      <ReactFullpage
+        scrollingSpeed={700}
+        easing="easeInOutCubic"
+        navigation
+        fitToSection
+        autoScrolling
+        scrollBar={false}
+        licenseKey="OPEN-SOURCE-GPLV3-LICENSE"
+        afterLoad={(_, destination) => {
+          setShowButton(destination.index >= 1);
+        }}
+        render={({ fullpageApi }) => {
+          if (fullpageApi && !fullpageRef.current) {
+            fullpageRef.current = fullpageApi;
+          }
+
+          return (
+            <ReactFullpage.Wrapper>
+              <Section1 />
+              <Section2 />
+              <Section3 />
+              <Section4 />
+              <Section5 />
+            </ReactFullpage.Wrapper>
+          );
+        }}
+      />
+
+      {showButton && (
+        <button
+          onClick={() => fullpageRef.current?.moveTo(1)}
+          className="fixed right-6 bottom-6 z-[99] cursor-pointer rounded-full bg-[var(--color-brand-primary)] p-3 text-white shadow-lg transition-all hover:scale-110 md:right-8 md:bottom-8"
+          aria-label="맨 위로 이동"
+        >
+          <ArrowUp size={24} />
+        </button>
       )}
-    />
+    </>
   );
 }
