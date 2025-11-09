@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Button from '@/app/components/common/Button';
 import FormInput from '@/app/components/common/FormInput';
+import { toast } from 'sonner';
 
 export interface SignupFormData {
   email: string;
@@ -40,12 +41,15 @@ export default function SignupForm() {
 
       if (duplicateCheck.exists) {
         setError('email', { message: '이미 사용 중인 아이디예요.' });
+        toast.error('이미 사용 중인 아이디예요.');
         return;
       }
 
       await instance.post('/signup', data);
+      toast.success('회원가입 완료!');
       router.push('/signin');
     } catch {
+      toast.error('회원가입 실패');
       setError('email', {
         message: '문제가 발생했어요. 잠시 후 다시 시도해주세요.',
       });

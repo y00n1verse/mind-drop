@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import { UserX } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import useModal from '@/app/hooks/useModal';
@@ -16,14 +17,19 @@ export default function DeleteAccountButton() {
     try {
       const res = await fetch('/api/auth/delete-account', { method: 'DELETE' });
       if (res.ok) {
-        alert('회원 탈퇴가 완료되었어요.');
-        await signOut({ callbackUrl: '/signin' });
+        toast.success('회원 탈퇴 완료', {
+          description: '다음에 또 만나요!',
+        });
+        setTimeout(() => {
+          signOut({ callbackUrl: '/signin' });
+        }, 2000);
       } else {
-        const data = await res.json();
-        alert(data.error || '회원 탈퇴 중 오류가 발생했어요.');
+        toast.error('회원 탈퇴 실패 ⚠️');
       }
     } catch {
-      alert('서버 요청 중 오류가 발생했어요.');
+      toast.error('서버 오류 ⚠️');
+    } finally {
+      closeConfirmModal();
     }
   };
 

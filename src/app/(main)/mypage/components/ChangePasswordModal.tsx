@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import instance from '@/lib/instance';
 import { useForm } from 'react-hook-form';
 import Modal from '@/app/components/common/Modal';
@@ -39,18 +40,15 @@ export default function ChangePasswordModal({
   const onSubmit = async (data: FormValues) => {
     try {
       await instance.post('/auth/change-password', data);
-      alert('비밀번호를 변경했어요.');
+      toast.success('비밀번호 변경 성공!');
       reset();
       onClose();
     } catch (e) {
       const error = e as AxiosError<{ message?: string }>;
       const message = error.response?.data?.message;
 
-      if (message) {
-        setError('currentPassword', { message });
-      } else {
-        alert('비밀번호를 변경하는 중 오류가 발생했어요.');
-      }
+      setError('currentPassword', { message });
+      toast.error('비밀번호 변경 실패');
     }
   };
 
