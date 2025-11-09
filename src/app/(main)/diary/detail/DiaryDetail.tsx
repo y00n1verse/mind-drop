@@ -9,8 +9,10 @@ import { useDiaryStore } from '@/stores/useDiaryStore';
 import { useSearchParams, useRouter } from 'next/navigation';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 export default function DiaryDetailPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
@@ -24,13 +26,13 @@ export default function DiaryDetailPage() {
   if (!diary) {
     return (
       <div className="flex h-full flex-col items-center justify-center">
-        <p className="text-lg">해당 날짜에는 일기가 존재하지 않습니다.</p>
+        <p className="text-lg">{t('diaryDetail.notFound')}</p>
         <Button
           variant="complete"
           className="mt-5"
           onClick={() => router.push('/calendar')}
         >
-          돌아가기
+          {t('diaryDetail.back')}
         </Button>
       </div>
     );
@@ -39,8 +41,9 @@ export default function DiaryDetailPage() {
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
   const handleSave = () => {
-    toast.success('일기 수정 완료!');
+    toast.success(t('diaryDetail.toast.success'));
     setIsEditMode(false);
+    router.push('/calendar');
   };
 
   const handleCancel = () => {
@@ -57,12 +60,12 @@ export default function DiaryDetailPage() {
         <button
           onClick={handleCancel}
           className="flex items-center justify-center rounded-full p-1 transition hover:bg-gray-100"
-          aria-label="뒤로가기"
+          aria-label={t('diaryDetail.back')}
         >
           <ChevronLeft className="h-6 w-6 text-gray-700" />
         </button>
 
-        <h1 className="text-xl">오늘의 일기</h1>
+        <h1 className="text-xl">{t('diaryDetail.title')}</h1>
 
         {isEditMode ? (
           <button
@@ -73,14 +76,14 @@ export default function DiaryDetailPage() {
                 : 'cursor-not-allowed text-gray-400'
             }`}
           >
-            저장
+            {t('diaryDetail.save')}
           </button>
         ) : (
           <button
             onClick={() => setIsEditMode(true)}
             className="cursor-pointer font-medium text-[var(--color-brand-primary)] transition hover:scale-105"
           >
-            수정
+            {t('diaryDetail.edit')}
           </button>
         )}
       </header>
@@ -107,7 +110,7 @@ export default function DiaryDetailPage() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <p className="text-lg md:text-xl">오늘의 기분</p>
+            <p className="text-lg md:text-xl">{t('diaryDetail.feeling')}</p>
             <div className="flex justify-between">
               {emotionData && (
                 <div className="flex flex-col items-center gap-2 p-2">
@@ -130,7 +133,7 @@ export default function DiaryDetailPage() {
               variant="cancel"
               onClick={() => router.push('/calendar')}
             >
-              목록으로
+              {t('diaryDetail.list')}
             </Button>
 
             <Button
@@ -139,7 +142,7 @@ export default function DiaryDetailPage() {
               variant="complete"
               onClick={() => setIsEditMode(true)}
             >
-              수정하기
+              {t('diaryDetail.edit')}
             </Button>
           </div>
         </div>

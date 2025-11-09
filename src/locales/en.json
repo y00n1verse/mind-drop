@@ -140,7 +140,7 @@
     },
     "section2": {
       "title": "Emotion Diary",
-      "description": "Select your mood\nand organize your day"
+      "description": "Select your feeling\nand organize your day"
     },
     "section3": {
       "title": "Emotion Calendar",
@@ -167,5 +167,49 @@
     "emptyMessage": "No diary entry yet.\nWould you like to write one?",
     "writeButton": "Write a diary",
     "title": "{{month}}/{{day}} Diary"
+  },
+  "diaryDetail": {
+    "title": "Today's Diary",
+    "notFound": "No diary entry exists for this date",
+    "back": "Go Back",
+    "save": "Save",
+    "edit": "Edit",
+    "list": "Back",
+    "feeling": "Today's Feeling",
+    "toast": {
+      "success": "Diary updated successfully!"
+    }
+  },
+  "diaryForm": {
+    "placeholder": {
+      "title": "Title",
+      "content": "Write freely about your day"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "contentRequired": "Content is required",
+      "selectEmotion": "Please select an emotion"
+    },
+    "toast": {
+      "createSuccess": "Diary saved!",
+      "editSuccess": "Diary updated!",
+      "failed": "Failed to save diary"
+    },
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "saving": "Saving"
+  },
+  "emotionSelector": {
+    "title": "Today's Feeling",
+    "hint": "Tap a feeling character below"
+  },
+  "diaryFormPage": {
+    "title": "Today's Diary",
+    "save": "Save",
+    "back": "Go Back",
+    "toast": {
+      "success": "Diary saved successfully!"
+    }
   }
 }

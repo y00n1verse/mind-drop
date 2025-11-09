@@ -167,5 +167,49 @@
     "emptyMessage": "还没有写日记。\n要去写一篇吗?",
     "writeButton": "去写日记",
     "title": "{{month}}月 {{day}}日 日记"
+  },
+  "diaryDetail": {
+    "title": "今天的日记",
+    "notFound": "该日期没有日记记录。",
+    "back": "返回",
+    "save": "保存",
+    "edit": "编辑",
+    "list": "返回列表",
+    "feeling": "今日心情",
+    "toast": {
+      "success": "日记修改成功！"
+    }
+  },
+  "diaryForm": {
+    "placeholder": {
+      "title": "标题",
+      "content": "写下今天的感受吧。"
+    },
+    "validation": {
+      "titleRequired": "标题是必填项。",
+      "contentRequired": "日记内容是必填项。",
+      "selectEmotion": "请选择情绪。"
+    },
+    "toast": {
+      "createSuccess": "日记已保存！",
+      "editSuccess": "日记已更新！",
+      "failed": "保存失败。"
+    },
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "saving": "保存中"
+  },
+  "emotionSelector": {
+    "title": "今天的心情",
+    "hint": "点击下方的心情角色"
+  },
+  "diaryFormPage": {
+    "title": "今天的日记",
+    "save": "保存",
+    "back": "返回",
+    "toast": {
+      "success": "日记保存成功！"
+    }
   }
 }

@@ -167,5 +167,49 @@
     "emptyMessage": "아직 작성된 일기가 없어요.\n일기를 작성하러 갈까요?",
     "writeButton": "일기 쓰러 가기",
     "title": "{{month}}월 {{day}}일 일기"
+  },
+  "diaryDetail": {
+    "title": "오늘의 일기",
+    "notFound": "해당 날짜에는 일기가 존재하지 않습니다.",
+    "back": "돌아가기",
+    "save": "저장",
+    "edit": "수정",
+    "list": "목록으로",
+    "feeling": "오늘의 기분",
+    "toast": {
+      "success": "일기 수정 완료!"
+    }
+  },
+  "diaryForm": {
+    "placeholder": {
+      "title": "제목",
+      "content": "오늘 하루는 어땠는지 자유롭게 적어보세요."
+    },
+    "validation": {
+      "titleRequired": "제목은 필수에요.",
+      "contentRequired": "일기 내용은 필수에요.",
+      "selectEmotion": "감정을 선택해주세요."
+    },
+    "toast": {
+      "createSuccess": "일기 저장 완료!",
+      "editSuccess": "일기 수정 완료!",
+      "failed": "일기 저장 실패"
+    },
+    "cancel": "취소",
+    "save": "저장하기",
+    "edit": "수정하기",
+    "saving": "저장 중..."
+  },
+  "emotionSelector": {
+    "title": "오늘의 기분",
+    "hint": "감정 캐릭터들을 눌러보세요"
+  },
+  "diaryFormPage": {
+    "title": "오늘의 일기",
+    "save": "저장",
+    "back": "뒤로가기",
+    "toast": {
+      "success": "일기 저장 완료!"
+    }
   }
 }
