@@ -29,5 +29,25 @@
       "submit": "Change",
       "submitting": "Changing"
     }
+  },
+  "password": {
+    "modalTitle": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password",
+    "success": "Password changed successfully!",
+    "errorToast": "Failed to change password",
+    "defaultError": "An error occurred while changing your password.",
+    "requiredCurrent": "Please enter your current password.",
+    "requiredNew": "Please enter your new password.",
+    "requiredConfirm": "Please confirm your new password.",
+    "empty": "Password cannot be blank.",
+    "minLength": "Please enter at least 8 characters.",
+    "pattern": "Password must include letters, numbers, and special characters.",
+    "notMatch": "New passwords do not match.",
+    "button": {
+      "submit": "Change Password",
+      "submitting": "Changing"
+    }
   }
 }

@@ -29,5 +29,25 @@
       "submit": "更改",
       "submitting": "正在更改"
     }
+  },
+  "password": {
+    "modalTitle": "更改密码",
+    "current": "当前密码",
+    "new": "新密码",
+    "confirm": "确认新密码",
+    "success": "密码修改成功！",
+    "errorToast": "密码修改失败",
+    "defaultError": "更改密码时发生错误。",
+    "requiredCurrent": "请输入当前密码。",
+    "requiredNew": "请输入新密码。",
+    "requiredConfirm": "请再次输入新密码。",
+    "empty": "密码不能为空。",
+    "minLength": "请输入至少 8 个字符。",
+    "pattern": "密码必须包含字母、数字和特殊字符。",
+    "notMatch": "两次输入的新密码不一致。",
+    "button": {
+      "submit": "更改密码",
+      "submitting": "正在更改"
+    }
   }
 }

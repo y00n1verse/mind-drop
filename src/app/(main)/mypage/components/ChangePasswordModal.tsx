@@ -7,6 +7,7 @@ import Modal from '@/app/components/common/Modal';
 import Button from '@/app/components/common/Button';
 import FormInput from '@/app/components/common/FormInput';
 import { AxiosError } from 'axios';
+import { useTranslation } from 'react-i18next';
 
 interface ChangePasswordModalProps {
   isOpen: boolean;
@@ -26,6 +27,8 @@ export default function ChangePasswordModal({
   isOpen,
   onClose,
 }: ChangePasswordModalProps) {
+  const { t } = useTranslation();
+
   const {
     watch,
     reset,
@@ -40,15 +43,15 @@ export default function ChangePasswordModal({
   const onSubmit = async (data: FormValues) => {
     try {
       await instance.post('/auth/change-password', data);
-      toast.success('비밀번호 변경 성공!');
+      toast.success(t('password.success'));
       reset();
       onClose();
     } catch (e) {
       const error = e as AxiosError<{ message?: string }>;
-      const message = error.response?.data?.message;
-
+      const message =
+        error.response?.data?.message || t('password.defaultError');
       setError('currentPassword', { message });
-      toast.error('비밀번호 변경 실패');
+      toast.error(t('password.errorToast'));
     }
   };
 
@@ -59,7 +62,7 @@ export default function ChangePasswordModal({
         reset();
         onClose();
       }}
-      title="비밀번호 변경"
+      title={t('password.modalTitle')}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -67,24 +70,26 @@ export default function ChangePasswordModal({
       >
         <FormInput
           type="password"
-          placeholder="현재 비밀번호"
+          placeholder={t('password.current')}
           register={register('currentPassword', {
-            required: '현재 비밀번호를 입력해주세요.',
-            validate: (value) =>
-              value.trim().length > 0 || '공백만 입력할 수 없어요.',
+            required: t('password.requiredCurrent'),
+            validate: (value) => value.trim().length > 0 || t('password.empty'),
           })}
           error={errors.currentPassword}
           className="rounded-lg border"
         />
         <FormInput
           type="password"
-          placeholder="새 비밀번호"
+          placeholder={t('password.new')}
           register={register('newPassword', {
-            required: '새 비밀번호를 입력해주세요.',
-            minLength: { value: 8, message: '8자 이상 입력해주세요.' },
+            required: t('password.requiredNew'),
+            minLength: {
+              value: 8,
+              message: t('password.minLength'),
+            },
             pattern: {
               value: passwordRegex,
-              message: '영문 대/소문자, 숫자 및 특수문자를 모두 포함해야 해요.',
+              message: t('password.pattern'),
             },
           })}
           error={errors.newPassword}
@@ -92,12 +97,11 @@ export default function ChangePasswordModal({
         />
         <FormInput
           type="password"
-          placeholder="새 비밀번호 확인"
+          placeholder={t('password.confirm')}
           register={register('confirmPassword', {
-            required: '비밀번호를 한 번 더 입력해주세요.',
+            required: t('password.requiredConfirm'),
             validate: (value) =>
-              value === watch('newPassword') ||
-              '새 비밀번호가 일치하지 않아요.',
+              value === watch('newPassword') || t('password.notMatch'),
           })}
           error={errors.confirmPassword}
           className="rounded-lg border"
@@ -108,7 +112,9 @@ export default function ChangePasswordModal({
           className="mt-2 h-10 w-full"
           disabled={isSubmitting}
         >
-          {isSubmitting ? '변경 중' : '비밀번호 변경'}
+          {isSubmitting
+            ? t('password.button.submitting')
+            : t('password.button.submit')}
         </Button>
       </form>
     </Modal>
