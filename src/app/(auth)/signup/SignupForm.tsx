@@ -38,29 +38,25 @@ export default function SignupForm() {
     mode: 'onBlur',
   });
 
+  const checkEmailDuplicate = async (email: string) => {
+    const { data } = await instance.post('/auth/check-duplicate', { email });
+    return data.exists;
+  };
+
   const onSubmit = async (data: SignupFormData) => {
     try {
       setIsLoading(true);
 
-      const { data: duplicateCheck } = await instance.post(
-        '/auth/check-duplicate',
-        { email: data.email },
-      );
-
-      if (duplicateCheck.exists) {
+      if (await checkEmailDuplicate(data.email)) {
         setError('email', { message: t('signup.error.duplicate') });
-        toast.error(t('signup.error.duplicate'));
         return;
       }
-
       await instance.post('/signup', data);
       toast.success(t('signup.success'));
       router.push('/signin');
     } catch {
+      setError('email', { message: t('signup.error.server') });
       toast.error(t('signup.error.failed'));
-      setError('email', {
-        message: t('signup.error.server'),
-      });
     } finally {
       setIsLoading(false);
     }
@@ -69,34 +65,25 @@ export default function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-16 mb-14 flex w-100 flex-col gap-8 p-4 md:mt-12 md:w-lg md:p-0"
+      className="my-16 flex w-full max-w-md flex-col items-center gap-6 px-4 md:gap-8 md:px-0"
     >
-      <div className="flex flex-col items-center gap-3 md:mt-20">
+      <header className="flex flex-col items-center gap-3">
         <Link href="/" className="transition hover:opacity-80">
-          <MindDropText className="h-auto w-48 md:w-54" />
+          <MindDropText className="h-auto w-52 md:w-64" />
         </Link>
-        <h1 className="mb-2 text-center text-2xl">{t('signup.title')}</h1>
-      </div>
+        <h1 className="mb-2 text-center text-xl text-gray-800">
+          {t('signup.title')}
+        </h1>
+      </header>
 
       <FormInput
         type="text"
         placeholder={t('signup.emailPlaceholder')}
         register={register('email', {
           required: t('signup.validation.email.required'),
-          minLength: {
-            value: 5,
-            message: t('signup.validation.email.minLength'),
-          },
-          validate: {
-            notBlank: (value) =>
-              value.trim().length > 0 || t('signup.validation.common.notBlank'),
-            emailFormat: (value) => {
-              const isEmailFormat = value.includes('@');
-              if (isEmailFormat && !emailRegex.test(value)) {
-                return t('signup.validation.email.invalid');
-              }
-              return true;
-            },
+          pattern: {
+            value: emailRegex,
+            message: t('signup.validation.email.invalid'),
           },
         })}
         error={errors.email}
@@ -106,8 +93,6 @@ export default function SignupForm() {
         placeholder={t('signup.nicknamePlaceholder')}
         register={register('nickname', {
           required: t('signup.validation.nickname.required'),
-          validate: (value) =>
-            value.trim().length > 0 || t('signup.validation.nickname.notBlank'),
         })}
         error={errors.nickname}
       />
@@ -140,22 +125,19 @@ export default function SignupForm() {
       />
       <Button
         type="submit"
-        size="large"
         variant="complete"
-        className="mt-4 w-full"
+        className="mt-2 h-12 w-full"
         disabled={isLoading}
+        aria-busy={isLoading}
       >
-        {isLoading ? <Spinner variant="beat" /> : t('signup.submit')}
+        {isLoading ? <Spinner /> : t('signup.submit')}
       </Button>
 
       <p className="text-md mt-3 text-center">
         {t('signup.haveAccount')}{' '}
-        <a
-          href="/signin"
-          className="text-md text-blue-700 underline hover:text-blue-500"
-        >
+        <Link href="/signin" className="text-blue-700 hover:underline">
           {t('signup.signIn')}
-        </a>
+        </Link>
       </p>
     </form>
   );
