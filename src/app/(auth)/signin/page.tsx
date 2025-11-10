@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+import Spinner from '@/app/loading';
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -18,6 +20,7 @@ interface LoginFormData {
 export default function LoginPage() {
   const router = useRouter();
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -30,6 +33,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
+      setIsLoading(true);
       const res = await signIn('credentials', {
         email: data.email,
         password: data.password,
@@ -38,16 +42,14 @@ export default function LoginPage() {
       });
 
       if (res?.error) {
-        setError('email', {
-          message: t('login.error.invalidCredentials'),
-        });
+        setError('email', { message: t('login.error.invalidCredentials') });
       } else {
         router.push('/');
       }
     } catch {
-      setError('email', {
-        message: t('login.error.server'),
-      });
+      setError('email', { message: t('login.error.server') });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -89,8 +91,9 @@ export default function LoginPage() {
           size="large"
           variant="complete"
           className="mt-4 w-full"
+          disabled={isLoading}
         >
-          {t('login.submit')}
+          {isLoading ? <Spinner variant="beat" /> : t('login.submit')}
         </Button>
 
         <p className="text-md mt-3 text-center">
