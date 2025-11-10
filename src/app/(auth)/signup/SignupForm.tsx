@@ -1,12 +1,14 @@
 'use client';
 
+import { toast } from 'sonner';
+import { useState } from 'react';
+import Spinner from '@/app/loading';
 import instance from '@/lib/instance';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import Button from '@/app/components/common/Button';
 import FormInput from '@/app/components/common/FormInput';
-import { toast } from 'sonner';
 
 export interface SignupFormData {
   email: string;
@@ -22,6 +24,7 @@ const passwordRegex =
 export default function SignupForm() {
   const router = useRouter();
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     watch,
@@ -35,6 +38,8 @@ export default function SignupForm() {
 
   const onSubmit = async (data: SignupFormData) => {
     try {
+      setIsLoading(true);
+
       const { data: duplicateCheck } = await instance.post(
         '/auth/check-duplicate',
         { email: data.email },
@@ -54,6 +59,8 @@ export default function SignupForm() {
       setError('email', {
         message: t('signup.error.server'),
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -131,8 +138,9 @@ export default function SignupForm() {
         size="large"
         variant="complete"
         className="mt-4 w-full"
+        disabled={isLoading}
       >
-        {t('signup.submit')}
+        {isLoading ? <Spinner variant="beat" /> : t('signup.submit')}
       </Button>
 
       <p className="text-md mt-3 text-center">
