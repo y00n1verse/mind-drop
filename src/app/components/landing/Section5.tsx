@@ -37,7 +37,9 @@ export default function Section5() {
           onClick={handleClick}
           className="mt-6 cursor-pointer rounded-full bg-[var(--color-brand-primary)] px-8 py-3 font-semibold text-white transition-colors hover:bg-[var(--color-brand-primary-hover)] lg:px-10"
         >
-          {session ? '일기 쓰러가기' : '로그인 하러가기'}
+          {session
+            ? t('landing.section5.button.write')
+            : t('landing.section5.button.login')}
         </button>
       </motion.div>
     </div>
