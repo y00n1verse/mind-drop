@@ -3,8 +3,11 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ChartColumn } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function Section4() {
+  const { t } = useTranslation();
+
   return (
     <div className="section flex h-screen items-center justify-center bg-[var(--background-secondary)] px-2 md:pb-20">
       <div className="flex w-full max-w-5xl flex-col gap-8 md:flex-row md:justify-between">
@@ -35,11 +38,10 @@ export default function Section4() {
                 />
               </div>
               <h2 className="mb-2 text-lg font-semibold md:text-2xl lg:text-3xl">
-                감정 통계
+                {t('landing.section4.title')}
               </h2>
-              <p className="text-base leading-relaxed text-[var(--text-secondary)] md:text-lg lg:text-xl">
-                일기 데이터를 바탕으로 <br />
-                감정 변화를 시각적으로 볼 수 있어요.
+              <p className="text-base leading-relaxed whitespace-pre-line text-[var(--text-secondary)] md:text-lg lg:text-xl">
+                {t('landing.section4.description')}
               </p>
             </div>
           </div>

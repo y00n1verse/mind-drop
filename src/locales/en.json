@@ -1,9 +1,239 @@
 {
+  "language": {
+    "label": "Language: English"
+  },
   "nav": {
     "main": "Home",
     "calendar": "Calendar",
     "stats": "Reports",
     "mypage": "My Page",
     "signin": "Sign In"
+  },
+  "mypage": {
+    "myAccount": "My Account",
+    "changeNickname": "Change Nickname",
+    "changePassword": "Change Password",
+    "reportBug": "Report Bug",
+    "logOut": "Log Out",
+    "deleteAccount": "Delete Account"
+  },
+  "nickname": {
+    "modalTitle": "Change Nickname",
+    "placeholder": "Nickname",
+    "success": "Nickname changed successfully!",
+    "errorToast": "Failed to change nickname",
+    "defaultError": "An error occurred while changing your nickname.",
+    "required": "Please enter your nickname.",
+    "empty": "Nickname cannot be blank.",
+    "button": {
+      "submit": "Change",
+      "submitting": "Changing"
+    }
+  },
+  "password": {
+    "modalTitle": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password",
+    "success": "Password changed successfully!",
+    "errorToast": "Failed to change password",
+    "defaultError": "An error occurred while changing your password.",
+    "requiredCurrent": "Please enter your current password.",
+    "requiredNew": "Please enter your new password.",
+    "requiredConfirm": "Please confirm your new password.",
+    "empty": "Password cannot be blank.",
+    "minLength": "Please enter at least 8 characters.",
+    "pattern": "Password must include letters, numbers, and special characters.",
+    "notMatch": "New passwords do not match.",
+    "button": {
+      "submit": "Change Password",
+      "submitting": "Changing"
+    }
+  },
+  "deleteAccount": {
+    "modalTitle": "Delete Account",
+    "description": "Are you sure you want to delete your account?\nAll your diaries will be permanently removed.",
+    "confirmLabel": "Delete",
+    "cancelLabel": "Cancel",
+    "success": "Account deleted successfully",
+    "successDescription": "See you next time!",
+    "fail": "Failed to delete account ⚠️",
+    "serverError": "Server error ⚠️"
+  },
+  "logout": {
+    "modalTitle": "Log Out",
+    "description": "Are you sure you want to log out?",
+    "confirmLabel": "Log Out",
+    "cancelLabel": "Cancel",
+    "successDescription": "See you next time!",
+    "fail": "Failed to log out ⚠️"
+  },
+  "socialAlert": {
+    "title": "Password Change Not Available",
+    "message": "Password change is <span>not available</span> for social login accounts.",
+    "connected": "Connected SNS",
+    "localLogin": "Credential Login",
+    "confirm": "OK"
+  },
+  "login": {
+    "title": "Sign In",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "or": "or",
+    "error": {
+      "requiredEmail": "Please enter your email.",
+      "requiredPassword": "Please enter your password.",
+      "empty": "Cannot be blank.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "server": "An error occurred during login. Please try again later."
+    }
+  },
+  "signup": {
+    "title": "Sign Up",
+    "emailPlaceholder": "Email or Username",
+    "nicknamePlaceholder": "Nickname",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "submit": "Sign Up",
+    "success": "Sign-up complete!",
+    "error": {
+      "duplicate": "This email is already in use.",
+      "failed": "Sign-up failed",
+      "server": "Something went wrong. Please try again later."
+    },
+    "validation": {
+      "common": {
+        "notBlank": "You cannot enter only spaces."
+      },
+      "email": {
+        "required": "Please enter your email or username.",
+        "minLength": "Username must be at least 5 characters long.",
+        "invalid": "Invalid email format."
+      },
+      "nickname": {
+        "required": "Please enter your nickname.",
+        "notBlank": "Nickname cannot be blank."
+      },
+      "password": {
+        "required": "Please enter your password.",
+        "minLength": "Password must be at least 8 characters.",
+        "pattern": "Password must include letters, numbers, and special characters."
+      },
+      "confirmPassword": {
+        "required": "Please re-enter your password.",
+        "mismatch": "Passwords do not match."
+      }
+    },
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In"
+  },
+  "landing": {
+    "section1": {
+      "subtitle": "Start your journey of reflection\nand journaling",
+      "button": {
+        "write": "Go to Write Diary",
+        "start": "Get Started"
+      }
+    },
+    "section2": {
+      "title": "Emotion Diary",
+      "description": "Select your feeling\nand organize your day"
+    },
+    "section3": {
+      "title": "Emotion Calendar",
+      "description": "See your emotions at a glance\nby month"
+    },
+    "section4": {
+      "title": "Emotion Stats",
+      "description": "Visualize emotional changes\nbased on your diary data"
+    },
+    "section5": {
+      "title": "Time to Know Yourself",
+      "description": "Record your emotions today\nand understand yourself better",
+      "button": {
+        "write": "Go to Write Diary",
+        "login": "Go to Login"
+      }
+    }
+  },
+  "notFound": {
+    "description": "The page could not be found.\nIt may not exist or is temporarily unavailable.\nPlease check that the address you entered is correct.",
+    "button": "Back to Home"
+  },
+  "diaryPanel": {
+    "emptyMessage": "No diary entry yet.\nWould you like to write one?",
+    "writeButton": "Write a diary",
+    "title": "{{month}}/{{day}} Diary"
+  },
+  "diaryDetail": {
+    "title": "Today's Diary",
+    "notFound": "No diary entry exists for this date",
+    "back": "Go Back",
+    "save": "Save",
+    "edit": "Edit",
+    "list": "Back",
+    "feeling": "Today's Feeling",
+    "toast": {
+      "success": "Diary updated successfully!"
+    }
+  },
+  "diaryForm": {
+    "placeholder": {
+      "title": "Title",
+      "content": "Write freely about your day"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "contentRequired": "Content is required",
+      "selectEmotion": "Please select an emotion"
+    },
+    "toast": {
+      "createSuccess": "Diary saved!",
+      "editSuccess": "Diary updated!",
+      "failed": "Failed to save diary"
+    },
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "saving": "Saving"
+  },
+  "emotionSelector": {
+    "title": "Today's Feeling",
+    "hint": "Tap a feeling character below"
+  },
+  "diaryFormPage": {
+    "title": "Today's Diary",
+    "save": "Save",
+    "back": "Go Back",
+    "toast": {
+      "success": "Diary saved successfully!"
+    }
+  },
+  "emotions": {
+    "best": "Best",
+    "good": "Good",
+    "normal": "Normal",
+    "bad": "Bad",
+    "worst": "Worst"
+  },
+  "emotionMonthlyChart": {
+    "title": "Monthly Emotion Chart",
+    "description": "See your monthly feeling trends at a glance",
+    "dateFormat": "MMMM yyyy"
+  },
+  "emotionSummary": {
+    "title": "Emotion Summary",
+    "description": "You can view your monthly emotion distribution and summary at a glance",
+    "dateFormat": "MMMM yyyy",
+    "noData": "- No emotion data for {{month}}.",
+    "mostPrefixSingular": "The emotion you felt the most this month was",
+    "mostPrefixPlural": "The emotions you felt the most this month were",
+    "leastPrefixSingular": "The emotion you felt the least this month was",
+    "leastPrefixPlural": "The emotions you felt the least this month were",
+    "and": " and ",
+    "period": "."
   }
 }

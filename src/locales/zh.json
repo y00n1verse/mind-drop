@@ -1,9 +1,239 @@
 {
+  "language": {
+    "label": "语言: 中文"
+  },
   "nav": {
     "main": "主页",
     "calendar": "日历",
     "stats": "报告",
     "mypage": "我的页面",
     "signin": "登录"
+  },
+  "mypage": {
+    "myAccount": "我的账户",
+    "changeNickname": "修改昵称",
+    "changePassword": "修改密码",
+    "reportBug": "错误报告",
+    "logOut": "退出登录",
+    "deleteAccount": "注销账号"
+  },
+  "nickname": {
+    "modalTitle": "更改昵称",
+    "placeholder": "昵称",
+    "success": "昵称修改成功！",
+    "errorToast": "昵称修改失败",
+    "defaultError": "更改昵称时发生错误。",
+    "required": "请输入昵称。",
+    "empty": "昵称不能为空。",
+    "button": {
+      "submit": "更改",
+      "submitting": "正在更改"
+    }
+  },
+  "password": {
+    "modalTitle": "更改密码",
+    "current": "当前密码",
+    "new": "新密码",
+    "confirm": "确认新密码",
+    "success": "密码修改成功！",
+    "errorToast": "密码修改失败",
+    "defaultError": "更改密码时发生错误。",
+    "requiredCurrent": "请输入当前密码。",
+    "requiredNew": "请输入新密码。",
+    "requiredConfirm": "请再次输入新密码。",
+    "empty": "密码不能为空。",
+    "minLength": "请输入至少 8 个字符。",
+    "pattern": "密码必须包含字母、数字和特殊字符。",
+    "notMatch": "两次输入的新密码不一致。",
+    "button": {
+      "submit": "更改密码",
+      "submitting": "正在更改"
+    }
+  },
+  "deleteAccount": {
+    "modalTitle": "删除账户",
+    "description": "确定要删除您的账户吗？\n您撰写的所有日记都将被永久删除。",
+    "confirmLabel": "删除",
+    "cancelLabel": "取消",
+    "success": "账户删除成功",
+    "successDescription": "下次再见！",
+    "fail": "账户删除失败 ⚠️",
+    "serverError": "服务器错误 ⚠️"
+  },
+  "logout": {
+    "modalTitle": "退出登录",
+    "description": "确定要退出登录吗？",
+    "confirmLabel": "退出",
+    "cancelLabel": "取消",
+    "successDescription": "下次再见！",
+    "fail": "退出失败 ⚠️"
+  },
+  "socialAlert": {
+    "title": "无法更改密码",
+    "message": "社交账号 <span>无法更改密码</span>。",
+    "connected": "已连接的社交平台",
+    "localLogin": "凭证登录",
+    "confirm": "确认"
+  },
+  "login": {
+    "title": "登录",
+    "emailPlaceholder": "输入邮箱",
+    "passwordPlaceholder": "输入密码",
+    "submit": "登录",
+    "noAccount": "还没有账户吗？",
+    "signUp": "注册",
+    "or": "或",
+    "error": {
+      "requiredEmail": "请输入邮箱。",
+      "requiredPassword": "请输入密码。",
+      "empty": "不能只输入空格。",
+      "invalidCredentials": "邮箱或密码错误。",
+      "server": "登录时发生错误，请稍后再试。"
+    }
+  },
+  "signup": {
+    "title": "注册",
+    "emailPlaceholder": "邮箱或用户名",
+    "nicknamePlaceholder": "昵称",
+    "passwordPlaceholder": "密码",
+    "confirmPasswordPlaceholder": "确认密码",
+    "submit": "注册",
+    "success": "注册成功！",
+    "error": {
+      "duplicate": "该邮箱已被使用。",
+      "failed": "注册失败",
+      "server": "发生错误，请稍后再试。"
+    },
+    "validation": {
+      "common": {
+        "notBlank": "不能只输入空格。"
+      },
+      "email": {
+        "required": "请输入邮箱或用户名。",
+        "minLength": "用户名长度至少为 5 个字符。",
+        "invalid": "邮箱格式不正确。"
+      },
+      "nickname": {
+        "required": "请输入昵称。",
+        "notBlank": "昵称不能为空。"
+      },
+      "password": {
+        "required": "请输入密码。",
+        "minLength": "密码长度至少为 8 个字符。",
+        "pattern": "密码必须包含字母、数字和特殊字符。"
+      },
+      "confirmPassword": {
+        "required": "请再次输入密码。",
+        "mismatch": "两次输入的密码不一致。"
+      }
+    },
+    "haveAccount": "已经有账号了吗？",
+    "signIn": "登录"
+  },
+  "landing": {
+    "section1": {
+      "subtitle": "开启记录与回顾每日旅程",
+      "button": {
+        "write": "去写日记",
+        "start": "立即开始"
+      }
+    },
+    "section2": {
+      "title": "情感日记",
+      "description": "选择心情，整理一天。"
+    },
+    "section3": {
+      "title": "情感日历",
+      "description": "一目了然地查看每月的情绪。"
+    },
+    "section4": {
+      "title": "情感统计",
+      "description": "根据日记数据可视化情绪变化。"
+    },
+    "section5": {
+      "title": "认识自己的时间",
+      "description": "记录今天的情绪，更好地了解自己。",
+      "button": {
+        "write": "去写日记",
+        "login": "去登录"
+      }
+    }
+  },
+  "notFound": {
+    "description": "无法找到页面。\n页面不存在或暂时不可用。\n请再次确认您输入的地址是否正确。",
+    "button": "返回主页"
+  },
+  "diaryPanel": {
+    "emptyMessage": "还没有写日记。\n要去写一篇吗?",
+    "writeButton": "去写日记",
+    "title": "{{month}}月 {{day}}日 日记"
+  },
+  "diaryDetail": {
+    "title": "今天的日记",
+    "notFound": "该日期没有日记记录。",
+    "back": "返回",
+    "save": "保存",
+    "edit": "编辑",
+    "list": "返回列表",
+    "feeling": "今日心情",
+    "toast": {
+      "success": "日记修改成功！"
+    }
+  },
+  "diaryForm": {
+    "placeholder": {
+      "title": "标题",
+      "content": "写下今天的感受吧。"
+    },
+    "validation": {
+      "titleRequired": "标题是必填项。",
+      "contentRequired": "日记内容是必填项。",
+      "selectEmotion": "请选择情绪。"
+    },
+    "toast": {
+      "createSuccess": "日记已保存！",
+      "editSuccess": "日记已更新！",
+      "failed": "保存失败。"
+    },
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "saving": "保存中"
+  },
+  "emotionSelector": {
+    "title": "今天的心情",
+    "hint": "点击下方的心情角色"
+  },
+  "diaryFormPage": {
+    "title": "今天的日记",
+    "save": "保存",
+    "back": "返回",
+    "toast": {
+      "success": "日记保存成功！"
+    }
+  },
+  "emotions": {
+    "best": "非常好",
+    "good": "好",
+    "normal": "一般",
+    "bad": "不好",
+    "worst": "糟糕"
+  },
+  "emotionMonthlyChart": {
+    "title": "每月情绪分布",
+    "description": "一目了然查看您每月的情绪变化",
+    "dateFormat": "yyyy年 MM月"
+  },
+  "emotionSummary": {
+    "title": "情绪总结",
+    "description": "您可以一目了然地查看每月的情绪分布和总结",
+    "dateFormat": "yyyy年 MM月",
+    "noData": "- {{month}} 没有情绪数据。",
+    "mostPrefixSingular": "本月你最常感受到的情绪是",
+    "mostPrefixPlural": "本月你最常感受到的情绪是",
+    "leastPrefixSingular": "本月你最少感受到的情绪是",
+    "leastPrefixPlural": "本月你最少感受到的情绪是",
+    "and": "和",
+    "period": "。"
   }
 }

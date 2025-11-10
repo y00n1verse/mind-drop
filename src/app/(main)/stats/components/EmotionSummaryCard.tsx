@@ -6,16 +6,15 @@ import { useDiaryStore } from '@/stores/useDiaryStore';
 import { format, addMonths, subMonths } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getEmotionStatsByMonth } from '@/utils/getEmotionStatsByMonth';
+import { useTranslation } from 'react-i18next';
 
 export default function EmotionSummaryCard() {
+  const { t, i18n } = useTranslation();
   const { diaries } = useDiaryStore();
   const [currentDate, setCurrentDate] = useState(new Date());
   const currentMonth = format(currentDate, 'yyyy-MM');
 
-  // 감정 통계
   const emotionData = getEmotionStatsByMonth(diaries, currentMonth);
-
-  // 감정 비율
   const total = emotionData.reduce((sum, e) => sum + e.uv, 0);
   const emotionRatios = emotionData.map((e) => ({
     ...e,
@@ -31,20 +30,12 @@ export default function EmotionSummaryCard() {
   const handlePrevMonth = () => setCurrentDate((d) => subMonths(d, 1));
   const handleNextMonth = () => setCurrentDate((d) => addMonths(d, 1));
 
-  // 받침 유무에 따른 어미 반환 로직
-  function getSentenceEnding(word: string | undefined) {
-    if (!word || word.length === 0) return '이에요.';
-    const lastChar = word.charCodeAt(word.length - 1);
-    const hasBatchim = (lastChar - 0xac00) % 28 !== 0;
-    return hasBatchim ? '이에요.' : '예요.';
-  }
-
   return (
     <div className="flex w-full flex-col items-start gap-4">
       <div className="flex flex-col items-start gap-1">
-        <h1 className="text-lg font-semibold">감정 요약</h1>
+        <h1 className="text-lg font-semibold"> {t('emotionSummary.title')}</h1>
         <p className="text-sm text-[#959595]">
-          월 단위로 기록된 감정 비율과 요약을 한 번에 볼 수 있어요
+          {t('emotionSummary.description')}
         </p>
       </div>
 
@@ -52,14 +43,14 @@ export default function EmotionSummaryCard() {
         <div className="flex items-center justify-between pb-3">
           <button
             onClick={handlePrevMonth}
-            className="cursor-pointer rounded-md hover:bg-gray-100"
+            className="rounded-md p-1 hover:bg-gray-100"
           >
             <ChevronLeft />
           </button>
-          <p>{format(currentDate, 'yyyy년 MM월')}</p>
+          <p>{format(currentDate, t('emotionSummary.dateFormat'))}</p>
           <button
             onClick={handleNextMonth}
-            className="cursor-pointer rounded-md hover:bg-gray-100"
+            className="rounded-md p-1 hover:bg-gray-100"
           >
             <ChevronRight />
           </button>
@@ -88,29 +79,44 @@ export default function EmotionSummaryCard() {
 
         {total === 0 ? (
           <p>
-            - {format(currentDate, 'yyyy년 MM월')}에는 감정 데이터가 없어요.
+            {t('emotionSummary.noData', {
+              month: format(currentDate, t('emotionSummary.dateFormat')),
+            })}
           </p>
         ) : (
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 text-base">
             <p>
-              - 가장 많이 느낀 감정은{' '}
+              <span>
+                {mostFeeling.length > 1
+                  ? t('emotionSummary.mostPrefixPlural')
+                  : t('emotionSummary.mostPrefixSingular')}{' '}
+              </span>
               {mostFeeling.map((e, i) => (
-                <span key={e.variant} className={`font-medium ${e.color}`}>
-                  {e.label}
-                  {i < mostFeeling.length - 1 && ', '}
+                <span key={e.variant}>
+                  <span className={`font-medium ${e.color}`}>{e.label}</span>
+                  {i < mostFeeling.length - 1 && (
+                    <span>{t('emotionSummary.and')}</span>
+                  )}
                 </span>
               ))}
-              {getSentenceEnding(mostFeeling[0].label)}
+              <span>{t('emotionSummary.period')}</span>
             </p>
+
             <p>
-              - 가장 적게 느낀 감정은{' '}
+              <span>
+                {leastFeeling.length > 1
+                  ? t('emotionSummary.leastPrefixPlural')
+                  : t('emotionSummary.leastPrefixSingular')}{' '}
+              </span>
               {leastFeeling.map((e, i) => (
-                <span key={e.variant} className={`font-medium ${e.color}`}>
-                  {e.label}
-                  {i < leastFeeling.length - 1 && ', '}
+                <span key={e.variant}>
+                  <span className={`font-medium ${e.color}`}>{e.label}</span>
+                  {i < leastFeeling.length - 1 && (
+                    <span>{t('emotionSummary.and')}</span>
+                  )}
                 </span>
               ))}
-              {getSentenceEnding(leastFeeling[0].label)}
+              <span>{t('emotionSummary.period')}</span>
             </p>
           </div>
         )}

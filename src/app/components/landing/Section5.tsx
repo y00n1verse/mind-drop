@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useTranslation } from 'react-i18next';
 
 export default function Section5() {
   const router = useRouter();
   const { data: session } = useSession();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     if (session) {
@@ -25,15 +27,19 @@ export default function Section5() {
         viewport={{ once: true }}
         className="flex flex-col items-center justify-center gap-2"
       >
-        <h2 className="mb-3 text-3xl font-bold">나를 알아가는 시간</h2>
-        <p className="mb-6 max-w-md text-lg text-[color:var(--text-secondary)]">
-          오늘의 감정을 기록하며 <br /> 나를 조금 더 이해해볼까요?
+        <h2 className="mb-3 text-3xl font-bold">
+          {t('landing.section5.title')}
+        </h2>
+        <p className="mb-6 max-w-md text-lg whitespace-pre-line text-[color:var(--text-secondary)]">
+          {t('landing.section5.description')}
         </p>
         <button
           onClick={handleClick}
           className="mt-6 cursor-pointer rounded-full bg-[var(--color-brand-primary)] px-8 py-3 font-semibold text-white transition-colors hover:bg-[var(--color-brand-primary-hover)] lg:px-10"
         >
-          {session ? '일기 쓰러가기' : '로그인 하러가기'}
+          {session
+            ? t('landing.section5.button.write')
+            : t('landing.section5.button.login')}
         </button>
       </motion.div>
     </div>

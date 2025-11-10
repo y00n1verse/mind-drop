@@ -13,10 +13,12 @@ import SocialLoginAlertModal from './SocialLoginAlertModal';
 import LogoutButton from './LogoutButton';
 import SendBugButton from './SendBugButton';
 import ChangeLanguageButton from './ChangeLanguageButton';
+import { useTranslation } from 'react-i18next';
 
 export default function SettingsPanel() {
   const { data: session } = useSession();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const {
     isOpen: isPasswordOpen,
@@ -58,7 +60,7 @@ export default function SettingsPanel() {
         >
           <ChevronLeft className="h-6 w-6 text-gray-700" />
         </button>
-        <h1 className="text-lg font-medium">내 계정</h1>
+        <h1 className="text-lg font-medium"> {t('mypage.myAccount')}</h1>
       </header>
 
       <div className="flex w-full flex-col gap-1 md:grid md:grid-cols-2 md:gap-8 md:p-4 lg:grid-cols-3 lg:gap-10 lg:p-8">

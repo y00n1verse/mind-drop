@@ -1,8 +1,11 @@
 'use client';
 
 import { Bug } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function SendBugButton() {
+  const { t } = useTranslation();
+
   const handleClick = () => {
     const email = 'jiphrodite@gmail.com';
     const subject = encodeURIComponent('Mind Drop 의견 보내기');
@@ -20,7 +23,7 @@ export default function SendBugButton() {
       <div className="flex items-center justify-start gap-2 md:flex-col md:justify-center">
         <Bug className="hidden text-gray-700 md:block md:h-28 md:w-28 lg:h-32 lg:w-32" />
         <span className="block md:mt-2 md:text-lg md:font-semibold md:text-gray-600">
-          버그 제보
+          {t('mypage.reportBug')}
         </span>
       </div>
     </button>

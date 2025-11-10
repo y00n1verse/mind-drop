@@ -5,9 +5,11 @@ import { useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
+import { useTranslation } from 'react-i18next';
 
 export default function DiaryFormPage() {
   const router = useRouter();
+  const { t } = useTranslation();
   const formRef = useRef<DiaryFormHandle>(null);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -21,12 +23,12 @@ export default function DiaryFormPage() {
         <button
           onClick={() => router.back()}
           className="flex items-center justify-center rounded-full p-1 transition hover:bg-gray-100"
-          aria-label="뒤로가기"
+          aria-label={t('diaryFormPage.back')}
         >
           <ChevronLeft className="h-6 w-6 text-gray-700" />
         </button>
 
-        <h1 className="text-xl">오늘의 일기</h1>
+        <h1 className="text-xl">{t('diaryFormPage.title')}</h1>
         <button
           onClick={handleSaveClick}
           className={`font-medium transition ${
@@ -35,7 +37,7 @@ export default function DiaryFormPage() {
               : 'cursor-not-allowed text-gray-400'
           }`}
         >
-          저장
+          {t('diaryFormPage.save')}
         </button>
       </header>
 
@@ -43,7 +45,7 @@ export default function DiaryFormPage() {
         ref={formRef}
         mode="create"
         onSuccess={() => {
-          toast.success('일기 저장 완료!');
+          toast.success(t('diaryFormPage.toast.success'));
           router.push('/calendar');
         }}
         onFormStateChange={setIsFormValid}

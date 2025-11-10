@@ -1,5 +1,6 @@
 import { emotions, EmotionType } from '@/constants/emotions';
 import Label from '../common/Label';
+import { useTranslation } from 'react-i18next';
 
 interface EmotionSelectorProps {
   selectedEmotion: EmotionType;
@@ -12,15 +13,17 @@ export default function EmotionSelector({
   onSelect,
   error,
 }: EmotionSelectorProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-4">
       <p className="text-lg md:text-xl">
-        오늘의 기분{' '}
+        {t('emotionSelector.title')}{' '}
         {error ? (
           <span className="text-sm text-[var(--color-warn-bg)]">{error}</span>
         ) : (
           <span className="text-base text-gray-500 md:text-lg">
-            (감정 캐릭터들을 눌러보세요)
+            ({t('emotionSelector.hint')})
           </span>
         )}
       </p>

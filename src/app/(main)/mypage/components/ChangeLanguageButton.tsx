@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { Languages } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ChangeLanguageButton() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [lang, setLang] = useState(i18n.language || 'ko');
 
   const toggleLanguage = () => {
@@ -16,18 +16,13 @@ export default function ChangeLanguageButton() {
     setLang(nextLang);
   };
 
-  const getLabel = (code: string) => {
-    switch (code) {
-      case 'ko':
-        return '언어: 한국어';
-      case 'en':
-        return 'Language: English';
-      case 'zh':
-        return '语言: 中文';
-      default:
-        return '언어';
+  useEffect(() => {
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang && savedLang !== lang) {
+      i18n.changeLanguage(savedLang);
+      setLang(savedLang);
     }
-  };
+  }, []);
 
   return (
     <button
@@ -45,7 +40,7 @@ export default function ChangeLanguageButton() {
             transition={{ duration: 0.25, ease: 'easeOut' }}
             className="block md:mt-2 md:text-base md:font-semibold md:text-gray-600"
           >
-            <span>{getLabel(lang)}</span>
+            {t('language.label')}
           </motion.span>
         </AnimatePresence>
       </div>

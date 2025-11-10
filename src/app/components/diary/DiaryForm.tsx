@@ -10,6 +10,7 @@ import { useDiaryStore } from '@/stores/useDiaryStore';
 import { EmotionType } from '@/constants/emotions';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 interface DiaryFormProps {
   mode: 'create' | 'edit';
@@ -31,6 +32,7 @@ export interface DiaryFormHandle {
 
 const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
   ({ mode, diary, onSuccess, onFormStateChange, onCancel }, ref) => {
+    const { t } = useTranslation();
     const router = useRouter();
     const { addDiary, updateDiary, selectedDate } = useDiaryStore();
 
@@ -69,7 +71,9 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
 
     const onSubmit = async (data: DiaryFormData) => {
       if (!data.emotion) {
-        setError('emotion', { message: '감정을 선택해주세요.' });
+        setError('emotion', {
+          message: t('diaryForm.validation.selectEmotion'),
+        });
         return;
       }
 
@@ -87,14 +91,14 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
             content: data.content,
             emotion: data.emotion,
           });
-          toast.success('일기 저장 완료!');
+          toast.success(t('diaryForm.toast.createSuccess'));
         } else if (mode === 'edit') {
           await updateDiary(selectedDate, data);
-          toast.success('일기 수정 완료!');
+          toast.success(t('diaryForm.toast.editSuccess'));
         }
         onSuccess(data);
       } catch {
-        toast.error('일기 저장 실패');
+        toast.error(t('diaryForm.toast.failed'));
       } finally {
         setIsSubmitting(false);
       }
@@ -111,15 +115,19 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       >
         <FormInput
           type="text"
-          placeholder="제목"
-          register={register('title', { required: '제목은 필수에요.' })}
+          placeholder={t('diaryForm.placeholder.title')}
+          register={register('title', {
+            required: t('diaryForm.validation.titleRequired'),
+          })}
           error={errors.title}
           className="text-xl md:text-2xl"
         />
 
         <FormTextarea
-          placeholder="오늘 하루는 어땠는지 자유롭게 적어보세요."
-          register={register('content', { required: '일기 내용은 필수에요.' })}
+          placeholder={t('diaryForm.placeholder.content')}
+          register={register('content', {
+            required: t('diaryForm.validation.contentRequired'),
+          })}
           error={errors.content}
           className="text-lg md:text-xl"
         />
@@ -132,7 +140,9 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
 
         <input
           type="hidden"
-          {...register('emotion', { required: '감정을 선택해주세요.' })}
+          {...register('emotion', {
+            required: t('diaryForm.validation.selectEmotion'),
+          })}
         />
 
         <div className="mt-10 hidden justify-end gap-3 md:flex">
@@ -148,7 +158,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
               }
             }}
           >
-            취소
+            {t('diaryForm.cancel')}
           </Button>
           <Button
             type="submit"
@@ -157,10 +167,10 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
             disabled={!isFormValid || isSubmitting}
           >
             {isSubmitting
-              ? '저장 중...'
+              ? t('diaryForm.saving')
               : mode === 'create'
-                ? '저장하기'
-                : '수정하기'}
+                ? t('diaryForm.save')
+                : t('diaryForm.edit')}
           </Button>
         </div>
       </form>
