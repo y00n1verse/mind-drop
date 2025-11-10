@@ -59,7 +59,7 @@ export default function LandingPage() {
       {showButton && (
         <button
           onClick={() => fullpageRef.current?.moveTo(1)}
-          className="fixed right-6 bottom-6 z-[99] cursor-pointer rounded-full bg-[var(--color-brand-primary)] p-3 text-white shadow-lg transition-all hover:scale-110 md:right-8 md:bottom-8"
+          className="fixed right-4 bottom-20 z-[99] cursor-pointer rounded-full bg-[var(--color-brand-primary)] p-3 text-white shadow-lg transition-all hover:scale-110 md:right-6 md:right-8 md:bottom-6 md:bottom-8"
           aria-label="맨 위로 이동"
         >
           <ArrowUp size={24} />
