@@ -8,7 +8,9 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import Button from '@/app/components/common/Button';
+import MindDropText from '@/assets/icons/MindDropText.svg';
 import FormInput from '@/app/components/common/FormInput';
+import Link from 'next/link';
 
 export interface SignupFormData {
   email: string;
@@ -67,11 +69,14 @@ export default function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-28 mb-14 flex w-100 flex-col gap-8 md:mt-0 md:w-lg"
+      className="mt-16 mb-14 flex w-100 flex-col gap-8 p-4 md:mt-12 md:w-lg md:p-0"
     >
-      <h1 className="mb-2 text-center text-2xl md:mt-20">
-        {t('signup.title')}
-      </h1>
+      <div className="flex flex-col items-center gap-3 md:mt-20">
+        <Link href="/" className="transition hover:opacity-80">
+          <MindDropText className="h-auto w-48 md:w-54" />
+        </Link>
+        <h1 className="mb-2 text-center text-2xl">{t('signup.title')}</h1>
+      </div>
 
       <FormInput
         type="text"

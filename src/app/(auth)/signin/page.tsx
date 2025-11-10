@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import Spinner from '@/app/loading';
 import { signIn } from 'next-auth/react';
@@ -10,6 +11,7 @@ import NaverIcon from '@/assets/icons/NaverIcon.svg';
 import KakaoIcon from '@/assets/icons/KakaoIcon.svg';
 import GoogleIcon from '@/assets/icons/GoogleIcon.svg';
 import FormInput from '../../components/common/FormInput';
+import MindDropText from '@/assets/icons/MindDropText.svg';
 import { useTranslation } from 'react-i18next';
 
 interface LoginFormData {
@@ -57,12 +59,14 @@ export default function LoginPage() {
     <div className="flex flex-col items-center justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-28 mb-14 flex w-100 flex-col gap-8 md:mt-0 md:w-lg"
+        className="mt-16 flex w-100 flex-col items-center gap-8 p-4 md:mt-36 md:mb-6 md:w-lg md:p-0"
       >
-        <h1 className="mb-2 text-center text-2xl md:mt-20">
-          {' '}
-          {t('login.title')}
-        </h1>
+        <div className="flex flex-col gap-3">
+          <Link href="/" className="transition hover:opacity-80">
+            <MindDropText className="h-auto w-48 md:w-54" />
+          </Link>
+          <h1 className="mb-2 text-center text-2xl">{t('login.title')}</h1>
+        </div>
 
         <FormInput
           type="email"
