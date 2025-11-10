@@ -84,11 +84,10 @@
     "signUp": "회원가입",
     "or": "또는",
     "error": {
-      "requiredEmail": "이메일을 입력해주세요.",
-      "requiredPassword": "비밀번호를 입력해주세요.",
-      "empty": "공백만 입력할 수 없어요.",
-      "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않아요.",
-      "server": "로그인 중 문제가 발생했어요. 잠시 후 다시 시도해주세요."
+      "requiredEmail": "이메일을 입력해주세요",
+      "requiredPassword": "비밀번호를 입력해주세요",
+      "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않아요",
+      "server": "로그인 중 문제가 발생했어요. 잠시 후 다시 시도해주세요"
     }
   },
   "signup": {
