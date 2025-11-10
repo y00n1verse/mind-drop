@@ -1,12 +1,12 @@
 'use client';
 
 import 'react-day-picker/style.css';
+import { DayPicker } from 'react-day-picker';
+import { useTranslation } from 'react-i18next';
+import { emotions } from '@/constants/emotions';
 import { enUS, ko, zhCN } from 'date-fns/locale';
 import { useEffect, useMemo, useState } from 'react';
-import { DayPicker } from 'react-day-picker';
-import { emotions } from '@/constants/emotions';
 import { useDiaryStore } from '@/stores/useDiaryStore';
-import { useTranslation } from 'react-i18next';
 
 export default function Calendar() {
   const today = useMemo(() => new Date(), []);
@@ -43,7 +43,7 @@ export default function Calendar() {
   }, [selectedDate]);
 
   return (
-    <div className="flex justify-center rounded-md bg-[oklch(0.937_0_0)] pt-6 pb-2 md:px-3 lg:items-center lg:justify-start lg:p-8">
+    <div className="mx-auto w-full rounded-md bg-[oklch(0.937_0_0)] px-0 pt-3 pb-4 md:w-[700px] md:pt-6 lg:w-full lg:pt-8">
       <DayPicker
         locale={currentLocale}
         animate
@@ -60,8 +60,10 @@ export default function Calendar() {
         }}
         disabled={{ after: today }}
         classNames={{
+          months: 'flex flex-col w-full items-center',
+          table: 'w-full table-fixed',
           day_button:
-            'flex flex-col cursor-pointer justify-start items-center p-1 gap-1 text-xs w-17 h-17 rounded-md hover:bg-gray-100 transition-colors lg:p-1.5 lg:gap-1 md:w-20 md:h-18 lg:w-24 lg:h-22',
+            'flex flex-col items-center justify-start cursor-pointer p-1 gap-1 sm:gap-2 text-[10px] w-[12vw] h-[12vw] min-w-[2.5rem] min-h-[2.5rem] rounded-md hover:bg-gray-100 transition-colors max-[767px]:w-[14vw] max-[767px]:h-[14vw] md:w-24 md:h-24 lg:w-20 lg:h-20 xl:w-[5.5rem] xl:h-[5.5rem] 2xl:w-23 2xl:h-23',
           selected: 'rounded-lg bg-gray-100',
         }}
         components={{
@@ -73,14 +75,11 @@ export default function Calendar() {
             );
 
             return (
-              <button
-                {...buttonProps}
-                className={`${buttonProps.className ?? ''}`}
-              >
+              <button {...buttonProps} className={buttonProps.className ?? ''}>
                 <span>{day.date.getDate()}</span>
                 {emotionData && (
                   <emotionData.Icon
-                    className={`lg: h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${emotionData.color}`}
+                    className={`h-14 w-14 sm:h-15 sm:w-15 lg:h-18 lg:w-18 ${emotionData.color}`}
                   />
                 )}
               </button>

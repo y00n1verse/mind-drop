@@ -10,12 +10,16 @@ export default function CalendarPage() {
 
   return (
     <AuthGuard>
-      <div className="relative flex flex-col md:mx-10 md:mt-25 md:flex-row md:gap-5 lg:mx-15 lg:mt-30 lg:gap-5">
-        <Calendar />
-        <DiaryPanel />
+      <section className="flex flex-col items-center justify-center gap-4 pb-24 md:mt-24 md:pb-12 lg:mx-15 lg:mt-28 lg:flex-row lg:items-stretch lg:justify-center lg:gap-10">
+        <div className="flex w-full justify-center lg:w-3/5">
+          <Calendar />
+        </div>
+        <div className="flex w-full justify-center lg:w-2/5">
+          <DiaryPanel />
+        </div>
 
         {isLoading && <Spinner variant="fade" />}
-      </div>
+      </section>
     </AuthGuard>
   );
 }

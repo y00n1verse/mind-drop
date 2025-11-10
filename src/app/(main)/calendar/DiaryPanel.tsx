@@ -15,11 +15,10 @@ export default function DiaryPanel() {
 
   if (!diary) {
     return (
-      <div className="m-5 flex h-40 flex-col items-center justify-center gap-6 rounded-md bg-[oklch(0.937_0_0)] p-4 md:m-0 md:h-150 md:w-full md:gap-8 md:p-5 lg:p-8">
-        <div className="text-center whitespace-pre-line">
-          <p>{t('diaryPanel.emptyMessage')}</p>
-        </div>
-
+      <div className="mx-5 flex w-full flex-col items-center justify-center gap-6 rounded-md bg-[oklch(0.937_0_0)] p-4 md:mx-auto md:w-[700px] lg:m-0 lg:w-full lg:gap-8">
+        <p className="text-center whitespace-pre-line">
+          {t('diaryPanel.emptyMessage')}
+        </p>
         <Button
           variant="complete"
           className="h-10 w-35 lg:w-45"
@@ -35,6 +34,10 @@ export default function DiaryPanel() {
   }
 
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
+  const { date, title, content } = diary;
+  const dateObj = new Date(date);
+  const month = dateObj.getMonth() + 1;
+  const day = dateObj.getDate();
 
   const handleClick = () => {
     if (!selectedDate) return;
@@ -44,40 +47,35 @@ export default function DiaryPanel() {
   return (
     <div
       onClick={handleClick}
-      className="m-5 flex cursor-pointer items-center gap-4 rounded-md bg-[oklch(0.937_0_0)] p-5 transition-all hover:scale-[1.01] hover:shadow-md md:m-0 md:w-full md:flex-col md:items-start md:gap-5 md:p-5 lg:gap-5 lg:p-10"
+      className="mx-5 flex w-full cursor-pointer items-center gap-4 rounded-md bg-[oklch(0.937_0_0)] p-5 transition-all hover:scale-[1.01] hover:shadow-md md:mx-auto md:w-[700px] md:p-5 lg:m-0 lg:w-full lg:flex-col lg:items-start lg:gap-5 lg:p-10"
     >
       {emotionData && (
         <div className="md:self-center">
-          <emotionData.Icon
-            className={`h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 ${emotionData.color}`}
-          />
+          {emotionData?.Icon && (
+            <emotionData.Icon
+              className={`h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 ${emotionData.color}`}
+            />
+          )}
         </div>
       )}
 
-      <p className="hidden w-full text-center text-base text-gray-600 md:block md:text-lg">
-        {t('diaryPanel.title', {
-          month: new Date(diary.date).getMonth() + 1,
-          day: new Date(diary.date).getDate(),
-        })}
+      <p className="hidden w-full text-center text-base text-gray-600 md:text-lg lg:block">
+        {t('diaryPanel.title', { month, day })}
       </p>
 
-      <div className="flex w-full flex-col gap-2 md:gap-5">
-        <div className="flex justify-between">
-          <h1 className="text-lg font-semibold md:mt-4 md:text-xl lg:mt-8 lg:text-2xl">
-            {diary.title}
+      <div className="flex w-full flex-col gap-2 md:gap-3 lg:gap-5">
+        <div className="flex items-center justify-between">
+          <h1 className="text-lg font-semibold md:text-xl lg:mt-8 lg:text-2xl">
+            {title}
           </h1>
-          <p className="text-md hidden text-right text-gray-500 md:hidden">
-            {diary.date}
-          </p>
+          <p className="text-md hidden text-gray-500 lg:hidden">{date}</p>
         </div>
 
-        <div className="flex items-end justify-between md:flex-col md:items-start">
-          <p className="md:truncate-none w-56 truncate text-sm md:w-full md:text-base md:whitespace-pre-line">
-            {diary.content}
+        <div className="flex items-end justify-between lg:flex-col lg:items-start">
+          <p className="line-clamp-6 w-36 truncate text-sm md:truncate md:text-base lg:w-full lg:whitespace-pre-line">
+            {content}
           </p>
-          <p className="text-right text-sm text-gray-400 md:hidden">
-            {diary.date}
-          </p>
+          <p className="text-right text-sm text-gray-400 lg:hidden">{date}</p>
         </div>
       </div>
     </div>
