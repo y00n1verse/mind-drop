@@ -11,11 +11,11 @@ export default function EmotionReportPage() {
 
   return (
     <AuthGuard>
-      <div className="mx-auto mb-15 flex w-full max-w-6xl flex-col items-center justify-center gap-10 p-6 lg:flex-row lg:items-start lg:justify-around">
-        <div className="w-full lg:w-[50%]">
+      <div className="mx-auto mb-15 flex w-full flex-col items-center justify-center gap-10 p-6 lg:gap-16">
+        <div className="w-full lg:w-[65%]">
           <EmotionMonthlyChart />
         </div>
-        <div className="w-full lg:w-[50%]">
+        <div className="w-full lg:w-[65%]">
           <EmotionSummaryCard />
         </div>
 

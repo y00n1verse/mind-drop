@@ -1,8 +1,15 @@
 'use client';
 
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { emotions } from '@/constants/emotions';
+import { enUS, ko, zhCN } from 'date-fns/locale';
 import Label from '@/app/components/common/Label';
+import { TickItem } from 'recharts/types/util/types';
+import { useDiaryStore } from '@/stores/useDiaryStore';
+import { addMonths, format, subMonths } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { getEmotionStatsByMonth } from '@/utils/getEmotionStatsByMonth';
 import {
   BarChart,
   Bar,
@@ -11,13 +18,8 @@ import {
   LabelList,
   ResponsiveContainer,
 } from 'recharts';
-import { useDiaryStore } from '@/stores/useDiaryStore';
-import { useMemo, useState } from 'react';
-import { getEmotionStatsByMonth } from '@/utils/getEmotionStatsByMonth';
-import { addMonths, format, subMonths } from 'date-fns';
-import { TickItem } from 'recharts/types/util/types';
-import { useTranslation } from 'react-i18next';
-import { enUS, ko, zhCN } from 'date-fns/locale';
+
+const LOCALE_MAP = { ko, en: enUS, zh: zhCN } as const;
 
 interface EmotionTickProps {
   x?: number;
@@ -31,11 +33,11 @@ function EmotionTick({ x = 0, y = 0, payload }: EmotionTickProps) {
   const { Icon, label, color, variant } = emotion;
 
   return (
-    <g transform={`translate(${x - 25},${y + 12})`}>
-      <foreignObject width={50} height={80}>
+    <g transform={`translate(${x - 40},${y + 12})`}>
+      <foreignObject width={80} height={90}>
         <div className="flex flex-col items-center gap-2">
           <Icon
-            className={`h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 ${color}`}
+            className={`h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${color}`}
           />
           <Label label={label} variant={variant} size="small" />
         </div>
@@ -49,21 +51,17 @@ export default function EmotionMonthlyChart() {
   const { diaries } = useDiaryStore();
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const localeMap = { ko, en: enUS, zh: zhCN };
-  const locale = localeMap[i18n.language as keyof typeof localeMap] || ko;
+  const locale = LOCALE_MAP[i18n.language as keyof typeof LOCALE_MAP] || ko;
 
   const currentMonth = format(currentDate, 'yyyy-MM');
 
-  const chartData = useMemo(
-    () => getEmotionStatsByMonth(diaries, currentMonth),
-    [diaries, currentMonth],
-  );
+  const chartData = getEmotionStatsByMonth(diaries, currentMonth);
 
   const handlePrevMonth = () => setCurrentDate((d) => subMonths(d, 1));
   const handleNextMonth = () => setCurrentDate((d) => addMonths(d, 1));
 
   return (
-    <div className="flex w-full flex-col items-start gap-4">
+    <div className="flex flex-col items-start gap-4">
       <div className="flex flex-col items-start gap-1">
         <h1 className="text-lg font-semibold">
           {t('emotionMonthlyChart.title')}
@@ -94,7 +92,7 @@ export default function EmotionMonthlyChart() {
           </button>
         </div>
 
-        <div className="relative h-[300px] w-full">
+        <div className="relative h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
@@ -113,9 +111,9 @@ export default function EmotionMonthlyChart() {
                   fill="#959595"
                   fontSize={14}
                 />
-                {chartData.map((entry, index) => (
+                {chartData.map((entry) => (
                   <Cell
-                    key={`cell-${index}`}
+                    key={entry.variant}
                     fill={`var(--color-${entry.variant})`}
                   />
                 ))}
