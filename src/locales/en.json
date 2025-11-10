@@ -218,5 +218,22 @@
     "normal": "Normal",
     "bad": "Bad",
     "worst": "Worst"
+  },
+  "emotionMonthlyChart": {
+    "title": "Monthly Emotion Chart",
+    "description": "See your monthly feeling trends at a glance",
+    "dateFormat": "MMMM yyyy"
+  },
+  "emotionSummary": {
+    "title": "Emotion Summary",
+    "description": "You can view your monthly emotion distribution and summary at a glance",
+    "dateFormat": "MMMM yyyy",
+    "noData": "- No emotion data for {{month}}.",
+    "mostPrefixSingular": "The emotion you felt the most this month was",
+    "mostPrefixPlural": "The emotions you felt the most this month were",
+    "leastPrefixSingular": "The emotion you felt the least this month was",
+    "leastPrefixPlural": "The emotions you felt the least this month were",
+    "and": " and ",
+    "period": "."
   }
 }

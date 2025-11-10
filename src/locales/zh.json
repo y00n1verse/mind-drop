@@ -218,5 +218,22 @@
     "normal": "一般",
     "bad": "不好",
     "worst": "糟糕"
+  },
+  "emotionMonthlyChart": {
+    "title": "每月情绪分布",
+    "description": "一目了然查看您每月的情绪变化",
+    "dateFormat": "yyyy年 MM月"
+  },
+  "emotionSummary": {
+    "title": "情绪总结",
+    "description": "您可以一目了然地查看每月的情绪分布和总结",
+    "dateFormat": "yyyy年 MM月",
+    "noData": "- {{month}} 没有情绪数据。",
+    "mostPrefixSingular": "本月你最常感受到的情绪是",
+    "mostPrefixPlural": "本月你最常感受到的情绪是",
+    "leastPrefixSingular": "本月你最少感受到的情绪是",
+    "leastPrefixPlural": "本月你最少感受到的情绪是",
+    "and": "和",
+    "period": "。"
   }
 }

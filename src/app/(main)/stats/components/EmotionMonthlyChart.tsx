@@ -16,6 +16,8 @@ import { useMemo, useState } from 'react';
 import { getEmotionStatsByMonth } from '@/utils/getEmotionStatsByMonth';
 import { addMonths, format, subMonths } from 'date-fns';
 import { TickItem } from 'recharts/types/util/types';
+import { useTranslation } from 'react-i18next';
+import { enUS, ko, zhCN } from 'date-fns/locale';
 
 interface EmotionTickProps {
   x?: number;
@@ -43,8 +45,12 @@ function EmotionTick({ x = 0, y = 0, payload }: EmotionTickProps) {
 }
 
 export default function EmotionMonthlyChart() {
+  const { t, i18n } = useTranslation();
   const { diaries } = useDiaryStore();
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  const localeMap = { ko, en: enUS, zh: zhCN };
+  const locale = localeMap[i18n.language as keyof typeof localeMap] || ko;
 
   const currentMonth = format(currentDate, 'yyyy-MM');
 
@@ -59,9 +65,11 @@ export default function EmotionMonthlyChart() {
   return (
     <div className="flex w-full flex-col items-start gap-4">
       <div className="flex flex-col items-start gap-1">
-        <h1 className="text-lg font-semibold">월별 기분 분포</h1>
+        <h1 className="text-lg font-semibold">
+          {t('emotionMonthlyChart.title')}
+        </h1>
         <p className="text-sm text-[#959595]">
-          월 단위로 기록했던 기분을 한눈에 볼 수 있어요
+          {t('emotionMonthlyChart.description')}
         </p>
       </div>
 
@@ -73,7 +81,11 @@ export default function EmotionMonthlyChart() {
           >
             <ChevronLeft />
           </button>
-          <p>{format(currentDate, 'yyyy년 MM월')}</p>
+          <p>
+            {format(currentDate, t('emotionMonthlyChart.dateFormat'), {
+              locale,
+            })}
+          </p>
           <button
             onClick={handleNextMonth}
             className="cursor-pointer rounded-md hover:bg-gray-100"
