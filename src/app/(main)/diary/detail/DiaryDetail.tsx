@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { emotions } from '@/constants/emotions';
@@ -9,6 +9,7 @@ import Button from '@/app/components/common/Button';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { useSearchParams, useRouter } from 'next/navigation';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
+import { useLayoutStore } from '@/stores/useLayoutStore';
 
 export default function DiaryDetailPage() {
   const { t } = useTranslation();
@@ -17,22 +18,37 @@ export default function DiaryDetailPage() {
   const date = searchParams.get('date');
   const { getDiaryByDate } = useDiaryStore();
   const diary = getDiaryByDate(date || '');
+  const { setShowNav } = useLayoutStore();
 
   const formRef = useRef<DiaryFormHandle>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  useEffect(() => {
+    setShowNav(false);
+    return () => setShowNav(true);
+  }, [setShowNav]);
+
   if (!diary) {
     return (
-      <div className="flex h-full flex-col items-center justify-center">
-        <p className="text-lg">{t('diaryDetail.notFound')}</p>
-        <Button
-          variant="complete"
-          className="mt-5"
-          onClick={() => router.push('/calendar')}
-        >
-          {t('diaryDetail.back')}
-        </Button>
+      <div className="flex h-screen flex-col items-center justify-center gap-6 text-center md:gap-8">
+        <p className="text-xl md:text-2xl">{t('diaryDetail.notFound')}</p>
+        <div className="flex gap-3">
+          <Button
+            size="large"
+            variant="cancel"
+            onClick={() => router.push('/calendar')}
+          >
+            {t('diaryDetail.back')}
+          </Button>
+          <Button
+            size="large"
+            variant="complete"
+            onClick={() => router.push(`/diary/form?date=${date}`)}
+          >
+            {t('diaryDetail.writeNow')}
+          </Button>
+        </div>
       </div>
     );
   }
