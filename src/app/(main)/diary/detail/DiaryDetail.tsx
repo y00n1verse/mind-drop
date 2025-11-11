@@ -2,14 +2,13 @@
 
 import { useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { emotions } from '@/constants/emotions';
 import Label from '@/app/components/common/Label';
 import Button from '@/app/components/common/Button';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { useSearchParams, useRouter } from 'next/navigation';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
-import { toast } from 'sonner';
-import { useTranslation } from 'react-i18next';
 
 export default function DiaryDetailPage() {
   const { t } = useTranslation();
@@ -41,7 +40,6 @@ export default function DiaryDetailPage() {
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
   const handleSave = () => {
-    toast.success(t('diaryDetail.toast.success'));
     setIsEditMode(false);
     router.push('/calendar');
   };

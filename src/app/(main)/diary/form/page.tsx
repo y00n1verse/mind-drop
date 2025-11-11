@@ -1,11 +1,10 @@
 'use client';
 
-import { toast } from 'sonner';
 import { useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
 import { useTranslation } from 'react-i18next';
+import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
 
 export default function DiaryFormPage() {
   const router = useRouter();
@@ -45,7 +44,6 @@ export default function DiaryFormPage() {
         ref={formRef}
         mode="create"
         onSuccess={() => {
-          toast.success(t('diaryFormPage.toast.success'));
           router.push('/calendar');
         }}
         onFormStateChange={setIsFormValid}
