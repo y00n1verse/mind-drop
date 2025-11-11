@@ -65,14 +65,14 @@ export default function DiaryPanel() {
 
       <div className="flex w-full flex-col gap-2 md:gap-3 lg:gap-5">
         <div className="flex items-center justify-between">
-          <h1 className="line-clamp-1 w-32 text-lg font-semibold md:w-full md:text-xl lg:mt-8 lg:text-2xl">
+          <h1 className="w-32 truncate text-lg font-semibold md:w-full md:text-xl lg:mt-8 lg:text-2xl">
             {title}
           </h1>
           <p className="text-md hidden text-gray-500 lg:hidden">{date}</p>
         </div>
 
-        <div className="flex items-end justify-between lg:flex-col lg:items-start">
-          <p className="line-clamp-1 w-36 text-sm md:text-base lg:line-clamp-6 lg:w-full">
+        <div className="lg:flex lg:flex-col lg:items-start">
+          <p className="block w-36 truncate text-sm md:text-base lg:line-clamp-6 lg:w-full lg:overflow-hidden lg:whitespace-normal">
             {content}
           </p>
           <p className="text-right text-sm text-gray-400 lg:hidden">{date}</p>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { emotions } from '@/constants/emotions';
 import Label from '@/app/components/common/Label';
@@ -17,6 +18,7 @@ interface DiaryDetailProps {
 }
 
 export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
+  const router = useRouter();
   const { t } = useTranslation();
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
@@ -35,7 +37,7 @@ export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
         <label className="px-2 text-base font-medium text-gray-800 md:text-lg">
           {t('diaryForm.content')}
         </label>
-        <div className="max-h-60 overflow-y-auto border-t border-gray-300 px-3 py-2 leading-relaxed break-words whitespace-pre-wrap md:max-h-80 md:text-lg">
+        <div className="h-60 overflow-y-auto border-t border-gray-300 px-3 py-2 leading-relaxed break-words whitespace-pre-wrap md:text-lg">
           {diary.content}
         </div>
       </div>
@@ -61,7 +63,7 @@ export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
           type="button"
           size="large"
           variant="cancel"
-          onClick={() => history.back()}
+          onClick={() => router.push('/calendar')}
         >
           {t('diaryDetail.list')}
         </Button>
