@@ -45,6 +45,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       watch,
       formState: { errors },
     } = useForm<DiaryFormData>({
+      mode: 'onChange',
       defaultValues: {
         title: diary?.title || '',
         content: diary?.content || '',
@@ -111,35 +112,46 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
     return (
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-2xl flex-col gap-3 text-lg md:gap-6"
+        className="flex w-full max-w-2xl flex-col gap-4 text-lg md:gap-6"
       >
-        <h1 className="hidden text-center md:block md:text-2xl md:font-normal">
-          {t('diaryForm.dateTitle', {
-            month: selectedDate ? new Date(selectedDate).getMonth() + 1 : '',
-            day: selectedDate ? new Date(selectedDate).getDate() : '',
-          })}
-        </h1>
+        <div className="relative">
+          <FormInput
+            label={t('diaryForm.title')}
+            type="text"
+            placeholder={t('diaryForm.placeholder.title')}
+            register={register('title', {
+              required: t('diaryForm.validation.titleRequired'),
+              maxLength: {
+                value: 30,
+                message: t('diaryForm.validation.titleMax', { count: 30 }),
+              },
+            })}
+            error={errors.title}
+            className="text-base md:text-lg"
+          />
+          <span className="absolute right-3 bottom-2 text-sm text-gray-400">
+            {title.length} / 30
+          </span>
+        </div>
 
-        <FormInput
-          label={t('diaryForm.title')}
-          type="text"
-          placeholder={t('diaryForm.placeholder.title')}
-          register={register('title', {
-            required: t('diaryForm.validation.titleRequired'),
-          })}
-          error={errors.title}
-          className="text-base md:text-lg"
-        />
-
-        <FormTextarea
-          label={t('diaryForm.content')}
-          placeholder={t('diaryForm.placeholder.content')}
-          register={register('content', {
-            required: t('diaryForm.validation.contentRequired'),
-          })}
-          error={errors.content}
-          className="text-sm md:text-base"
-        />
+        <div className="relative">
+          <FormTextarea
+            label={t('diaryForm.content')}
+            placeholder={t('diaryForm.placeholder.content')}
+            register={register('content', {
+              required: t('diaryForm.validation.contentRequired'),
+              maxLength: {
+                value: 500,
+                message: t('diaryForm.validation.contentMax', { count: 500 }),
+              },
+            })}
+            error={errors.content}
+            className="text-base md:text-base"
+          />
+          <span className="absolute right-3 bottom-2 text-sm text-gray-400">
+            {content.length} / 500
+          </span>
+        </div>
 
         <EmotionSelector
           selectedEmotion={selectedEmotion}

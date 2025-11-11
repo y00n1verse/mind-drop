@@ -181,13 +181,15 @@
     "title": "Title",
     "content": "Content",
     "placeholder": {
-      "title": "Title",
-      "content": "Write freely about your day"
+      "title": "Title (max 30 characters)",
+      "content": "Write freely about your day (max 500 characters)"
     },
     "validation": {
       "titleRequired": "Title is required",
       "contentRequired": "Content is required",
-      "selectEmotion": "Please select an emotion"
+      "selectEmotion": "Please select an emotion",
+      "titleMax": "The title can be up to {{count}} characters long",
+      "contentMax": "The content can be up to {{count}} characters long"
     },
     "toast": {
       "createSuccess": "Diary saved!",

@@ -181,13 +181,15 @@
     "title": "标题",
     "content": "内容",
     "placeholder": {
-      "title": "标题",
-      "content": "写下今天的感受吧。"
+      "title": "标题 (最多30个字符)",
+      "content": "写下今天的感受吧 (最多500个字符)"
     },
     "validation": {
-      "titleRequired": "标题是必填项。",
-      "contentRequired": "日记内容是必填项。",
-      "selectEmotion": "请选择情绪。"
+      "titleRequired": "标题是必填项",
+      "contentRequired": "日记内容是必填项",
+      "selectEmotion": "请选择情绪",
+      "titleMax": "标题最多可输入 {{count}} 个字符",
+      "contentMax": "内容最多可输入 {{count}} 个字符"
     },
     "toast": {
       "createSuccess": "日记已保存！",
