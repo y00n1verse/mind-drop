@@ -18,6 +18,7 @@ interface DiaryStore {
   selectedDate: string | null;
 
   setSelectedDate: (date: string | null) => void;
+  reset: () => void;
   getUserDiaries: () => Promise<void>;
   getDiaryByDate: (date: string) => Diary | undefined;
   addDiary: (diary: Omit<Diary, 'userId'>) => Promise<void>;
@@ -32,6 +33,7 @@ export const useDiaryStore = create<DiaryStore>()(
       selectedDate: null,
 
       setSelectedDate: (date) => set({ selectedDate: date }),
+      reset: () => set({ diaries: [], selectedDate: null }),
 
       getUserDiaries: async () => {
         const { start, stop } = useLoadingStore.getState();
