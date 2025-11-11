@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface FormInputProps {
+  label?: string;
   type: string;
   placeholder: string;
   register: UseFormRegisterReturn;
@@ -10,6 +11,7 @@ interface FormInputProps {
 }
 
 export default function FormInput({
+  label,
   type,
   placeholder,
   register,
@@ -18,6 +20,11 @@ export default function FormInput({
 }: FormInputProps) {
   return (
     <div className="flex w-full flex-col">
+      {label && (
+        <label className="p-2 text-base font-medium text-gray-800">
+          {label}
+        </label>
+      )}
       <input
         {...register}
         type={type}
@@ -32,7 +39,7 @@ export default function FormInput({
           if (type === 'password') e.preventDefault();
         }}
         className={clsx(
-          'w-full border-b px-3 py-2 placeholder:text-gray-400 focus:outline-none',
+          'w-full rounded-lg border-1 px-3 py-2 placeholder:text-gray-400 focus:outline-none',
           error
             ? 'border-[var(--color-warn-bg)] focus:border-[var(--color-warn-bg)]'
             : 'border-gray-500 focus:border-[var(--color-brand-primary-hover)]',
