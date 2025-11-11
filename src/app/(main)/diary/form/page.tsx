@@ -54,7 +54,6 @@ export default function DiaryFormPage() {
         ref={formRef}
         mode="create"
         onSuccess={() => {
-          toast.success(t('diaryForm.toast.editSuccess'));
           router.push(`/diary/detail?date=${selectedDate}`);
         }}
         onFormStateChange={setIsFormValid}
