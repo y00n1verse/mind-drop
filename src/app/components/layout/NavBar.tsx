@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import UserIcon from '@/assets/icons/UserIcon.svg';
 import HomeIcon from '@/assets/icons/HomeIcon.svg';
-import StatsIcon from '@/assets/icons/StatsIcon.svg';
+import ReportIcon from '@/assets/icons/ReportIcon.svg';
 import MindDropLogo from '@/assets/icons/MindDropLogo.svg';
 import CalendarIcon from '@/assets/icons/CalendarIcon.svg';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ export default function NavBar() {
   const navMenu = [
     { href: '/', label: t('nav.main'), Icon: HomeIcon },
     { href: '/calendar', label: t('nav.calendar'), Icon: CalendarIcon },
-    { href: '/stats', label: t('nav.stats'), Icon: StatsIcon },
+    { href: '/report', label: t('nav.report'), Icon: ReportIcon },
   ];
 
   const navUser = {

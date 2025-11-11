@@ -61,8 +61,8 @@ export default function EmotionMonthlyChart() {
   const handleNextMonth = () => setCurrentDate((d) => addMonths(d, 1));
 
   return (
-    <div className="flex flex-col items-start gap-4">
-      <div className="flex flex-col items-start gap-1">
+    <div className="flex h-full flex-col justify-between gap-2">
+      <div className="mt-2 mb-1">
         <h1 className="text-lg font-semibold">
           {t('emotionMonthlyChart.title')}
         </h1>
@@ -71,8 +71,8 @@ export default function EmotionMonthlyChart() {
         </p>
       </div>
 
-      <div className="w-full rounded-md bg-white p-5 shadow-sm">
-        <div className="flex items-center justify-between pb-3">
+      <div className="w-full flex-1 rounded-md bg-white p-5 shadow-sm">
+        <div className="flex flex-shrink-0 items-center justify-between pb-3">
           <button
             onClick={handlePrevMonth}
             className="cursor-pointer rounded-md hover:bg-gray-100"
@@ -92,7 +92,7 @@ export default function EmotionMonthlyChart() {
           </button>
         </div>
 
-        <div className="relative h-[300px]">
+        <div className="relative h-[250px] flex-1 lg:h-[360px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}

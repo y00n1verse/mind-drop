@@ -5,7 +5,7 @@
   "nav": {
     "main": "Home",
     "calendar": "Calendar",
-    "stats": "Reports",
+    "report": "Report",
     "mypage": "My Page",
     "signin": "Sign In"
   },
@@ -142,7 +142,7 @@
       "description": "See your emotions at a glance\nby month"
     },
     "section4": {
-      "title": "Emotion Stats",
+      "title": "Emotion Reports",
       "description": "Visualize emotional changes\nbased on your diary data"
     },
     "section5": {
@@ -221,7 +221,7 @@
   },
   "emotionSummary": {
     "title": "Emotion Summary",
-    "description": "You can view your monthly emotion distribution and summary at a glance",
+    "description": "View your monthly emotion distribution and summary at a glance",
     "dateFormat": "MMMM yyyy",
     "noData": "- No emotion data for {{month}}.",
     "mostPrefixSingular": "The emotion you felt the most this month was",
