@@ -105,7 +105,7 @@ export default function DiaryDetailPage() {
             {diary.title}
           </h1>
 
-          <div className="h-60 border-b border-gray-300 px-3 py-2 text-lg leading-relaxed whitespace-pre-wrap md:text-xl">
+          <div className="h-60 overflow-y-auto border-b border-gray-300 px-3 py-2 text-lg leading-relaxed break-words whitespace-pre-wrap md:text-xl">
             {diary.content}
           </div>
 
