@@ -1,23 +1,33 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import { useLayoutStore } from '@/stores/useLayoutStore';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
+import { useDiaryStore } from '@/stores/useDiaryStore';
+import { toast } from 'sonner';
 
 export default function DiaryFormPage() {
   const router = useRouter();
   const { t } = useTranslation();
   const formRef = useRef<DiaryFormHandle>(null);
   const [isFormValid, setIsFormValid] = useState(false);
+  const { setShowNav } = useLayoutStore();
+  const { selectedDate } = useDiaryStore();
+
+  useEffect(() => {
+    setShowNav(false);
+    return () => setShowNav(true);
+  }, [setShowNav]);
 
   const handleSaveClick = () => {
     formRef.current?.submit();
   };
 
   return (
-    <div className="relative mx-auto max-w-3xl p-6 md:flex md:items-center md:justify-center md:p-8">
+    <div className="relative mx-auto max-w-3xl p-6 md:mt-18 md:flex md:items-center md:justify-center md:p-8">
       <header className="mb-10 flex items-center justify-between md:hidden">
         <button
           onClick={() => router.back()}
@@ -44,7 +54,8 @@ export default function DiaryFormPage() {
         ref={formRef}
         mode="create"
         onSuccess={() => {
-          router.push('/calendar');
+          toast.success(t('diaryForm.toast.editSuccess'));
+          router.push(`/diary/detail?date=${selectedDate}`);
         }}
         onFormStateChange={setIsFormValid}
       />

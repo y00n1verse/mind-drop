@@ -16,7 +16,7 @@ export default function DiaryDetailPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
-  const { getDiaryByDate } = useDiaryStore();
+  const { getDiaryByDate, selectedDate } = useDiaryStore();
   const diary = getDiaryByDate(date || '');
   const { setShowNav } = useLayoutStore();
 
@@ -25,9 +25,9 @@ export default function DiaryDetailPage() {
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    setShowNav(false);
+    setShowNav(!isEditMode);
     return () => setShowNav(true);
-  }, [setShowNav]);
+  }, [isEditMode, setShowNav]);
 
   if (!diary) {
     return (
@@ -57,7 +57,7 @@ export default function DiaryDetailPage() {
 
   const handleSave = () => {
     setIsEditMode(false);
-    router.push('/calendar');
+    router.push(`/diary/detail?date=${selectedDate}`);
   };
 
   const handleCancel = () => {
@@ -69,7 +69,7 @@ export default function DiaryDetailPage() {
   };
 
   return (
-    <div className="relative mx-auto max-w-3xl p-6 md:flex md:items-center md:justify-center md:p-8">
+    <div className="relative mx-auto max-w-3xl p-6 md:mt-18 md:flex md:items-center md:justify-center md:p-8">
       <header className="mb-10 flex items-center justify-between md:hidden">
         <button
           onClick={handleCancel}
