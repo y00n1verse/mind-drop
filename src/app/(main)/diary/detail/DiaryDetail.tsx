@@ -69,7 +69,7 @@ export default function DiaryDetailPage() {
   };
 
   return (
-    <div className="relative mx-auto max-w-3xl p-6 md:mt-18 md:flex md:items-center md:justify-center md:p-8">
+    <div className="relative mx-auto max-w-3xl items-center p-6 md:flex md:justify-center md:p-8">
       <header className="mb-10 flex items-center justify-between md:hidden">
         <button
           onClick={handleCancel}
@@ -79,7 +79,13 @@ export default function DiaryDetailPage() {
           <ChevronLeft className="h-6 w-6 text-gray-700" />
         </button>
 
-        <h1 className="text-xl">{t('diaryDetail.title')}</h1>
+        <h1 className="text-xl">
+          {' '}
+          {t('diaryForm.dateTitle', {
+            month: selectedDate ? new Date(selectedDate).getMonth() + 1 : '',
+            day: selectedDate ? new Date(selectedDate).getDate() : '',
+          })}
+        </h1>
 
         {isEditMode ? (
           <button
@@ -114,7 +120,7 @@ export default function DiaryDetailPage() {
           />
         </div>
       ) : (
-        <div className="flex w-full max-w-2xl flex-col gap-8 text-lg">
+        <div className="flex w-full max-w-2xl flex-col gap-4 text-lg md:gap-8">
           <h1 className="border-b border-gray-300 px-3 py-2 text-xl font-semibold md:text-2xl">
             {diary.title}
           </h1>

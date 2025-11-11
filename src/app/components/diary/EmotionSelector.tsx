@@ -17,12 +17,12 @@ export default function EmotionSelector({
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-lg md:text-xl">
+      <p className="p-2 text-base md:text-lg">
         {t('emotionSelector.title')}{' '}
         {error ? (
           <span className="text-sm text-[var(--color-warn-bg)]">{error}</span>
         ) : (
-          <span className="text-base text-gray-500 md:text-lg">
+          <span className="text-sm text-gray-500 md:text-base">
             ({t('emotionSelector.hint')})
           </span>
         )}
@@ -41,11 +41,12 @@ export default function EmotionSelector({
               }`}
             >
               <Icon
-                className={`h-17 w-17 md:h-21 md:w-21 lg:h-23 lg:w-23 ${color} ${
+                className={`h-14 w-14 md:h-18 md:w-18 lg:h-20 lg:w-20 ${color} ${
                   isSelected ? 'opacity-100' : 'opacity-80'
                 }`}
               />
               <Label
+                size="small"
                 label={label}
                 variant={variant}
                 className={`mt-1 ${isSelected ? 'font-semibold' : 'opacity-80'}`}

@@ -111,25 +111,34 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
     return (
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-2xl flex-col gap-8 text-lg"
+        className="flex w-full max-w-2xl flex-col gap-3 text-lg md:gap-6"
       >
+        <h1 className="hidden text-center md:block md:text-2xl md:font-normal">
+          {t('diaryForm.dateTitle', {
+            month: selectedDate ? new Date(selectedDate).getMonth() + 1 : '',
+            day: selectedDate ? new Date(selectedDate).getDate() : '',
+          })}
+        </h1>
+
         <FormInput
+          label={t('diaryForm.title')}
           type="text"
           placeholder={t('diaryForm.placeholder.title')}
           register={register('title', {
             required: t('diaryForm.validation.titleRequired'),
           })}
           error={errors.title}
-          className="text-xl md:text-2xl"
+          className="text-base md:text-lg"
         />
 
         <FormTextarea
+          label={t('diaryForm.content')}
           placeholder={t('diaryForm.placeholder.content')}
           register={register('content', {
             required: t('diaryForm.validation.contentRequired'),
           })}
           error={errors.content}
-          className="text-lg md:text-xl"
+          className="text-sm md:text-base"
         />
 
         <EmotionSelector

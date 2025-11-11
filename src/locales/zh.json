@@ -164,7 +164,7 @@
     "title": "{{month}}月 {{day}}日 日记"
   },
   "diaryDetail": {
-    "title": "今天的日记",
+    "title": "{{month}}月 {{day}}日 日记",
     "notFound": "该日期没有日记记录。",
     "back": "返回",
     "writeNow": "立即写日记",
@@ -177,6 +177,9 @@
     }
   },
   "diaryForm": {
+    "dateTitle": "{{month}}月 {{day}}日 日记",
+    "title": "标题",
+    "content": "内容",
     "placeholder": {
       "title": "标题",
       "content": "写下今天的感受吧。"

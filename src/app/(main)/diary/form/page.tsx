@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { useLayoutStore } from '@/stores/useLayoutStore';
 import DiaryForm, { DiaryFormHandle } from '@/app/components/diary/DiaryForm';
 import { useDiaryStore } from '@/stores/useDiaryStore';
-import { toast } from 'sonner';
 
 export default function DiaryFormPage() {
   const router = useRouter();
@@ -28,7 +27,7 @@ export default function DiaryFormPage() {
 
   return (
     <div className="relative mx-auto max-w-3xl p-6 md:mt-18 md:flex md:items-center md:justify-center md:p-8">
-      <header className="mb-10 flex items-center justify-between md:hidden">
+      <header className="mb-6 flex items-center justify-between md:hidden">
         <button
           onClick={() => router.back()}
           className="flex items-center justify-center rounded-full p-1 transition hover:bg-gray-100"

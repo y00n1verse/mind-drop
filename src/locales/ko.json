@@ -164,7 +164,7 @@
     "title": "{{month}}월 {{day}}일 일기"
   },
   "diaryDetail": {
-    "title": "오늘의 일기",
+    "title": "{{month}}월 {{day}}일 일기",
     "notFound": "해당 날짜에는 일기가 존재하지 않습니다.",
     "back": "돌아가기",
     "writeNow": "지금 작성하기",
@@ -177,8 +177,11 @@
     }
   },
   "diaryForm": {
+    "dateTitle": "{{month}}월 {{day}}일 일기",
+    "title": "제목",
+    "content": "내용",
     "placeholder": {
-      "title": "제목",
+      "title": "제목을 입력해주세요",
       "content": "오늘 하루는 어땠는지 자유롭게 적어보세요."
     },
     "validation": {
@@ -194,7 +197,7 @@
     "cancel": "취소",
     "save": "저장하기",
     "edit": "수정하기",
-    "saving": "저장 중..."
+    "saving": "저장 중"
   },
   "emotionSelector": {
     "title": "오늘의 기분",

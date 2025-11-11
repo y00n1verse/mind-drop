@@ -164,7 +164,7 @@
     "title": "{{month}}/{{day}} Diary"
   },
   "diaryDetail": {
-    "title": "Today's Diary",
+    "title": "{{month}}/{{day}} Diary",
     "notFound": "No diary entry exists for this date",
     "back": "Go Back",
     "writeNow": "Write now",
@@ -177,6 +177,9 @@
     }
   },
   "diaryForm": {
+    "dateTitle": "Diary for {{month}}/{{day}}",
+    "title": "Title",
+    "content": "Content",
     "placeholder": {
       "title": "Title",
       "content": "Write freely about your day"
