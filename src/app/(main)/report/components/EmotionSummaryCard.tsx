@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { emotions } from '@/constants/emotions';
 import Label from '@/app/components/common/Label';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { format, addMonths, subMonths } from 'date-fns';
@@ -74,16 +75,9 @@ export default function EmotionSummaryCard() {
         </div>
 
         <div className="flex flex-1 flex-col justify-between">
-          {total === 0 ? (
-            <p className="text-center text-gray-500">
-              {t('emotionSummary.noData', {
-                month: format(currentDate, t('emotionSummary.dateFormat')),
-              })}
-            </p>
-          ) : (
-            <>
-              <div className="my-2 flex justify-around lg:my-11">
-                {emotionRatios.map(
+          <div className="my-2 flex justify-around lg:my-11">
+            {emotionRatios.length > 0
+              ? emotionRatios.map(
                   ({ label, variant, Icon, color, percent }) => (
                     <div
                       key={variant}
@@ -102,10 +96,33 @@ export default function EmotionSummaryCard() {
                       </p>
                     </div>
                   ),
-                )}
-              </div>
+                )
+              : emotions.map(({ label, variant, Icon, color }) => (
+                  <div
+                    key={variant}
+                    className="flex flex-col items-center gap-2 rounded-md p-2 opacity-60"
+                  >
+                    <Icon
+                      className={`h-12 w-12 md:h-14 md:w-14 lg:h-17 lg:w-17 ${color}`}
+                    />
+                    <Label label={label} variant={variant} size="small" />
+                    <p className="text-base font-medium text-gray-400 md:text-lg">
+                      0%
+                    </p>
+                  </div>
+                ))}
+          </div>
 
-              <div className="flex flex-col gap-1 border-t-2 border-gray-100 pt-4 text-sm md:text-base">
+          <div className="flex flex-col gap-1 border-t-2 border-gray-100 pt-4 text-left text-sm md:text-base">
+            {total === 0 ? (
+              <p className="text-gray-500">
+                {' '}
+                {t('emotionSummary.noData', {
+                  month: format(currentDate, t('emotionSummary.dateFormat')),
+                })}
+              </p>
+            ) : (
+              <>
                 <p>
                   {mostFeeling.length > 1
                     ? t('emotionSummary.mostPrefixPlural')
@@ -137,9 +154,9 @@ export default function EmotionSummaryCard() {
                   ))}
                   {t('emotionSummary.period')}
                 </p>
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
