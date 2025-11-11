@@ -21,7 +21,7 @@ export default function SettingsButtons({
   onOpenDelete,
 }: SettingsButtonsProps) {
   return (
-    <div className="grid md:h-screen md:grid-cols-2 md:gap-6 md:p-4 lg:grid-cols-3 lg:p-8">
+    <div className="grid md:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3 lg:p-8">
       <ChangeNicknameButton onClick={onOpenNickname} />
       <ChangePasswordButton onClick={onOpenPassword} />
       <ChangeLanguageButton />
