@@ -24,7 +24,7 @@ export default function DiaryPanel() {
           className="h-10 w-35 lg:w-45"
           onClick={() => {
             if (!selectedDate) return;
-            router.push(`/diary/form?date=${selectedDate}`);
+            router.push(`/diary?date=${selectedDate}`);
           }}
         >
           {t('diaryPanel.writeButton')}
@@ -41,7 +41,7 @@ export default function DiaryPanel() {
 
   const handleClick = () => {
     if (!selectedDate) return;
-    router.push(`/diary/detail?date=${selectedDate}`);
+    router.push(`/diary?date=${selectedDate}`);
   };
 
   return (

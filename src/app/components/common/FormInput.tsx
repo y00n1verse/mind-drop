@@ -39,7 +39,7 @@ export default function FormInput({
           if (type === 'password') e.preventDefault();
         }}
         className={clsx(
-          'w-full rounded-lg border-1 border-gray-100 px-3 py-2 placeholder:text-gray-400 focus:outline-none',
+          'w-full rounded-lg border-1 px-3 py-2 placeholder:text-gray-400 focus:outline-none',
           error
             ? 'border-[var(--color-warn-bg)] focus:border-[var(--color-warn-bg)]'
             : 'border-gray-500 focus:border-[var(--color-brand-primary-hover)]',
