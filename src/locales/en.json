@@ -5,7 +5,7 @@
   "nav": {
     "main": "Home",
     "calendar": "Calendar",
-    "stats": "Reports",
+    "report": "Report",
     "mypage": "My Page",
     "signin": "Sign In"
   },
@@ -84,11 +84,10 @@
     "signUp": "Sign Up",
     "or": "or",
     "error": {
-      "requiredEmail": "Please enter your email.",
-      "requiredPassword": "Please enter your password.",
-      "empty": "Cannot be blank.",
-      "invalidCredentials": "Email or password is incorrect.",
-      "server": "An error occurred during login. Please try again later."
+      "requiredEmail": "Please enter your email",
+      "requiredPassword": "Please enter your password",
+      "invalidCredentials": "Email or password is incorrect",
+      "server": "An error occurred during login. Please try again later"
     }
   },
   "signup": {
@@ -100,31 +99,27 @@
     "submit": "Sign Up",
     "success": "Sign-up complete!",
     "error": {
-      "duplicate": "This email is already in use.",
+      "duplicate": "This email is already in use",
       "failed": "Sign-up failed",
       "server": "Something went wrong. Please try again later."
     },
     "validation": {
-      "common": {
-        "notBlank": "You cannot enter only spaces."
-      },
       "email": {
-        "required": "Please enter your email or username.",
-        "minLength": "Username must be at least 5 characters long.",
-        "invalid": "Invalid email format."
+        "required": "Please enter your email or username",
+        "minLength": "Username must be at least 5 characters long",
+        "invalid": "Invalid email format"
       },
       "nickname": {
-        "required": "Please enter your nickname.",
-        "notBlank": "Nickname cannot be blank."
+        "required": "Please enter your nickname"
       },
       "password": {
-        "required": "Please enter your password.",
-        "minLength": "Password must be at least 8 characters.",
-        "pattern": "Password must include letters, numbers, and special characters."
+        "required": "Please enter your password",
+        "minLength": "Password must be at least 8 characters",
+        "pattern": "Password must include letters, numbers, and special characters"
       },
       "confirmPassword": {
-        "required": "Please re-enter your password.",
-        "mismatch": "Passwords do not match."
+        "required": "Please re-enter your password",
+        "mismatch": "Passwords do not match"
       }
     },
     "haveAccount": "Already have an account?",
@@ -147,7 +142,7 @@
       "description": "See your emotions at a glance\nby month"
     },
     "section4": {
-      "title": "Emotion Stats",
+      "title": "Emotion Reports",
       "description": "Visualize emotional changes\nbased on your diary data"
     },
     "section5": {
@@ -215,7 +210,7 @@
   "emotions": {
     "best": "Best",
     "good": "Good",
-    "normal": "Normal",
+    "normal": "Soso",
     "bad": "Bad",
     "worst": "Worst"
   },
@@ -226,7 +221,7 @@
   },
   "emotionSummary": {
     "title": "Emotion Summary",
-    "description": "You can view your monthly emotion distribution and summary at a glance",
+    "description": "View your monthly emotion distribution and summary at a glance",
     "dateFormat": "MMMM yyyy",
     "noData": "- No emotion data for {{month}}.",
     "mostPrefixSingular": "The emotion you felt the most this month was",

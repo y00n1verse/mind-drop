@@ -114,12 +114,13 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-30px);
+    transform: translateY(-10px);
   }
 }
 
 .animate-wave {
-  animation: wave 1.5s ease-in-out infinite;
+  animation: wave 1s ease-in-out infinite;
+  will-change: transform;
 }
 
 .fp-overflow {

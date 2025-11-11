@@ -8,3 +8,5 @@ export default function useModal() {
 
   return { isOpen, openModal, closeModal };
 }
+
+export type UseModalReturn = ReturnType<typeof useModal>;

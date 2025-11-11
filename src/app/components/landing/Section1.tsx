@@ -2,17 +2,28 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { emotions } from '@/constants/emotions';
 import { useTranslation } from 'react-i18next';
+import { useDiaryStore } from '@/stores/useDiaryStore';
 
 export default function Section1() {
   const router = useRouter();
   const { data: session } = useSession();
   const { t } = useTranslation();
+  const { getDiaryByDate, setSelectedDate } = useDiaryStore();
 
   const handleClick = () => {
-    if (session) {
-      router.push('/diary/form');
-    } else {
+    if (!session) {
       router.push('/signin');
+      return;
+    }
+    const koreaDate = new Date().toLocaleDateString('en-CA', {
+      timeZone: 'Asia/Seoul',
+    });
+    setSelectedDate(koreaDate);
+    const diary = getDiaryByDate(koreaDate);
+    if (diary) {
+      router.push(`/diary/detail?date=${koreaDate}`);
+    } else {
+      router.push(`/diary/form?date=${koreaDate}`);
     }
   };
 

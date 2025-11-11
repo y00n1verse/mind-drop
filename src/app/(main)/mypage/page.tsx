@@ -1,5 +1,5 @@
 import AuthGuard from '@/app/components/AuthGuard';
-import SettingsPanel from './components/SettingsPanel';
+import SettingsPanel from '@/app/components/settings/SettingsPanel';
 
 export default function MyPage() {
   return (

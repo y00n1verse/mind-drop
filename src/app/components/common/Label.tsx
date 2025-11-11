@@ -11,7 +11,7 @@ interface LabelProps {
   children?: ReactNode;
 }
 
-const base = 'px-3 py-0.5 inline-block rounded-3xl text-white';
+const base = 'px-2 py-0.5 inline-block rounded-3xl text-white';
 
 const sizeStyles = {
   small: 'px-2 py-0.5 text-sm',
