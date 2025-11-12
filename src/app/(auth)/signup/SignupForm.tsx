@@ -19,7 +19,6 @@ export interface SignupFormData {
   confirmPassword: string;
 }
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-={}[\]|:;"'<>,.?/]).+$/;
 
@@ -77,14 +76,10 @@ export default function SignupForm() {
       </header>
 
       <FormInput
-        type="text"
+        type="email"
         placeholder={t('signup.emailPlaceholder')}
         register={register('email', {
           required: t('signup.validation.email.required'),
-          pattern: {
-            value: emailRegex,
-            message: t('signup.validation.email.invalid'),
-          },
         })}
         error={errors.email}
       />

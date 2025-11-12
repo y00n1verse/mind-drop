@@ -101,7 +101,7 @@
   },
   "signup": {
     "title": "注册",
-    "emailPlaceholder": "邮箱或用户名",
+    "emailPlaceholder": "邮箱",
     "nicknamePlaceholder": "昵称",
     "passwordPlaceholder": "密码",
     "confirmPasswordPlaceholder": "确认密码",
@@ -114,8 +114,7 @@
     },
     "validation": {
       "email": {
-        "required": "请输入邮箱或用户名",
-        "minLength": "用户名长度至少为 5 个字符。",
+        "required": "请输入邮箱",
         "invalid": "邮箱格式不正确"
       },
       "nickname": {
