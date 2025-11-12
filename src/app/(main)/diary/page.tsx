@@ -14,29 +14,36 @@ export default function DiaryPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
-  const isEdit = searchParams.get('edit') === 'true';
-  const isNew = searchParams.get('new') === 'true';
 
   const { getDiaryByDate } = useDiaryStore();
-  const diary = date ? getDiaryByDate(date) : null;
   const { setShowNav } = useLayoutStore();
+  const diary = date ? getDiaryByDate(date) : null;
+  const isEdit = searchParams.get('edit') === 'true';
+  const isNew = !isEdit && !diary;
+  const isDetail = !!(diary && !isEdit && !isNew);
 
   const formRef = useRef<DiaryFormHandle>(null);
   const [isFormValid, setIsFormValid] = useState(false);
 
   const parsedDate = useMemo(() => (date ? new Date(date) : null), [date]);
-  const formattedDateTitle = parsedDate
-    ? t('diaryForm.dateTitle', {
+
+  const formattedTitle = useMemo(() => {
+    if (isNew) return t('diaryForm.createTitle');
+    if (isEdit) return t('diaryForm.editTitle');
+    if (isDetail && parsedDate) {
+      return t('diaryDetail.title', {
         month: parsedDate.getMonth() + 1,
         day: parsedDate.getDate(),
-      })
-    : '';
+      });
+    }
+    return '';
+  }, [isNew, isEdit, isDetail, parsedDate, t]);
 
   useEffect(() => {
-    const showNav = !!(diary && !isEdit && !isNew);
-    setShowNav(showNav);
+    const shouldHideNav = isNew || isEdit || isDetail;
+    setShowNav(!shouldHideNav);
     return () => setShowNav(true);
-  }, [diary, isEdit, isNew, setShowNav]);
+  }, [isEdit, isNew, isDetail, setShowNav]);
 
   useEffect(() => {
     if (!date) router.push('/calendar');
@@ -47,7 +54,7 @@ export default function DiaryPage() {
   if (isNew || !diary) {
     return (
       <DiaryLayout
-        title={formattedDateTitle}
+        title={formattedTitle}
         onBack={() => router.push('/calendar')}
         rightButton={{
           label: t('diaryFormPage.save'),
@@ -68,7 +75,7 @@ export default function DiaryPage() {
   if (isEdit) {
     return (
       <DiaryLayout
-        title={formattedDateTitle}
+        title={formattedTitle}
         onBack={() => router.push(`/diary?date=${date}`)}
         rightButton={{
           label: t('diaryDetail.save'),
@@ -90,7 +97,7 @@ export default function DiaryPage() {
 
   return (
     <DiaryLayout
-      title={formattedDateTitle}
+      title={formattedTitle}
       onBack={() => router.push('/calendar')}
       rightButton={{
         label: t('diaryDetail.edit'),

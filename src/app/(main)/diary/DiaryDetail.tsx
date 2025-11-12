@@ -1,10 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { emotions } from '@/constants/emotions';
 import Label from '@/app/components/common/Label';
-import Button from '@/app/components/common/Button';
 
 interface DiaryDetailProps {
   diary: {
@@ -18,17 +16,16 @@ interface DiaryDetailProps {
 }
 
 export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
-  const router = useRouter();
   const { t } = useTranslation();
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
   return (
-    <div className="flex w-full max-w-2xl flex-col gap-6 text-base md:gap-6 md:text-lg">
+    <div className="flex w-full max-w-2xl flex-col gap-4 text-base md:gap-10 md:text-lg">
       <div className="flex flex-col gap-2">
         <label className="px-2 text-base font-medium text-gray-800 md:text-lg">
           {t('diaryForm.title')}
         </label>
-        <h1 className="border-t border-gray-300 px-3 py-2 text-xl font-medium md:text-2xl">
+        <h1 className="border-t border-gray-300 px-3 py-2 text-lg font-medium md:text-xl">
           {diary.title}
         </h1>
       </div>
@@ -37,7 +34,7 @@ export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
         <label className="px-2 text-base font-medium text-gray-800 md:text-lg">
           {t('diaryForm.content')}
         </label>
-        <div className="h-60 overflow-y-auto border-t border-gray-300 px-3 py-2 leading-relaxed break-words whitespace-pre-wrap md:text-lg">
+        <div className="h-40 overflow-y-auto border-t border-gray-300 px-3 py-2 text-sm leading-relaxed break-words whitespace-pre-wrap md:h-50 md:text-base">
           {diary.content}
         </div>
       </div>
@@ -56,21 +53,6 @@ export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
             </div>
           )}
         </div>
-      </div>
-
-      <div className="mt-10 hidden justify-end gap-3 md:flex">
-        <Button
-          type="button"
-          size="large"
-          variant="cancel"
-          onClick={() => router.push('/calendar')}
-        >
-          {t('diaryDetail.list')}
-        </Button>
-
-        <Button type="button" size="large" variant="complete" onClick={onEdit}>
-          {t('diaryDetail.edit')}
-        </Button>
       </div>
     </div>
   );

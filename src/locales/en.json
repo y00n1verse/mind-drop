@@ -60,6 +60,15 @@
     "fail": "Failed to delete account ⚠️",
     "serverError": "Server error ⚠️"
   },
+  "deleteDiary": {
+    "modalTitle": "Delete Diary",
+    "description": "Are you sure you want to delete this diary?\nDeleted diaries cannot be restored.",
+    "confirmLabel": "Delete",
+    "cancelLabel": "Cancel",
+    "success": "Diary deleted successfully",
+    "fail": "Diary deletion failed ⚠️",
+    "serverError": "Server error ⚠️"
+  },
   "logout": {
     "modalTitle": "Log Out",
     "description": "Are you sure you want to log out?",
@@ -161,7 +170,10 @@
   "diaryPanel": {
     "emptyMessage": "No diary entry yet.\nWould you like to write one?",
     "writeButton": "Write a diary",
-    "title": "{{month}}/{{day}} Diary"
+    "title": "{{month}}/{{day}} Diary",
+    "view": "View Diary",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "diaryDetail": {
     "title": "{{month}}/{{day}} Diary",
@@ -178,6 +190,8 @@
   },
   "diaryForm": {
     "dateTitle": "Diary for {{month}}/{{day}}",
+    "createTitle": "Write Diary",
+    "editTitle": "Edit Diary",
     "title": "Title",
     "content": "Content",
     "placeholder": {

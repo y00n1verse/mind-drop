@@ -60,6 +60,15 @@
     "fail": "账户删除失败 ⚠️",
     "serverError": "服务器错误 ⚠️"
   },
+  "deleteDiary": {
+    "modalTitle": "删除日记",
+    "description": "您确定要删除这篇日记吗？\n删除后将无法恢复。",
+    "confirmLabel": "删除",
+    "cancelLabel": "取消",
+    "success": "日记删除成功",
+    "fail": "日记删除失败 ⚠️",
+    "serverError": "服务器错误 ⚠️"
+  },
   "logout": {
     "modalTitle": "退出登录",
     "description": "确定要退出登录吗？",
@@ -161,7 +170,10 @@
   "diaryPanel": {
     "emptyMessage": "还没有写日记。\n要去写一篇吗?",
     "writeButton": "去写日记",
-    "title": "{{month}}月 {{day}}日 日记"
+    "title": "{{month}}月 {{day}}日 日记",
+    "view": "查看日记",
+    "edit": "编辑",
+    "delete": "删除"
   },
   "diaryDetail": {
     "title": "{{month}}月 {{day}}日 日记",
@@ -178,6 +190,8 @@
   },
   "diaryForm": {
     "dateTitle": "{{month}}月 {{day}}日 日记",
+    "createTitle": "撰写日记",
+    "editTitle": "编辑日记",
     "title": "标题",
     "content": "内容",
     "placeholder": {

@@ -27,7 +27,7 @@ export default function FormTextarea({
         {...register}
         placeholder={placeholder}
         className={clsx(
-          'h-60 w-full resize-none rounded-lg border p-3 placeholder:text-gray-400 focus:outline-none',
+          'h-40 w-full resize-none rounded-lg border p-3 placeholder:text-gray-400 focus:outline-none md:h-50',
           error
             ? 'border-[var(--color-warn-bg)] focus:border-[var(--color-warn-bg)]'
             : 'border-gray-500 focus:border-[var(--color-brand-primary-hover)]',
