@@ -17,7 +17,7 @@ export default function EmotionSelector({
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="p-2 text-base md:text-lg">
+      <p className="p-2 text-base font-medium text-gray-800">
         {t('emotionSelector.title')}{' '}
         {error ? (
           <span className="text-sm text-[var(--color-warn-bg)]">{error}</span>

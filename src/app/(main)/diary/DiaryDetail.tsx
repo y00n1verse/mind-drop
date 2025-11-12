@@ -20,7 +20,7 @@ export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 
   return (
-    <div className="flex w-full max-w-2xl flex-col gap-6 text-base md:gap-6 md:text-lg">
+    <div className="flex w-full max-w-2xl flex-col gap-4 text-base md:gap-10 md:text-lg">
       <div className="flex flex-col gap-2">
         <label className="px-2 text-base font-medium text-gray-800 md:text-lg">
           {t('diaryForm.title')}

@@ -109,7 +109,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
     return (
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-2xl flex-col gap-4 text-lg md:gap-6"
+        className="flex w-full max-w-2xl flex-col gap-4 text-lg md:gap-10"
       >
         <div className="relative">
           <FormInput
