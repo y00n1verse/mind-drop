@@ -190,6 +190,8 @@
   },
   "diaryForm": {
     "dateTitle": "{{month}}月 {{day}}日 日记",
+    "createTitle": "撰写日记",
+    "editTitle": "编辑日记",
     "title": "标题",
     "content": "内容",
     "placeholder": {

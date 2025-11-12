@@ -50,7 +50,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       },
     });
 
-    const [, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const selectedEmotion = watch('emotion');
 
     const title = watch('title');

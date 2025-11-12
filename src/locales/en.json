@@ -190,6 +190,8 @@
   },
   "diaryForm": {
     "dateTitle": "Diary for {{month}}/{{day}}",
+    "createTitle": "Write Diary",
+    "editTitle": "Edit Diary",
     "title": "Title",
     "content": "Content",
     "placeholder": {
