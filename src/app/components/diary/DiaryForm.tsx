@@ -2,13 +2,11 @@
 
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Button from '../common/Button';
 import FormInput from '../common/FormInput';
 import EmotionSelector from './EmotionSelector';
 import FormTextarea from './FormTextarea';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { EmotionType } from '@/constants/emotions';
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 
@@ -31,9 +29,8 @@ export interface DiaryFormHandle {
 }
 
 const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
-  ({ mode, diary, onSuccess, onFormStateChange, onCancel }, ref) => {
+  ({ mode, diary, onSuccess, onFormStateChange }, ref) => {
     const { t } = useTranslation();
-    const router = useRouter();
     const { addDiary, updateDiary, selectedDate } = useDiaryStore();
 
     const {
@@ -53,7 +50,7 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       },
     });
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [, setIsSubmitting] = useState(false);
     const selectedEmotion = watch('emotion');
 
     const title = watch('title');
@@ -165,35 +162,6 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
             required: t('diaryForm.validation.selectEmotion'),
           })}
         />
-
-        <div className="mt-10 hidden justify-end gap-3 md:flex">
-          <Button
-            type="button"
-            size="large"
-            variant="cancel"
-            onClick={() => {
-              if (mode === 'edit' && onCancel) {
-                onCancel();
-              } else {
-                router.push('/calendar');
-              }
-            }}
-          >
-            {t('diaryForm.cancel')}
-          </Button>
-          <Button
-            type="submit"
-            size="large"
-            variant="complete"
-            disabled={!isFormValid || isSubmitting}
-          >
-            {isSubmitting
-              ? t('diaryForm.saving')
-              : mode === 'create'
-                ? t('diaryForm.save')
-                : t('diaryForm.edit')}
-          </Button>
-        </div>
       </form>
     );
   },
