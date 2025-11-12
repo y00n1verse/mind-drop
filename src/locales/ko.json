@@ -60,6 +60,15 @@
     "fail": "회원 탈퇴 실패 ⚠️",
     "serverError": "서버 오류 ⚠️"
   },
+  "deleteDiary": {
+    "modalTitle": "일기 삭제",
+    "description": "정말 삭제하시겠어요?\n삭제한 일기는 복구할 수 없어요.",
+    "confirmLabel": "삭제",
+    "cancelLabel": "취소",
+    "success": "일기 삭제 완료",
+    "fail": "일기 삭제 실패 ⚠️",
+    "serverError": "서버 오류 ⚠️"
+  },
   "logout": {
     "modalTitle": "로그아웃",
     "description": "정말 로그아웃하시겠어요?",
@@ -161,7 +170,10 @@
   "diaryPanel": {
     "emptyMessage": "아직 작성된 일기가 없어요.\n일기를 작성하러 갈까요?",
     "writeButton": "일기 쓰러 가기",
-    "title": "{{month}}월 {{day}}일 일기"
+    "title": "{{month}}월 {{day}}일 일기",
+    "view": "일기 보기",
+    "edit": "수정하기",
+    "delete": "삭제하기"
   },
   "diaryDetail": {
     "title": "{{month}}월 {{day}}일 일기",
