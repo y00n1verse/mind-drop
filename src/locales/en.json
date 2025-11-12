@@ -101,7 +101,7 @@
   },
   "signup": {
     "title": "Sign Up",
-    "emailPlaceholder": "Email or Username",
+    "emailPlaceholder": "Email",
     "nicknamePlaceholder": "Nickname",
     "passwordPlaceholder": "Password",
     "confirmPasswordPlaceholder": "Confirm Password",
@@ -115,7 +115,6 @@
     "validation": {
       "email": {
         "required": "Please enter your email or username",
-        "minLength": "Username must be at least 5 characters long",
         "invalid": "Invalid email format"
       },
       "nickname": {

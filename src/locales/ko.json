@@ -101,21 +101,21 @@
   },
   "signup": {
     "title": "회원가입",
-    "emailPlaceholder": "아이디 또는 이메일",
+    "emailPlaceholder": "이메일",
     "nicknamePlaceholder": "닉네임",
     "passwordPlaceholder": "비밀번호",
     "confirmPasswordPlaceholder": "비밀번호 확인",
     "submit": "회원가입",
     "success": "회원가입 완료!",
     "error": {
-      "duplicate": "이미 사용 중인 아이디예요",
+      "duplicate": "이미 사용 중인 이메일이에요.",
       "failed": "회원가입 실패",
       "server": "문제가 발생했어요 잠시 후 다시 시도해주세요."
     },
     "validation": {
       "email": {
-        "required": "아이디 또는 이메일을 입력해주세요",
-        "minLength": "아이디는 5자 이상 입력해주세요",
+        "required": "이메일을 입력해주세요",
+
         "invalid": "이메일 형식이 올바르지 않아요"
       },
       "nickname": {
