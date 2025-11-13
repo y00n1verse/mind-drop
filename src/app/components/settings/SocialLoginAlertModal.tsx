@@ -7,7 +7,7 @@ import Button from '@/app/components/common/Button';
 interface SocialLoginAlertModalProps {
   isOpen: boolean;
   onClose: () => void;
-  provider?: string;
+  provider?: string | null;
 }
 
 export default function SocialLoginAlertModal({

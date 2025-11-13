@@ -19,8 +19,8 @@ export default function SettingsPanel() {
   const logoutModal = useModal();
   const deleteModal = useModal();
 
-  const provider = session?.user?.provider;
-  const isSocialLogin = provider && provider !== 'credentials';
+  const provider = session?.user?.provider ?? null;
+  const isSocialLogin = provider !== null && provider !== 'credentials';
 
   const handlePasswordClick = () => {
     if (isSocialLogin) socialAlertModal.openModal();

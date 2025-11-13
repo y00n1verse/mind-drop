@@ -13,7 +13,7 @@ interface SettingsModalsProps {
   socialAlertModal: UseModalReturn;
   logoutModal: UseModalReturn;
   deleteModal: UseModalReturn;
-  provider?: string;
+  provider?: string | null;
 }
 
 export default function SettingsModals({
