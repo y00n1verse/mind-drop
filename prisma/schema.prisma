@@ -10,7 +10,7 @@ datasource db {
 // 테이블
 model User {
   id         String   @id @default(cuid())
-  email      String?  @unique
+  email      String?
   nickname   String?
   name       String?
   image      String?

@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
   const { currentPassword, newPassword } = await req.json();
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: { email: session.user.email },
   });
 
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
   const hashed = await bcrypt.hash(newPassword, 10);
   await prisma.user.update({
-    where: { email: user.email! },
+    where: { id: user.id },
     data: { password: hashed },
   });
 
