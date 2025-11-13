@@ -7,7 +7,6 @@ export default function DiaryLayout({
   onBack,
   rightButton,
   children,
-  isDetail = false,
 }: {
   title: string;
   onBack?: () => void;
@@ -17,7 +16,6 @@ export default function DiaryLayout({
     active?: boolean;
   };
   children: React.ReactNode;
-  isDetail?: boolean;
 }) {
   return (
     <div className="relative mx-auto flex max-w-3xl flex-col items-center p-5 md:min-h-screen md:justify-center md:p-8">

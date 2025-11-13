@@ -22,7 +22,7 @@ export default function ChangeLanguageButton() {
       i18n.changeLanguage(savedLang);
       setLang(savedLang);
     }
-  }, []);
+  }, [i18n, lang]);
 
   return (
     <SettingsButton

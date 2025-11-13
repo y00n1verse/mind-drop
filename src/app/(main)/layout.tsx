@@ -24,7 +24,7 @@ export default function MainLayout({
     } else {
       setShowNav(false);
     }
-  }, [pathname]);
+  }, [pathname, setShowNav]);
 
   return (
     <>
