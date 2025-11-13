@@ -11,11 +11,9 @@ interface DiaryDetailProps {
     emotion: string;
     date?: string | Date;
   };
-  onEdit: () => void;
-  onBack?: () => void;
 }
 
-export default function DiaryDetail({ diary, onEdit }: DiaryDetailProps) {
+export default function DiaryDetail({ diary }: DiaryDetailProps) {
   const { t } = useTranslation();
   const emotionData = emotions.find((e) => e.variant === diary.emotion);
 

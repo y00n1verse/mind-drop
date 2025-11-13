@@ -76,7 +76,7 @@ export default function DiaryPage() {
     return (
       <DiaryLayout
         title={formattedTitle}
-        onBack={() => router.push(`/diary?date=${date}`)}
+        onBack={() => router.push('/calendar')}
         rightButton={{
           label: t('diaryDetail.save'),
           onClick: () => formRef.current?.submit(),
@@ -104,12 +104,8 @@ export default function DiaryPage() {
         onClick: () => router.push(`/diary?date=${date}&edit=true`),
         active: true,
       }}
-      isDetail
     >
-      <DiaryDetail
-        diary={diary}
-        onEdit={() => router.push(`/diary?date=${date}&edit=true`)}
-      />
+      <DiaryDetail diary={diary} />
     </DiaryLayout>
   );
 }
