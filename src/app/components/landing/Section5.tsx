@@ -26,7 +26,7 @@ export default function Section5() {
   };
 
   return (
-    <div className="section flex h-screen flex-col items-center justify-center bg-[var(--background-tertiary)] pb-10 text-center md:pb-30">
+    <div className="flex h-screen items-center justify-center bg-[var(--background-tertiary)] px-4 md:px-6">
       <motion.div
         initial={{ scale: 0.6, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
