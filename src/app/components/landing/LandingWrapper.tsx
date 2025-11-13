@@ -13,11 +13,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useState, useRef } from 'react';
 import { useDiaryStore } from '@/stores/useDiaryStore';
 import { Mousewheel, Keyboard, Pagination } from 'swiper/modules';
+import { Swiper as SwiperType } from 'swiper';
 
 export default function LandingWrapper() {
   const [isClient, setIsClient] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const { data: session } = useSession();
   const { getUserDiaries } = useDiaryStore();
