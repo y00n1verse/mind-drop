@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { NextAuthOptions } from 'next-auth';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
@@ -56,7 +57,7 @@ export const authOptions: NextAuthOptions = {
       const providerId = account.providerAccountId ?? null;
       const email = user.email ?? null;
 
-      let existingUser: any = null;
+      let existingUser: User | null = null;
       if (providerId) {
         existingUser = await prisma.user.findUnique({
           where: { providerId },
