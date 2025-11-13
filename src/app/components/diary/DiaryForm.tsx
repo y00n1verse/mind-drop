@@ -50,7 +50,6 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
       },
     });
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const selectedEmotion = watch('emotion');
 
     const title = watch('title');
@@ -80,7 +79,6 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
         return;
       }
 
-      setIsSubmitting(true);
       try {
         if (mode === 'create') {
           await addDiary({
@@ -97,8 +95,6 @@ const DiaryForm = forwardRef<DiaryFormHandle, DiaryFormProps>(
         onSuccess(data);
       } catch {
         toast.error(t('diaryForm.toast.failed'));
-      } finally {
-        setIsSubmitting(false);
       }
     };
 
