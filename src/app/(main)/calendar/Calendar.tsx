@@ -29,7 +29,7 @@ export default function Calendar() {
       const formatted = today.toLocaleDateString('sv-SE');
       setSelectedDate(formatted);
     }
-  }, [selectedDate, setSelectedDate]);
+  }, [selectedDate, setSelectedDate, today]);
 
   useEffect(() => {
     getUserDiaries();
