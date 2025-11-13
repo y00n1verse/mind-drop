@@ -16,6 +16,22 @@ export const metadata: Metadata = {
     template: '%s | Mind Drop',
   },
   description: '하루의 마음을 한 방울씩 기록하며 비워내는 감정 다이어리',
+  openGraph: {
+    title: 'Mind Drop',
+    description: '하루의 마음을 한 방울씩 기록하며 비워내는 감정 다이어리',
+    url: 'https://jiyoon-mind-drop.vercel.app',
+    siteName: 'Mind Drop',
+    images: [
+      {
+        url: 'https://jiyoon-mind-drop.vercel.app/assets/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Mind Drop thumbnail',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
