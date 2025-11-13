@@ -9,7 +9,7 @@ declare module 'next-auth' {
       nickname?: string | null;
       image?: string | null;
       hasPassword?: boolean;
-      provider?: string;
+      provider?: string | null;
       providerId?: string | null;
     } & DefaultSession['user'];
   }
@@ -20,7 +20,7 @@ declare module 'next-auth/jwt' {
     id?: string;
     email?: string | null;
     hasPassword?: boolean;
-    provider?: string;
+    provider?: string | null;
     providerId?: string | null;
     nickname?: string | null;
   }
