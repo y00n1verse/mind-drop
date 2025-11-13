@@ -13,7 +13,7 @@ interface Props {
 
 export default function LogoutModal({ isOpen, onClose }: Props) {
   const { t } = useTranslation();
-const { reset } = useDiaryStore();
+  const { reset } = useDiaryStore();
 
   const handleLogout = async () => {
     try {
