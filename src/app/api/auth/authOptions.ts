@@ -47,25 +47,34 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider && user?.email) {
-        const existingUser = await prisma.user.findUnique({
+      if (!account) return false;
+
+      const provider = account.provider;
+      const providerId = account.providerAccountId;
+
+      let existingUser = await prisma.user.findUnique({
+        where: { providerId },
+      });
+
+      if (!existingUser && user.email) {
+        existingUser = await prisma.user.findUnique({
           where: { email: user.email },
         });
+      }
 
-        if (!existingUser) {
-          await prisma.user.create({
-            data: {
-              email: user.email,
-              name: user.name ?? '',
-              image: user.image ?? '',
-              provider: account.provider,
-            },
-          });
-        }
+      if (!existingUser) {
+        await prisma.user.create({
+          data: {
+            email: user.email,
+            name: user.name ?? '',
+            image: user.image ?? '',
+            provider,
+            providerId,
+          },
+        });
       }
       return true;
     },
-
     async jwt({ token, user, trigger, session }) {
       if (trigger === 'update' && session?.user?.nickname) {
         token.nickname = session.user.nickname;
