@@ -71,14 +71,15 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (!existingUser) {
+        const data = {
+          name: user.name ?? '',
+          image: user.image ?? '',
+          provider,
+          providerId,
+        } as const;
+
         await prisma.user.create({
-          data: {
-            email: email ?? undefined,
-            name: user.name ?? '',
-            image: user.image ?? '',
-            provider,
-            providerId: providerId ?? undefined,
-          },
+          data: email ? { ...data, email } : data,
         });
       }
       return true;
