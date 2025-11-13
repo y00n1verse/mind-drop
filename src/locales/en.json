@@ -79,7 +79,7 @@
   },
   "socialAlert": {
     "title": "Password Change Not Available",
-    "message": "Password change is <span>not available</span> for social login accounts.",
+    "message": "Password change is not available\nfor social login accounts.",
     "connected": "Connected SNS",
     "localLogin": "Credential Login",
     "confirm": "OK"
