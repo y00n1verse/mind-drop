@@ -10,9 +10,5 @@ export default async function LoginPage() {
     redirect('/');
   }
 
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <SigninForm />
-    </div>
-  );
+  return <SigninForm />;
 }
