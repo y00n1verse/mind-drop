@@ -86,7 +86,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     async jwt({ token, user, account }) {
-      if (user && account) {
+      if (user && account && !token.id) {
         const dbUser = await prisma.user.findFirst({
           where: {
             OR: [
@@ -98,6 +98,14 @@ export const authOptions: NextAuthOptions = {
 
         if (dbUser) {
           token.id = dbUser.id;
+        }
+      }
+      if (token.id) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id },
+        });
+
+        if (dbUser) {
           token.email = dbUser.email;
           token.nickname = dbUser.nickname;
           token.provider = dbUser.provider;
