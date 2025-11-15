@@ -1,6 +1,8 @@
 'use client';
 
 import { toast } from 'sonner';
+import { AxiosError } from 'axios';
+import instance from '@/lib/instance';
 import { signOut } from 'next-auth/react';
 import { useTranslation } from 'react-i18next';
 import ConfirmModal from '@/app/components/common/ConfirmModal';
@@ -15,19 +17,18 @@ export default function DeleteAccountModal({ isOpen, onClose }: Props) {
 
   const handleDeleteAccount = async () => {
     try {
-      const res = await fetch('/api/auth/delete-account', { method: 'DELETE' });
-      if (res.ok) {
-        toast.success(t('deleteAccount.success'), {
-          description: t('deleteAccount.successDescription'),
-        });
-        setTimeout(() => {
-          signOut({ callbackUrl: '/signin' });
-        }, 2000);
-      } else {
-        toast.error(t('deleteAccount.fail'));
-      }
-    } catch {
-      toast.error(t('deleteAccount.serverError'));
+      await instance.delete('/auth/delete-account');
+      toast.success(t('deleteAccount.success'), {
+        description: t('deleteAccount.successDescription'),
+      });
+      setTimeout(() => {
+        signOut({ callbackUrl: '/signin' });
+      }, 2000);
+    } catch (e) {
+      const error = e as AxiosError<{ message?: string }>;
+      const message =
+        error.response?.data?.message || t('deleteAccount.serverError');
+      toast.error(message);
     } finally {
       onClose();
     }
