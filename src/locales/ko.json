@@ -79,7 +79,7 @@
   },
   "socialAlert": {
     "title": "비밀번호 변경 불가",
-    "message": "소셜 로그인 계정은 <span>비밀번호 변경이 불가능</span>해요.",
+    "message": "소셜 로그인 계정은\n비밀번호 변경이 불가능해요.",
     "connected": "연결된 SNS",
     "localLogin": "자격 증명 로그인",
     "confirm": "확인"

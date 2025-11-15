@@ -79,7 +79,7 @@
   },
   "socialAlert": {
     "title": "无法更改密码",
-    "message": "社交账号 <span>无法更改密码</span>。",
+    "message": "社交账号\n无法更改密码。",
     "connected": "已连接的社交平台",
     "localLogin": "凭证登录",
     "confirm": "确认"

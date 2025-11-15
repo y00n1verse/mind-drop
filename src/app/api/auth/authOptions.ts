@@ -1,10 +1,11 @@
+import { User } from '@prisma/client';
 import { NextAuthOptions } from 'next-auth';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import NaverProvider from 'next-auth/providers/naver';
-import KakaoProvider from 'next-auth/providers/kakao';
-import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+import KakaoProvider from 'next-auth/providers/kakao';
+import NaverProvider from 'next-auth/providers/naver';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -15,17 +16,20 @@ export const authOptions: NextAuthOptions = {
         password: { label: '비밀번호', type: 'password' },
       },
       async authorize(credentials) {
-        const email = credentials?.email;
-        const password = credentials?.password;
-        if (!email || !password) return null;
+        if (!credentials?.email || !credentials?.password) return null;
 
-        const user = await prisma.user.findUnique({ where: { email } });
+        const user = await prisma.user.findFirst({
+          where: { email: credentials.email },
+        });
         if (!user || !user.password) return null;
 
-        const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
         if (!isValid) return null;
 
-        return { id: user.id.toString(), email: user.email };
+        return { id: user.id, email: user.email };
       },
     }),
     GoogleProvider({
@@ -47,50 +51,71 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider && user?.email) {
-        const existingUser = await prisma.user.findUnique({
-          where: { email: user.email },
-        });
+      if (!account) return false;
 
-        if (!existingUser) {
-          await prisma.user.create({
-            data: {
-              email: user.email,
-              name: user.name ?? '',
-              image: user.image ?? '',
-              provider: account.provider,
-            },
-          });
-        }
+      const provider = account.provider;
+      const providerId = account.providerAccountId ?? null;
+      const email = user.email ?? null;
+
+      let existingUser: User | null = null;
+      if (providerId) {
+        existingUser = await prisma.user.findUnique({
+          where: { providerId },
+        });
+      }
+
+      if (!existingUser && email) {
+        existingUser = await prisma.user.findFirst({
+          where: { email },
+        });
+      }
+
+      if (!existingUser) {
+        const data = {
+          name: user.name ?? '',
+          image: user.image ?? '',
+          provider,
+          providerId,
+        } as const;
+
+        await prisma.user.create({
+          data: email ? { ...data, email } : data,
+        });
       }
       return true;
     },
 
-    async jwt({ token, user, trigger, session }) {
-      if (trigger === 'update' && session?.user?.nickname) {
-        token.nickname = session.user.nickname;
-      }
-
-      if (user) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email! },
+    async jwt({ token, user, account }) {
+      if (user && account) {
+        const dbUser = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { providerId: account.providerAccountId ?? undefined },
+              { email: user.email ?? undefined },
+            ],
+          },
         });
+
         if (dbUser) {
-          token.id = dbUser.id.toString();
-          token.nickname = dbUser.nickname ?? '';
+          token.id = dbUser.id;
+          token.email = dbUser.email;
+          token.nickname = dbUser.nickname;
+          token.provider = dbUser.provider;
+          token.providerId = dbUser.providerId;
           token.hasPassword = !!dbUser.password;
-          token.provider = dbUser.provider ?? 'credentials';
         }
       }
       return token;
     },
 
     async session({ session, token }) {
-      if (session?.user && token?.id) {
-        session.user.id = token.id;
-        session.user.nickname = token.nickname ?? '';
-        session.user.hasPassword = token.hasPassword;
-        session.user.provider = token.provider;
+      if (session.user) {
+        session.user.id = token.id!;
+        session.user.email = token.email ?? null;
+        session.user.nickname = token.nickname ?? null;
+        session.user.provider = token.provider ?? null;
+        session.user.providerId = token.providerId ?? null;
+        session.user.hasPassword = token.hasPassword ?? false;
       }
       return session;
     },

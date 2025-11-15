@@ -23,7 +23,7 @@ export default function Section1() {
   };
 
   return (
-    <div className="section flex h-screen flex-col items-center justify-center bg-[var(--background-tertiary)] pb-5 text-center md:pb-30">
+    <div className="flex h-screen items-center justify-center bg-[var(--background-tertiary)] px-4 md:px-6">
       <div className="flex flex-col items-center justify-center gap-8 md:gap-10 lg:gap-12">
         <div className="flex gap-4 md:gap-6">
           {emotions.map((emotion, i) => {

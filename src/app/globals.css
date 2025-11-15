@@ -59,52 +59,50 @@ body {
   --color-warn-hover: color-mix(in oklch, var(--color-warn-bg), black 10%);
 }
 
-#fp-nav {
+.swiper-pagination {
+  position: fixed !important;
   top: 40% !important;
-}
+  right: 20px !important;
+  left: auto !important;
 
-#fp-nav ul {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  width: auto !important;
+  height: auto !important;
+
+  z-index: 50 !important;
 }
 
-#fp-nav ul li {
-  margin: 5px !important;
-}
-
-#fp-nav ul li a {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+.swiper-pagination-bullet {
   width: 15px !important;
   height: 15px !important;
-  background: transparent !important;
+  margin: 5px 0 !important;
+
+  background: #dddddd !important;
+  border-radius: 50% !important;
+
+  opacity: 1 !important;
   border: none !important;
   outline: none !important;
-  padding: 0 !important;
-  box-sizing: border-box;
-  transform: none !important;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease;
 }
 
-#fp-nav ul li a span {
-  display: block !important;
-  width: 15px !important;
-  height: 15px !important;
-  border-radius: 50%;
-  background: #dddddd;
-  transition: background-color 0.25s ease;
-  opacity: 1 !important;
-  margin: 0 !important;
-}
-
-#fp-nav ul li a:hover span,
-#fp-nav ul li a.active span {
+.swiper-pagination-bullet:hover {
   background: var(--color-brand-primary) !important;
 }
 
-#fp-nav ul li a:not(.active):not(:hover) span {
+.swiper-pagination-bullet-active {
+  background: var(--color-brand-primary) !important;
+  transform: scale(1.05);
+}
+
+.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):not(:hover) {
   background: #dddddd !important;
 }
 

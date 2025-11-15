@@ -7,16 +7,23 @@ import { authOptions } from '../authOptions';
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
-  if (!session || !session.user?.email) {
+  if (!session) {
     return NextResponse.json(
       { message: '로그인이 필요합니다.' },
       { status: 401 },
     );
   }
 
+  if (!session.user.email) {
+    return NextResponse.json(
+      { message: '소셜 로그인 유저는 비밀번호를 변경할 수 없어요.' },
+      { status: 400 },
+    );
+  }
+
   const { currentPassword, newPassword } = await req.json();
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: { email: session.user.email },
   });
 
@@ -44,7 +51,7 @@ export async function POST(req: NextRequest) {
 
   const hashed = await bcrypt.hash(newPassword, 10);
   await prisma.user.update({
-    where: { email: user.email },
+    where: { id: user.id },
     data: { password: hashed },
   });
 
