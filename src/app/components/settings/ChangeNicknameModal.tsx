@@ -45,7 +45,7 @@ export default function ChangeNicknameModal({ isOpen, onClose }: Props) {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      await instance.post('/user/change-nickname', data);
+      await instance.post('/user/nickname', data);
       await update({
         user: { ...session?.user, nickname: data.nickname },
       });
