@@ -42,7 +42,7 @@ export default function ChangePasswordModal({
 
   const onSubmit = async (data: FormValues) => {
     try {
-      await instance.post('/auth/change-password', data);
+      await instance.post('/user/change-password', data);
       toast.success(t('password.success'));
       reset();
       onClose();
