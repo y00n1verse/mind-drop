@@ -6,7 +6,7 @@ import { authOptions } from '../authOptions';
 export async function DELETE() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.email) {
+  if (!session?.user?.id) {
     return NextResponse.json(
       { error: '인증되지 않은 요청입니다' },
       { status: 401 },
@@ -14,8 +14,8 @@ export async function DELETE() {
   }
 
   try {
-    const user = await prisma.user.findFirst({
-      where: { email: session.user.email },
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
       select: { id: true },
     });
 
